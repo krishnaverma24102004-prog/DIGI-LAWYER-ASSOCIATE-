@@ -1,0 +1,754 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Digi Lawyer – Live Consultation Test</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+  <style>
+    :root {
+      --bg: #f6f7f9; --panel: #ffffff; --text: #1d2330; --muted: #6b7280; --border: #e3e6eb;
+      --accent: #2f5bea; --accent-text: #ffffff;
+      --high: #c62828; --high-bg: #fdecec; --medium: #b26a00; --medium-bg: #fff4e0; --low: #2e7d32; --low-bg: #e9f5ea;
+      --interim: #8a93a3;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #12151b; --panel: #1b1f27; --text: #e6e8ec; --muted: #9aa3b2; --border: #2c323d;
+        --accent: #6d8cff; --accent-text: #0d1020;
+        --high: #ff8a80; --high-bg: #3a1d1d; --medium: #ffcc80; --medium-bg: #3a2c14; --low: #a5d6a7; --low-bg: #1d3320;
+        --interim: #7d8696;
+      }
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; background: var(--bg); color: var(--text); }
+    header { padding: 16px 24px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    header h1 { font-size: 18px; margin: 0; flex: 1; }
+    main { display: grid; grid-template-columns: 1.3fr 1fr; gap: 16px; padding: 16px 24px; max-width: 1400px; margin: 0 auto; }
+    @media (max-width: 900px) { main { grid-template-columns: 1fr; padding: 16px; } header { padding: 16px; } }
+    section { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 16px; min-width: 0; }
+    h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 0 0 12px; }
+    .stack { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    input { flex: 1; min-width: 140px; padding: 8px 10px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text); font: inherit; }
+    button { padding: 8px 14px; border-radius: 6px; border: 1px solid var(--border); background: var(--panel); color: var(--text); font: inherit; cursor: pointer; }
+    button.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-text); }
+    button.danger { background: var(--high); border-color: var(--high); color: #fff; }
+    button:disabled { opacity: .45; cursor: not-allowed; }
+    .pill { font-size: 12px; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--border); color: var(--muted); white-space: nowrap; }
+    .pill.live { color: var(--high); border-color: var(--high); }
+    .pill.ok { color: var(--low); border-color: var(--low); }
+    .muted { color: var(--muted); font-size: 13px; }
+    #transcript { height: 420px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; }
+    .seg .who { font-weight: 600; margin-right: 6px; }
+    #interim { color: var(--interim); font-style: italic; min-height: 1.5em; }
+    .issue { border-left: 4px solid; border-radius: 6px; padding: 8px 10px; margin-bottom: 8px; }
+    .issue.high { border-color: var(--high); background: var(--high-bg); }
+    .issue.medium { border-color: var(--medium); background: var(--medium-bg); }
+    .issue.low { border-color: var(--low); background: var(--low-bg); }
+    .issue .sev { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; }
+    .issue.high .sev { color: var(--high); } .issue.medium .sev { color: var(--medium); } .issue.low .sev { color: var(--low); }
+    .issue .title { font-weight: 600; }
+    .issue .why { font-size: 13px; color: var(--muted); }
+    ul { margin: 0; padding-left: 18px; } li { margin-bottom: 4px; }
+    .cat { font-size: 11px; color: var(--muted); border: 1px solid var(--border); border-radius: 4px; padding: 0 5px; margin-left: 6px; }
+    #summary { white-space: pre-wrap; }
+    #log { font: 12px/1.4 ui-monospace, Consolas, monospace; max-height: 160px; overflow-y: auto; color: var(--muted); }
+    #log .err { color: var(--high); }
+    .meter { width: 80px; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+    .meter div { height: 100%; width: 0; background: var(--low); transition: width .08s; }
+    .empty { color: var(--muted); font-size: 13px; }
+    .doc { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border: 1px dashed var(--border); border-radius: 6px; margin-bottom: 10px; min-width: 0; flex-wrap: wrap; }
+    .doc .name { flex: 1; min-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .obs { border-left: 4px solid var(--border); border-radius: 6px; padding: 6px 10px; margin-bottom: 8px; }
+    .obs.conflict { border-color: var(--high); background: var(--high-bg); }
+    .obs.not_covered { border-color: var(--medium); background: var(--medium-bg); }
+    .obs.consistent { border-color: var(--low); background: var(--low-bg); }
+    .obs .clause { font-weight: 600; }
+    .obs .tag { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+    #downloadBtn { margin-top: 10px; }
+    select { flex: 1; min-width: 140px; padding: 8px 10px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text); font: inherit; }
+    label.field { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 160px; font-size: 12px; color: var(--muted); }
+    .cite { border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; margin-bottom: 8px; transition: opacity .3s; }
+    .cite.current { border-color: var(--accent); }
+    .cite.past { opacity: .6; }
+    .cite .head { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
+    .cite .title { font-weight: 600; }
+    .cite .score { font-size: 12px; color: var(--muted); white-space: nowrap; }
+    .cite .ref { font-size: 12px; color: var(--muted); }
+    .cite .excerpt { font-size: 13px; margin-top: 4px; color: var(--text); }
+    .cite .badge { font-size: 10px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--accent); }
+    .issue .auth { font-size: 12px; margin-top: 2px; }
+    .thinking { display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: 8px; background: var(--bg); border: 1px solid var(--border); font-size: 13px; color: var(--muted); }
+    .thinking .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); flex: none; }
+    .thinking.busy .dot { background: var(--accent); animation: pulse 1s ease-in-out infinite; }
+    .thinking.busy { color: var(--text); }
+    @keyframes pulse { 0%, 100% { opacity: .3; transform: scale(.8); } 50% { opacity: 1; transform: scale(1.15); } }
+    @media (prefers-reduced-motion: reduce) { .thinking.busy .dot { animation: none; } }
+    .steps { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+    .step { font-size: 11px; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--border); color: var(--muted); }
+    .step.active { border-color: var(--accent); color: var(--accent); font-weight: 600; }
+    .step.done { color: var(--low); border-color: var(--low); }
+    #agentMessage { white-space: pre-wrap; margin-top: 10px; }
+    .disclaimer-note { font-size: 12px; color: var(--medium); margin-top: 6px; }
+    .redacted { font-size: 11px; margin-left: 6px; padding: 0 6px; border-radius: 4px; background: var(--medium-bg); color: var(--medium); white-space: nowrap; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Digi Lawyer · Live Consultation Test</h1>
+    <span id="authStatus" class="pill">Signed out</span>
+    <span id="connStatus" class="pill">Idle</span>
+  </header>
+
+  <main>
+    <div class="stack">
+      <section>
+        <h2>1 · Sign in (Supabase)</h2>
+        <div class="row">
+          <input id="email" type="email" placeholder="Email" autocomplete="username" />
+          <input id="password" type="password" placeholder="Password" autocomplete="current-password" />
+          <button id="signInBtn">Sign in</button>
+          <button id="signOutBtn" disabled>Sign out</button>
+        </div>
+        <p class="muted">Or paste an access token directly:</p>
+        <div class="row"><input id="tokenInput" placeholder="eyJhbGciOi…" /></div>
+      </section>
+
+      <section>
+        <h2>2 · Consultation</h2>
+        <div class="row" style="margin-bottom:10px">
+          <label class="field">Organization
+            <select id="orgSelect"><option value="">Sign in to load…</option></select>
+          </label>
+          <label class="field">Select Practice Area
+            <select id="practiceSelect"><option value="">General (no practice area)</option></select>
+          </label>
+          <button id="installTemplatesBtn" hidden title="Add Personal Injury, Corporate/M&amp;A, Criminal Defense and Real Estate">Install templates</button>
+        </div>
+        <div class="row" style="margin-bottom:10px">
+          <label class="field">Case thread (the AI remembers earlier sessions in the same case)
+            <select id="threadSelect">
+              <option value="">No case thread</option>
+              <option value="__new__">+ New case thread…</option>
+            </select>
+          </label>
+        </div>
+        <div class="doc" id="docBox">
+          <span class="name" id="docName">No contract attached (optional): attach one before recording to cross-reference it live.</span>
+          <input id="docFile" type="file" accept=".pdf,.txt,.png,.jpg,.jpeg,.tif,.tiff,.webp,application/pdf,text/plain,image/*" hidden />
+          <button id="docBtn">Attach contract…</button>
+          <button id="docRemoveBtn" hidden>Remove</button>
+        </div>
+        <div class="row">
+          <input id="title" placeholder="Title (optional)" />
+          <button id="startBtn" class="primary">Start recording</button>
+          <button id="stopBtn" class="danger" disabled>Stop &amp; save</button>
+          <div class="meter" title="Mic level"><div id="level"></div></div>
+        </div>
+        <div class="row" style="margin-top:10px">
+          <input id="textChunk" placeholder="Or type a line to send as a transcript chunk (no mic needed)" />
+          <button id="sendTextBtn" disabled>Send text</button>
+        </div>
+      </section>
+
+      <section>
+        <h2>Live transcript</h2>
+        <div id="transcript"><div class="empty" id="transcriptEmpty">Start recording and speak.</div></div>
+        <div id="interim"></div>
+      </section>
+
+      <section>
+        <h2>Event log</h2>
+        <div id="log"></div>
+      </section>
+    </div>
+
+    <div class="stack">
+      <section>
+        <h2>AI assistant</h2>
+        <div class="thinking" id="thinking"><span class="dot"></span><span id="thinkingText">Waiting for the conversation…</span></div>
+        <div class="steps" id="steps">
+          <span class="step" data-stage="intake_analyzer">Intake</span>
+          <span class="step" data-stage="legal_researcher">Research</span>
+          <span class="step" data-stage="risk_evaluator">Risk</span>
+          <span class="step" data-stage="drafter">Draft</span>
+        </div>
+        <div id="agentMessage" class="empty">The assistant's notes appear here as the consultation develops.</div>
+        <div id="disclaimerNote" class="disclaimer-note" hidden>A legal-information disclaimer was added because the draft read like advice.</div>
+      </section>
+      <section>
+        <h2>Legal issue alerts</h2>
+        <div id="issues"><div class="empty">None yet.</div></div>
+      </section>
+      <section>
+        <h2>Legal citations</h2>
+        <div id="citations"><div class="empty">Statutes and precedents from your firm's knowledge base appear here as they become relevant.</div></div>
+      </section>
+      <section id="obsSection" hidden>
+        <h2>Contract cross-reference</h2>
+        <div id="observations"><div class="empty">None yet.</div></div>
+      </section>
+      <section>
+        <h2>Key facts</h2>
+        <div id="facts"><div class="empty">None yet.</div></div>
+      </section>
+      <section>
+        <h2>Suggested follow-up questions</h2>
+        <div id="questions"><div class="empty">None yet.</div></div>
+      </section>
+      <section>
+        <h2>Final summary</h2>
+        <div id="summaryMeta" class="muted"></div>
+        <div id="summary" class="empty">Appears after you stop the session.</div>
+        <button id="downloadBtn" class="primary" hidden>Download PDF Summary</button>
+      </section>
+    </div>
+  </main>
+
+<script>
+// ---------------------------------------------------------------------------
+// Audio capture: AudioWorklet that downsamples the mic to 16 kHz mono 16-bit PCM
+// (Deepgram "linear16") and posts ~100 ms frames to the main thread.
+// ---------------------------------------------------------------------------
+const TARGET_SAMPLE_RATE = 16000;
+const WORKLET_SOURCE = `
+class PcmDownsampler extends AudioWorkletProcessor {
+  constructor() {
+    super();
+    this.ratio = sampleRate / ${TARGET_SAMPLE_RATE};
+    this.frameSize = ${TARGET_SAMPLE_RATE / 10};
+    this.buffer = new Int16Array(this.frameSize);
+    this.length = 0; this.position = 0; this.sum = 0; this.count = 0; this.peak = 0;
+  }
+  process(inputs) {
+    const channel = inputs[0] && inputs[0][0];
+    if (!channel) return true;
+    for (let i = 0; i < channel.length; i++) {
+      this.sum += channel[i]; this.count++; this.position++;
+      if (this.position >= this.ratio) {
+        this.position -= this.ratio;
+        const s = Math.max(-1, Math.min(1, this.sum / this.count));
+        this.peak = Math.max(this.peak, Math.abs(s));
+        this.buffer[this.length++] = s < 0 ? s * 0x8000 : s * 0x7fff;
+        this.sum = 0; this.count = 0;
+        if (this.length === this.frameSize) {
+          this.port.postMessage({ pcm: this.buffer.buffer, peak: this.peak }, [this.buffer.buffer]);
+          this.buffer = new Int16Array(this.frameSize); this.length = 0; this.peak = 0;
+        }
+      }
+    }
+    return true;
+  }
+}
+registerProcessor('pcm-downsampler', PcmDownsampler);`;
+
+const $ = (id) => document.getElementById(id);
+const state = { supabase: null, session: null, ws: null, audio: null, analysisSeen: false, document: null, transcriptId: null, orgs: [], citations: new Map(), stageOrder: ['intake_analyzer', 'legal_researcher', 'risk_evaluator', 'drafter'] };
+
+function log(message, isError = false) {
+  const line = document.createElement('div');
+  if (isError) line.className = 'err';
+  line.textContent = `${new Date().toLocaleTimeString()}  ${message}`;
+  $('log').prepend(line);
+}
+
+function setConn(text, cls = '') { $('connStatus').textContent = text; $('connStatus').className = 'pill ' + cls; }
+
+function el(tag, className, text) {
+  const node = document.createElement(tag);
+  if (className) node.className = className;
+  if (text !== undefined) node.textContent = text;
+  return node;
+}
+
+// ---------------------------------------------------------------------------
+// Auth
+// ---------------------------------------------------------------------------
+async function initSupabase() {
+  try {
+    const cfg = await fetch('/api/v1/public-config').then(r => r.json());
+    if (!cfg.supabase_url || !cfg.supabase_anon_key) {
+      log('SUPABASE_URL / SUPABASE_ANON_KEY not set on the server; paste an access token instead.', true);
+      return;
+    }
+    state.supabase = window.supabase.createClient(cfg.supabase_url, cfg.supabase_anon_key);
+    const { data } = await state.supabase.auth.getSession();
+    setSession(data.session);
+    state.supabase.auth.onAuthStateChange((event, session) => {
+      setSession(session);
+      // Long consultations outlive the JWT: hand the refreshed token to the open socket.
+      if (event === 'TOKEN_REFRESHED' && session && state.ws?.readyState === WebSocket.OPEN) {
+        state.ws.send(JSON.stringify({ type: 'auth', token: session.access_token }));
+      }
+    });
+  } catch (err) {
+    log('Could not load Supabase config: ' + err.message, true);
+  }
+}
+
+function setSession(session) {
+  const changed = state.session?.access_token !== session?.access_token && !state.session !== !session;
+  state.session = session;
+  if (changed && session) loadOrganizations();
+  $('authStatus').textContent = session ? `Signed in: ${session.user.email}` : 'Signed out';
+  $('authStatus').className = 'pill' + (session ? ' ok' : '');
+  $('signOutBtn').disabled = !session;
+}
+
+function currentToken() {
+  return $('tokenInput').value.trim() || state.session?.access_token || null;
+}
+
+function currentOrgId() { return $('orgSelect').value || null; }
+
+function authHeaders() {
+  const headers = { Authorization: `Bearer ${currentToken()}` };
+  if (currentOrgId()) headers['X-Org-Id'] = currentOrgId();
+  return headers;
+}
+
+async function api(path, options = {}) {
+  const res = await fetch(path, { ...options, headers: { ...authHeaders(), ...(options.headers || {}) } });
+  const body = res.status === 204 ? null : await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(body?.detail || `${res.status} ${res.statusText}`);
+  return body;
+}
+
+// ---------------------------------------------------------------------------
+// Organizations and practice areas
+// ---------------------------------------------------------------------------
+async function loadOrganizations() {
+  if (!currentToken()) return;
+  try {
+    state.orgs = await api('/api/v1/organizations');
+  } catch (err) {
+    return log('Could not load organizations: ' + err.message, true);
+  }
+  const previous = currentOrgId();
+  $('orgSelect').replaceChildren(...state.orgs.map(o => {
+    const option = el('option', '', `${o.name} (${o.role})`);
+    option.value = o.id;
+    return option;
+  }));
+  const pick = state.orgs.find(o => o.id === previous) || state.orgs.find(o => o.is_active) || state.orgs[0];
+  if (pick) $('orgSelect').value = pick.id;
+  await Promise.all([loadPracticeAreas(), loadThreads()]);
+}
+
+function currentRole() { return state.orgs.find(o => o.id === currentOrgId())?.role; }
+
+async function loadPracticeAreas() {
+  const select = $('practiceSelect');
+  const general = el('option', '', 'General (no practice area)');
+  general.value = '';
+  if (!currentOrgId()) return select.replaceChildren(general);
+  try {
+    const areas = await api('/api/v1/practice-areas');
+    select.replaceChildren(general, ...areas.map(a => {
+      const option = el('option', '', a.name);
+      option.value = a.id;
+      return option;
+    }));
+    $('installTemplatesBtn').hidden = areas.length > 0 || !['owner', 'partner'].includes(currentRole());
+  } catch (err) {
+    select.replaceChildren(general);
+    log('Could not load practice areas: ' + err.message, true);
+  }
+}
+
+async function loadThreads(selectId) {
+  const select = $('threadSelect');
+  const none = Object.assign(el('option', '', 'No case thread'), { value: '' });
+  const create = Object.assign(el('option', '', '+ New case thread…'), { value: '__new__' });
+  if (!currentOrgId()) return select.replaceChildren(none, create);
+  try {
+    const threads = await api('/api/v1/case-threads?status=open');
+    select.replaceChildren(none, ...threads.map(t => Object.assign(el('option', '', t.title), { value: t.id })), create);
+    if (selectId) select.value = selectId;
+  } catch (err) {
+    select.replaceChildren(none, create);
+    log('Could not load case threads: ' + err.message, true);
+  }
+}
+
+$('threadSelect').onchange = async () => {
+  if ($('threadSelect').value !== '__new__') return;
+  const title = prompt('Name this case (e.g. "Kumar - deposit dispute")');
+  if (!title || !title.trim()) { $('threadSelect').value = ''; return; }
+  try {
+    const thread = await api('/api/v1/case-threads', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ title: title.trim() }) });
+    await loadThreads(thread.id);
+    log(`Created case thread "${thread.title}"`);
+  } catch (err) {
+    $('threadSelect').value = '';
+    log('Could not create case thread: ' + err.message, true);
+  }
+};
+
+$('orgSelect').onchange = () => { showDocument(null); loadPracticeAreas(); loadThreads(); };
+$('tokenInput').addEventListener('change', loadOrganizations);
+$('installTemplatesBtn').onclick = async () => {
+  try {
+    const added = await api('/api/v1/practice-areas/install-templates', { method: 'POST' });
+    log(`Installed ${added.length} practice area templates`);
+    await loadPracticeAreas();
+  } catch (err) { log('Could not install templates: ' + err.message, true); }
+};
+
+$('signInBtn').onclick = async () => {
+  if (!state.supabase) return log('Supabase is not configured on the server.', true);
+  const { error } = await state.supabase.auth.signInWithPassword({ email: $('email').value, password: $('password').value });
+  $('password').value = '';
+  if (error) log('Sign-in failed: ' + error.message, true); else log('Signed in.');
+};
+$('signOutBtn').onclick = () => state.supabase?.auth.signOut();
+
+// ---------------------------------------------------------------------------
+// WebSocket session
+// ---------------------------------------------------------------------------
+function resetPanels() {
+  $('transcript').replaceChildren(el('div', 'empty', 'Listening…'));
+  $('interim').textContent = '';
+  for (const id of ['issues', 'facts', 'questions', 'observations']) $(id).replaceChildren(el('div', 'empty', 'None yet.'));
+  $('obsSection').hidden = !state.document;
+  $('downloadBtn').hidden = true;
+  state.citations = new Map();
+  setThinking('idle', 'Waiting for the conversation…');
+  $('agentMessage').className = 'empty';
+  $('agentMessage').textContent = "The assistant's notes appear here as the consultation develops.";
+  $('disclaimerNote').hidden = true;
+  $('citations').replaceChildren(el('div', 'empty', 'Listening for relevant statutes and precedents…'));
+  state.transcriptId = null;
+  $('summary').className = 'empty'; $('summary').textContent = 'Appears after you stop the session.';
+  $('summaryMeta').textContent = '';
+  state.analysisSeen = false;
+}
+
+function connect(token) {
+  return new Promise((resolve, reject) => {
+    const params = new URLSearchParams();
+    if (currentOrgId()) params.set('org_id', currentOrgId());
+    if ($('practiceSelect').value) params.set('practice_area_id', $('practiceSelect').value);
+    if ($('threadSelect').value && $('threadSelect').value !== '__new__') params.set('thread_id', $('threadSelect').value);
+    const url = `${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}/api/v1/ws/audio?${params}`;
+    // Token goes in the subprotocol so it stays out of URLs and server logs.
+    const ws = new WebSocket(url, ['bearer', token]);
+    ws.binaryType = 'arraybuffer';
+    let opened = false;
+    ws.onopen = () => { opened = true; resolve(ws); };
+    ws.onmessage = (event) => handleServerMessage(JSON.parse(event.data));
+    ws.onclose = (event) => {
+      // Browsers hide the reason when the server refuses the handshake (it arrives as code 1006).
+      if (!opened) return reject(new Error('connection refused: the access token is invalid or expired, you are not a member of the selected organization, or Supabase is not configured on the server'));
+      log(`Socket closed (${event.code}${event.reason ? ': ' + event.reason : ''})`);
+      stopAudio();
+      setButtons(false);
+      if (!['Saved', 'Ended'].includes($('connStatus').textContent)) setConn('Idle');
+      state.ws = null;
+    };
+  });
+}
+
+function handleServerMessage(msg) {
+  switch (msg.type) {
+    case 'session_started':
+      log(`Session ${msg.session_id} started`);
+      break;
+    case 'transcript_interim':
+      $('interim').textContent = msg.text;
+      break;
+    case 'chunk_received':
+      addSegment(msg.text, msg.speaker, msg.redactions);
+      if (msg.source === 'audio') $('interim').textContent = '';
+      break;
+    case 'analysis':
+      renderAnalysis(msg.data);
+      break;
+    case 'session_ended':
+      renderSummary(msg);
+      break;
+    case 'error':
+      log(`${msg.code}: ${msg.message}`, true);
+      break;
+    case 'agent_status':
+      if (msg.stage === 'idle') setThinking('idle', 'Up to date');
+      else setThinking(msg.stage, msg.message);
+      break;
+    case 'agent_response':
+      $('agentMessage').className = '';
+      $('agentMessage').textContent = msg.message;
+      $('disclaimerNote').hidden = !msg.disclaimer_appended;
+      break;
+    case 'case_memory_loaded':
+      log(`Case "${msg.title}": ${msg.previous_sessions} earlier session(s) loaded into the AI's memory`);
+      break;
+    case 'practice_area_selected':
+      log(`Practice area: ${msg.name}`);
+      break;
+    case 'citations':
+      renderCitations(msg.items);
+      break;
+    case 'document_attached':
+      log(`Contract attached: ${msg.filename}` + (msg.complete_in_context ? '' : ' (long document: analysis uses the most relevant clauses)'));
+      break;
+    case 'auth_refreshed':
+      log('Access token refreshed');
+      break;
+  }
+}
+
+function setThinking(stage, message) {
+  const busy = stage !== 'idle';
+  $('thinking').className = 'thinking' + (busy ? ' busy' : '');
+  $('thinkingText').textContent = message;
+  const current = state.stageOrder.indexOf(stage);
+  for (const step of $('steps').children) {
+    const index = state.stageOrder.indexOf(step.dataset.stage);
+    step.className = 'step' + (!busy ? '' : index === current ? ' active' : index < current ? ' done' : '');
+  }
+}
+
+function addSegment(text, speaker, redactions = []) {
+  $('transcriptEmpty')?.remove();
+  const box = $('transcript');
+  if (box.firstChild?.classList?.contains('empty')) box.replaceChildren();
+  const seg = el('div', 'seg');
+  if (speaker) seg.append(el('span', 'who', speaker + ':'));
+  seg.append(document.createTextNode(text));
+  if (redactions.length) {
+    const badge = el('span', 'redacted', `${redactions.length} masked for AI`);
+    badge.title = 'The AI sees ' + redactions.join(', ') + ' instead of these identifiers';
+    seg.append(badge);
+  }
+  box.append(seg);
+  box.scrollTop = box.scrollHeight;
+}
+
+function renderAnalysis(data) {
+  const severityRank = { high: 0, medium: 1, low: 2 };
+  const issues = [...data.legal_issues].sort((a, b) => severityRank[a.severity] - severityRank[b.severity]);
+  $('issues').replaceChildren(...(issues.length ? issues.map(issue => {
+    const card = el('div', `issue ${issue.severity}`);
+    card.append(el('div', 'sev', `${issue.severity}${issue.area_of_law ? ' · ' + issue.area_of_law : ''}`));
+    card.append(el('div', 'title', issue.issue));
+    if (issue.rationale) card.append(el('div', 'why', issue.rationale));
+    if (issue.authority) card.append(el('div', 'why auth', '§ ' + issue.authority));
+    return card;
+  }) : [el('div', 'empty', 'None yet.')]));
+
+  const facts = el('ul');
+  for (const fact of data.key_facts) {
+    const li = el('li', '', fact.fact);
+    if (fact.category) li.append(el('span', 'cat', fact.category));
+    facts.append(li);
+  }
+  $('facts').replaceChildren(data.key_facts.length ? facts : el('div', 'empty', 'None yet.'));
+
+  const questions = el('ul');
+  for (const q of data.follow_up_questions) questions.append(el('li', '', q));
+  $('questions').replaceChildren(data.follow_up_questions.length ? questions : el('div', 'empty', 'None yet.'));
+
+  const observations = data.contract_observations || [];
+  const alignmentLabel = { conflict: 'Conflict', not_covered: 'Not covered', consistent: 'Consistent', unclear: 'Unclear' };
+  $('obsSection').hidden = !state.document && !observations.length;
+  $('observations').replaceChildren(...(observations.length ? observations.map(o => {
+    const card = el('div', `obs ${o.alignment}`);
+    card.append(el('div', 'tag', alignmentLabel[o.alignment] || o.alignment));
+    card.append(el('div', 'clause', o.clause));
+    card.append(el('div', '', o.observation));
+    return card;
+  }) : [el('div', 'empty', 'None yet.')]));
+
+  if (!state.analysisSeen && issues.some(i => i.severity === 'high')) log('High-severity legal issue flagged');
+  state.analysisSeen = true;
+}
+
+function renderCitations(items) {
+  // Keep everything matched this session; mark what Claude is looking at right now.
+  const currentIds = new Set(items.map(i => i.id));
+  for (const item of items) state.citations.set(item.id, item);
+  const ordered = [...state.citations.values()].sort((a, b) =>
+    (currentIds.has(b.id) - currentIds.has(a.id)) || (b.similarity - a.similarity));
+  $('citations').replaceChildren(...ordered.map(c => {
+    const card = el('div', 'cite ' + (currentIds.has(c.id) ? 'current' : 'past'));
+    if (currentIds.has(c.id)) card.append(el('div', 'badge', 'In context now'));
+    const head = el('div', 'head');
+    head.append(el('span', 'title', c.title), el('span', 'score', `${Math.round(c.similarity * 100)}% match`));
+    card.append(head);
+    const ref = [c.citation, c.jurisdiction].filter(Boolean).join(' · ');
+    if (ref) card.append(el('div', 'ref', ref));
+    card.append(el('div', 'excerpt', c.excerpt.length >= 400 ? c.excerpt + '…' : c.excerpt));
+    if (c.url && /^https?:\/\//.test(c.url)) {
+      const link = Object.assign(el('a', 'ref', 'Source'), { href: c.url, target: '_blank', rel: 'noopener noreferrer' });
+      card.append(link);
+    }
+    return card;
+  }));
+  log(`${items.length} legal citation${items.length === 1 ? '' : 's'} matched`);
+}
+
+function renderSummary(msg) {
+  renderAnalysis(msg.analysis);
+  $('summaryMeta').textContent = msg.transcript_id
+    ? `Saved as transcript ${msg.transcript_id} · n8n workflow ${msg.workflow_triggered ? 'triggered' : 'not triggered'}`
+    : 'Nothing was saved (no transcript).';
+  $('summary').className = msg.summary ? '' : 'empty';
+  $('summary').textContent = msg.summary || 'No summary generated.';
+  state.transcriptId = msg.transcript_id;
+  $('downloadBtn').hidden = !msg.transcript_id;
+  setConn(msg.transcript_id ? 'Saved' : 'Ended', msg.transcript_id ? 'ok' : '');
+}
+
+// ---------------------------------------------------------------------------
+// Microphone
+// ---------------------------------------------------------------------------
+async function startAudio(ws) {
+  const stream = await navigator.mediaDevices.getUserMedia({
+    audio: { channelCount: 1, echoCancellation: true, noiseSuppression: true },
+  });
+  const context = new AudioContext();
+  const moduleUrl = URL.createObjectURL(new Blob([WORKLET_SOURCE], { type: 'application/javascript' }));
+  await context.audioWorklet.addModule(moduleUrl);
+  URL.revokeObjectURL(moduleUrl);
+
+  const source = context.createMediaStreamSource(stream);
+  const worklet = new AudioWorkletNode(context, 'pcm-downsampler');
+  const mute = context.createGain();
+  mute.gain.value = 0;  // keeps the graph running without playing the mic back
+  source.connect(worklet).connect(mute).connect(context.destination);
+
+  worklet.port.onmessage = ({ data }) => {
+    $('level').style.width = Math.min(100, data.peak * 140) + '%';
+    if (ws.readyState === WebSocket.OPEN) ws.send(data.pcm);
+  };
+  state.audio = { stream, context };
+  log(`Microphone on (${context.sampleRate} Hz → ${TARGET_SAMPLE_RATE} Hz PCM)`);
+}
+
+function stopAudio() {
+  if (!state.audio) return;
+  state.audio.stream.getTracks().forEach(t => t.stop());
+  state.audio.context.close();
+  state.audio = null;
+  $('level').style.width = '0';
+}
+
+function setButtons(live) {
+  $('startBtn').disabled = live;
+  $('stopBtn').disabled = !live;
+  $('sendTextBtn').disabled = !live;
+  $('docBtn').disabled = live;
+  $('docRemoveBtn').disabled = live;
+  $('orgSelect').disabled = live;
+  $('practiceSelect').disabled = live;
+  $('threadSelect').disabled = live;
+}
+
+$('startBtn').onclick = async () => {
+  const token = currentToken();
+  if (!token) return log('Sign in or paste an access token first.', true);
+  resetPanels();
+  setButtons(true);
+  setConn('Connecting…');
+  try {
+    state.ws = await connect(token);
+    state.ws.send(JSON.stringify({
+      type: 'start',
+      title: $('title').value.trim() || undefined,
+      document_id: state.document?.id,
+      audio: { encoding: 'linear16', sample_rate: TARGET_SAMPLE_RATE, channels: 1 },
+    }));
+    setConn('● Live', 'live');
+    await startAudio(state.ws);
+  } catch (err) {
+    log('Could not start: ' + err.message + (state.ws ? ' (you can still send text chunks)' : ''), true);
+    if (!state.ws) { setButtons(false); setConn('Idle'); }
+  }
+};
+
+$('stopBtn').onclick = () => {
+  stopAudio();
+  $('stopBtn').disabled = true;
+  $('sendTextBtn').disabled = true;
+  setConn('Summarizing & saving…');
+  state.ws?.send(JSON.stringify({ type: 'end' }));
+};
+
+function sendText() {
+  const text = $('textChunk').value.trim();
+  if (!text || state.ws?.readyState !== WebSocket.OPEN) return;
+  state.ws.send(JSON.stringify({ type: 'transcript_chunk', text, speaker: 'Typed' }));
+  $('textChunk').value = '';
+}
+$('sendTextBtn').onclick = sendText;
+$('textChunk').addEventListener('keydown', e => { if (e.key === 'Enter') sendText(); });
+
+// ---------------------------------------------------------------------------
+// Contract upload
+// ---------------------------------------------------------------------------
+function showDocument(doc) {
+  state.document = doc;
+  $('docName').textContent = doc
+    ? `${doc.filename} · ${doc.page_count ? doc.page_count + ' pages · ' : ''}${doc.char_count.toLocaleString()} characters`
+    : 'No contract attached (optional): attach one before recording to cross-reference it live.';
+  $('docBtn').textContent = doc ? 'Replace…' : 'Attach contract…';
+  $('docRemoveBtn').hidden = !doc;
+  $('obsSection').hidden = !doc;
+}
+
+$('docBtn').onclick = () => $('docFile').click();
+$('docRemoveBtn').onclick = () => showDocument(null);
+$('docFile').onchange = async () => {
+  const file = $('docFile').files[0];
+  $('docFile').value = '';
+  if (!file) return;
+  const token = currentToken();
+  if (!token) return log('Sign in or paste an access token before uploading.', true);
+  const form = new FormData();
+  form.append('file', file);
+  $('docBtn').disabled = true;
+  $('docName').textContent = `Uploading ${file.name}…`;
+  try {
+    const res = await fetch('/api/v1/documents/upload', { method: 'POST', headers: authHeaders(), body: form });
+    const body = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(body.detail || `upload failed (${res.status})`);
+    showDocument(body);
+    const methods = Object.entries(body.extraction?.methods || {}).map(([m, n]) => `${n} page(s) by ${m === 'text' ? 'text layer' : m === 'ocr' ? 'OCR' : m === 'vision' ? 'Claude vision' : m}`);
+    log(`Uploaded ${body.filename}` + (methods.length ? ` (${methods.join(', ')})` : ''));
+  } catch (err) {
+    showDocument(state.document);
+    log('Upload failed: ' + err.message, true);
+  } finally {
+    $('docBtn').disabled = !!state.ws;
+  }
+};
+
+// ---------------------------------------------------------------------------
+// PDF report download (needs the auth header, so fetch it and save the blob)
+// ---------------------------------------------------------------------------
+$('downloadBtn').onclick = async () => {
+  const token = currentToken();
+  if (!state.transcriptId || !token) return;
+  $('downloadBtn').disabled = true;
+  try {
+    const res = await fetch(`/api/v1/transcripts/${state.transcriptId}/pdf`, { headers: authHeaders() });
+    if (!res.ok) throw new Error((await res.json().catch(() => ({}))).detail || `download failed (${res.status})`);
+    const name = /filename="([^"]+)"/.exec(res.headers.get('Content-Disposition') || '')?.[1] || 'consultation-report.pdf';
+    const url = URL.createObjectURL(await res.blob());
+    const link = Object.assign(document.createElement('a'), { href: url, download: name });
+    document.body.append(link);
+    link.click();
+    link.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 10000);
+  } catch (err) {
+    log('PDF download failed: ' + err.message, true);
+  } finally {
+    $('downloadBtn').disabled = false;
+  }
+};
+
+initSupabase();
+</script>
+</body>
+</html>

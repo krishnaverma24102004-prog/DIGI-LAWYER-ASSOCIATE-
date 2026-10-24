@@ -1,0 +1,16 @@
+.env
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.cache/
+evals/results/
+node_modules/
+.next/
+*.log
+.env.*
+!.env.example
+.claude/settings.local.json

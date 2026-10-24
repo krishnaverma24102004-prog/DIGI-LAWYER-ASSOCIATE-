@@ -1,0 +1,6 @@
+pytest>=8.0
+# Optional: runs tests/db (migrations + RLS) on an embedded Postgres with pgvector
+pgserver>=0.1.4
+psycopg[binary]>=3.2
+# Background-job tests without a Redis server (CI sets TEST_REDIS_URL to use a real one)
+fakeredis>=2.40

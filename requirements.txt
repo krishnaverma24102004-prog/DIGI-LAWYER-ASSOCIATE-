@@ -1,0 +1,39 @@
+fastapi>=0.115,<1.0
+uvicorn[standard]>=0.30,<1.0
+supabase>=2.10,<3.0
+pydantic-settings>=2.4,<3.0
+httpx>=0.27,<1.0
+anthropic>=1.15,<2.0
+deepgram-sdk>=7.13,<8.0
+pypdf>=6.0,<7.0
+reportlab>=5.0,<6.0
+python-multipart>=0.0.20
+fastembed>=0.9,<1.0
+langgraph>=1.2,<2.0
+presidio-analyzer>=2.2.360,<3.0
+# spaCy model used by Presidio (small: ~12 MB)
+en_core_web_sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl
+# OCR. System dependency: the Tesseract binary (see README). PDF pages are rendered with pypdfium2, no Poppler needed.
+pytesseract>=0.3.13,<1.0
+pypdfium2>=5.0,<6.0
+pillow>=11.0
+# Live web search for the external-researcher agent
+tavily-python>=0.8,<1.0
+# WebRTC voice sessions (bundles PyAV/FFmpeg; no system install needed)
+aiortc>=1.15,<2.0
+numpy>=2.0
+# Contract redlining (character-level diffs) and editable Word export
+diff-match-patch>=20241021
+python-docx>=1.1,<2.0
+# Billing (Stripe Checkout, webhooks, metered audio minutes)
+stripe>=16.0,<17.0
+# Phone intake (TwiML, webhook signature checks)
+twilio>=9.12,<10.0
+# Background jobs and shared rate-limit counters
+redis>=5.3,<6.0
+arq>=0.28,<1.0
+# Rate limiting and Prometheus metrics
+slowapi>=0.1.10,<1.0
+prometheus-fastapi-instrumentator>=8.1,<9.0
+# Supreme Court judgments import (scripts/ingest_sc_judgments.py) reads Parquet metadata
+pyarrow>=18.0

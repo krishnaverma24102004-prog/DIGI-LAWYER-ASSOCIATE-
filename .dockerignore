@@ -1,0 +1,15 @@
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+.cache/
+.pytest_cache/
+**/__pycache__/
+*.pyc
+frontend/
+tests/
+supabase/
+.claude/
+.github/
+*.md

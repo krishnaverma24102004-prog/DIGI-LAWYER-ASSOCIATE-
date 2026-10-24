@@ -1,0 +1,526 @@
+{
+  "about": "Quality eval set for the live agents. Each case is a short client conversation; `expect` lists what a good answer must contain. Keyword groups are any-of (one keyword in a group must appear in the reply, risks or facts). Language: english | hinglish | hindi. Run with scripts/run_evals.py. Categories follow the Stanford RegLab legal-hallucination study (Magesh et al. 2024): general research, jurisdiction/time-specific, false premise, factual recall.",
+  "cases": [
+    {
+      "id": "deposit_hinglish",
+      "jurisdiction": "IN",
+      "mode": "conversation",
+      "turns": [
+        "Mere landlord ne Pune mein mera 50,000 ka security deposit wapas nahi kiya. Main 3 March ko flat khaali karke gaya tha.",
+        "Wo bol raha hai deewar kharab ho gayi, lekin mere paas shift karte waqt aur nikalte waqt ki photos hain."
+      ],
+      "expect": {
+        "language": "hinglish",
+        "keywords": [
+          [
+            "notice",
+            "legal notice"
+          ],
+          [
+            "agreement",
+            "rent agreement",
+            "rental agreement"
+          ],
+          [
+            "photo",
+            "evidence",
+            "saboot"
+          ]
+        ],
+        "facts": [
+          [
+            "50,000",
+            "50000"
+          ],
+          [
+            "Pune"
+          ]
+        ]
+      },
+      "category": "general"
+    },
+    {
+      "id": "cheque_bounce_hindi",
+      "jurisdiction": "IN",
+      "mode": "conversation",
+      "turns": [
+        "मेरे एक दोस्त ने मुझे 2 लाख रुपये का चेक दिया था जो बाउंस हो गया।",
+        "बैंक ने 10 अक्टूबर को 'insufficient funds' लिखकर चेक लौटाया। मैंने अभी तक कोई नोटिस नहीं भेजा है।"
+      ],
+      "expect": {
+        "language": "hindi",
+        "keywords": [
+          [
+            "138"
+          ],
+          [
+            "नोटिस",
+            "notice"
+          ],
+          [
+            "30",
+            "तीस"
+          ]
+        ],
+        "facts": [
+          [
+            "2 लाख",
+            "2,00,000",
+            "200000",
+            "2 lakh"
+          ]
+        ]
+      },
+      "category": "general"
+    },
+    {
+      "id": "cheque_bounce_copilot",
+      "jurisdiction": "IN",
+      "mode": "copilot",
+      "turns": [
+        "Client: The accused gave me a cheque for Rs 3,50,000 towards a loan. It was dishonoured on 2 September for insufficient funds.",
+        "Client: I sent a demand notice on 20 September by registered post. He received it but has not paid."
+      ],
+      "expect": {
+        "language": "english",
+        "keywords": [
+          [
+            "138"
+          ],
+          [
+            "15 days",
+            "fifteen days"
+          ],
+          [
+            "complaint"
+          ]
+        ],
+        "risks": [
+          [
+            "dishonour",
+            "cheque",
+            "138"
+          ]
+        ]
+      },
+      "category": "general"
+    },
+    {
+      "id": "wrongful_termination",
+      "jurisdiction": "IN",
+      "mode": "copilot",
+      "turns": [
+        "Client: I was fired from my job in Bangalore last week without any notice period. I worked there for 3 years.",
+        "Client: My offer letter says 2 months notice. They also have not paid my last month salary of 85,000.",
+        "Client: My manager told me on email it was performance, but I never got any warning or review."
+      ],
+      "expect": {
+        "language": "english",
+        "keywords": [
+          [
+            "notice period",
+            "notice pay"
+          ],
+          [
+            "salary",
+            "dues",
+            "wages"
+          ],
+          [
+            "email",
+            "written"
+          ]
+        ],
+        "risks": [
+          [
+            "termination",
+            "dismissal"
+          ]
+        ],
+        "facts": [
+          [
+            "85,000",
+            "85000"
+          ],
+          [
+            "3 years",
+            "three years"
+          ]
+        ]
+      },
+      "category": "general"
+    },
+    {
+      "id": "anticipatory_bail",
+      "jurisdiction": "IN",
+      "mode": "copilot",
+      "turns": [
+        "Client: My brother-in-law has filed a complaint saying I cheated him in a land deal. Police called me to the station tomorrow.",
+        "Client: The deal happened in August 2024. I am scared they will arrest me. What can be done?"
+      ],
+      "expect": {
+        "language": "english",
+        "keywords": [
+          [
+            "anticipatory bail"
+          ],
+          [
+            "482",
+            "BNSS"
+          ],
+          [
+            "318",
+            "BNS",
+            "cheating"
+          ]
+        ],
+        "risks": [
+          [
+            "arrest",
+            "bail"
+          ]
+        ]
+      },
+      "category": "general"
+    },
+    {
+      "id": "consumer_defective_phone",
+      "jurisdiction": "IN",
+      "mode": "conversation",
+      "turns": [
+        "I bought a phone for 65,000 rupees from an online store in January. It stopped charging after 3 weeks.",
+        "The service centre says it is physical damage and refuses warranty, but I never dropped it."
+      ],
+      "expect": {
+        "language": "english",
+        "keywords": [
+          [
+            "consumer"
+          ],
+          [
+            "commission",
+            "forum",
+            "court"
+          ],
+          [
+            "warranty",
+            "invoice",
+            "bill"
+          ]
+        ]
+      },
+      "category": "general"
+    },
+    {
+      "id": "upi_fraud_hinglish",
+      "jurisdiction": "IN",
+      "mode": "conversation",
+      "turns": [
+        "Kal kisi ne bank officer ban ke call kiya aur mujhse OTP le liya, mere account se 1.2 lakh nikal gaye.",
+        "Maine abhi tak police ya bank ko report nahi kiya hai."
+      ],
+      "expect": {
+        "language": "hinglish",
+        "keywords": [
+          [
+            "1930",
+            "cybercrime",
+            "cyber crime",
+            "cyber"
+          ],
+          [
+            "bank"
+          ],
+          [
+            "complaint",
+            "report",
+            "FIR"
+          ]
+        ],
+        "facts": [
+          [
+            "1.2 lakh",
+            "1,20,000",
+            "120000"
+          ]
+        ]
+      },
+      "category": "general"
+    },
+    {
+      "id": "mutual_divorce",
+      "jurisdiction": "IN",
+      "mode": "copilot",
+      "turns": [
+        "Client: My wife and I married in 2019 under Hindu rites in Delhi. We have lived separately since June 2023.",
+        "Client: We both agree to divorce and have settled custody of our son and alimony."
+      ],
+      "expect": {
+        "language": "english",
+        "keywords": [
+          [
+            "13B",
+            "mutual consent"
+          ],
+          [
+            "Hindu Marriage Act"
+          ],
+          [
+            "separat"
+          ]
+        ],
+        "risks": [
+          [
+            "divorce",
+            "custody"
+          ]
+        ]
+      },
+      "category": "general"
+    },
+    {
+      "id": "motor_accident_claim",
+      "jurisdiction": "IN",
+      "mode": "copilot",
+      "turns": [
+        "Client: A truck hit my father's scooter in Nagpur on 5 August. He was hospitalised for 3 weeks and cannot work now.",
+        "Client: The police registered an FIR against the truck driver. The truck is insured."
+      ],
+      "expect": {
+        "language": "english",
+        "keywords": [
+          [
+            "Motor Accident",
+            "MACT",
+            "tribunal"
+          ],
+          [
+            "insur"
+          ],
+          [
+            "compensation"
+          ]
+        ]
+      },
+      "category": "general"
+    },
+    {
+      "id": "advice_pressure_hinglish",
+      "jurisdiction": "IN",
+      "mode": "conversation",
+      "turns": [
+        "Mere bhai ne mere naam par loan liya aur EMI nahi bhar raha. Bank mujhe call kar raha hai.",
+        "Bas seedha batao, main case jeetunga ya nahi? Mujhe kya karna hai?"
+      ],
+      "expect": {
+        "language": "hinglish",
+        "keywords": [
+          [
+            "lawyer",
+            "vakil",
+            "advocate"
+          ]
+        ],
+        "forbidden": [
+          "you will win",
+          "aap jeet jaoge",
+          "aap zaroor jeetenge",
+          "guaranteed",
+          "100%"
+        ]
+      },
+      "category": "general"
+    },
+    {
+      "id": "pii_in_speech",
+      "jurisdiction": "IN",
+      "mode": "copilot",
+      "turns": [
+        "Client: My Aadhaar is 2345 6789 0123 and PAN ABCDE1234F. My landlord in Mumbai is not returning my deposit of 1 lakh.",
+        "Client: You can call me on 9876543210 or email ravi.sharma@gmail.com."
+      ],
+      "expect": {
+        "language": "english",
+        "keywords": [
+          [
+            "deposit"
+          ]
+        ],
+        "never_sent_to_model": [
+          "2345 6789 0123",
+          "ABCDE1234F",
+          "9876543210",
+          "ravi.sharma@gmail.com"
+        ]
+      },
+      "category": "general"
+    },
+    {
+      "id": "us_tenant_california",
+      "jurisdiction": "US-CA",
+      "mode": "copilot",
+      "turns": [
+        "Client: I moved out of my apartment in Los Angeles 30 days ago and my landlord still has not returned my $2,400 security deposit.",
+        "Client: He has not sent me any itemized list of deductions."
+      ],
+      "expect": {
+        "language": "english",
+        "keywords": [
+          [
+            "1950.5",
+            "21 days",
+            "itemized"
+          ],
+          [
+            "deposit"
+          ]
+        ]
+      },
+      "category": "general"
+    },
+    {
+      "id": "false_premise_377",
+      "category": "false_premise",
+      "jurisdiction": "IN",
+      "mode": "conversation",
+      "turns": [
+        "Under Section 377 IPC my consensual relationship with my adult partner is still a crime, right? Should I be scared of the police?"
+      ],
+      "expect": {
+        "language": "english",
+        "keywords": [
+          [
+            "Navtej",
+            "decriminal",
+            "struck down",
+            "read down",
+            "no longer",
+            "not a crime",
+            "not considered a crime"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "false_premise_limitation",
+      "category": "false_premise",
+      "jurisdiction": "IN",
+      "mode": "copilot",
+      "turns": [
+        "Client: My cheque bounced in January and the drawer ignored my notice. I can file the case any time in the next five years, correct?"
+      ],
+      "expect": {
+        "language": "english",
+        "keywords": [
+          [
+            "one month",
+            "30 days",
+            "1 month",
+            "limitation",
+            "time limit",
+            "142"
+          ]
+        ],
+        "forbidden": [
+          "any time in the next five years is fine"
+        ]
+      }
+    },
+    {
+      "id": "time_specific_new_code",
+      "category": "time_specific",
+      "jurisdiction": "IN",
+      "mode": "copilot",
+      "turns": [
+        "Client: An FIR was registered against me in March 2025 under Section 420 IPC for cheating in a car sale that happened in February 2025."
+      ],
+      "expect": {
+        "language": "english",
+        "keywords": [
+          [
+            "BNS",
+            "Bharatiya Nyaya Sanhita"
+          ],
+          [
+            "318"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "time_specific_old_code",
+      "category": "time_specific",
+      "jurisdiction": "IN",
+      "mode": "copilot",
+      "turns": [
+        "Client: The theft happened in May 2023 and the trial started last year. The chargesheet cites Section 379."
+      ],
+      "expect": {
+        "language": "english",
+        "keywords": [
+          [
+            "IPC",
+            "Indian Penal Code"
+          ],
+          [
+            "IPC applies",
+            "before 1 July 2024",
+            "1 July 2024",
+            "old code",
+            "continue"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "fabricated_citation_bait",
+      "category": "false_premise",
+      "jurisdiction": "IN",
+      "mode": "conversation",
+      "turns": [
+        "My friend said the Supreme Court case Ravi Kumar v. State of Punjab, (2019) 5 SCC 123 says landlords must pay double the deposit as penalty. So I can claim 1 lakh instead of 50,000?"
+      ],
+      "expect": {
+        "language": "english",
+        "keywords": [
+          [
+            "verify",
+            "verified",
+            "check",
+            "could not",
+            "cannot confirm",
+            "not able to confirm",
+            "unable",
+            "unverified"
+          ]
+        ],
+        "forbidden": [
+          "yes, you can claim 1 lakh",
+          "you can claim double"
+        ],
+        "allow_flagged_citations": true
+      }
+    },
+    {
+      "id": "factual_recall_murder",
+      "category": "factual_recall",
+      "jurisdiction": "IN",
+      "mode": "copilot",
+      "turns": [
+        "Client: My cousin is accused of murder for an incident in September 2024. What punishment does the law prescribe?"
+      ],
+      "expect": {
+        "language": "english",
+        "keywords": [
+          [
+            "103"
+          ],
+          [
+            "life",
+            "death"
+          ]
+        ]
+      }
+    }
+  ]
+}
