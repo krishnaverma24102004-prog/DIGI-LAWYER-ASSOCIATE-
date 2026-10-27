@@ -324,6 +324,30 @@ Nothing the AI gets wrong, and nothing one person does by mistake, should leave 
 - **Production model gate.** With `ENVIRONMENT=production`, the API and worker refuse to start on a
   non-Claude model or a local gateway.
 
+## Court desk (cause lists, docket, limitation, custody, hearings)
+
+Built from the problem vault's panel-accepted solutions (`docs/problem-vault/`). Every date is
+computed in code from rule tables; no statutory date comes from the AI.
+
+- `/board`: tonight's cause lists (Supreme Court and Delhi High Court parsers; forwarded PDFs for
+  other lists) reconciled against the firm's matters, with appearance confirmation and escalation.
+- `/deadlines`: the firm docket. Each deadline is checked blind by a second member (they re-enter
+  the inputs without seeing the date); reminders escalate to the backup and a partner.
+- `/limitation`: limitation calculator with a worked computation (s.12 copy time, s.4 closures,
+  s.14, hard outer limits) and a certified-copy tracker.
+- `/custody`: default-bail and s.479 BNSS dates for every undertrial, with the procedural code
+  chosen by when the investigation began (s.531 BNSS).
+- `/hearings`: likely call windows per bench from the firm's own logs, clash warnings across
+  courtrooms, and hearing briefs whose directions are verified against the order's text.
+- `/rules`: the limitation and punishment tables ship as drafts; a rule is used in a firm only
+  after two of its advocates check and sign it. The worked examples in `tests/fixtures/` were
+  written from the statutes by engineering and still need advocates' sign-off.
+
+The worker runs the cause-list fetch (every 30 min, 17:00-10:00 IST), appearance escalation,
+the hourly docket sweep (08:00-21:00 IST), the custody recompute (07:00 IST) and hearing briefs
+(19:00 IST). Delhi High Court lists aren't fetched automatically: its terms forbid systematic
+downloading, so firms forward them.
+
 ## Citation verification
 
 Everything the agents cite is checked in code (`app/services/citation_service.py`), not only by the

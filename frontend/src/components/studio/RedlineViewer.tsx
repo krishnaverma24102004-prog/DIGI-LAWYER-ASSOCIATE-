@@ -404,7 +404,7 @@ export function RedlineViewer({
           We act for
           <input className={field} value={ourSide} onChange={(e) => setOurSide(e.target.value)} placeholder="e.g. the Tenant" />
         </label>
-        <input ref={fileRef} type="file" hidden accept=".pdf,.txt,.png,.jpg,.jpeg,.tif,.tiff" onChange={(e) => e.target.files?.[0] && upload(e.target.files[0])} />
+        <input ref={fileRef} type="file" hidden accept=".pdf,.docx,.txt,.png,.jpg,.jpeg,.tif,.tiff" onChange={(e) => e.target.files?.[0] && upload(e.target.files[0])} />
         <button onClick={() => fileRef.current?.click()} disabled={busy !== null} className="rounded-lg border border-slate-300 px-3 py-1.5 text-sm dark:border-slate-600">
           {busy === "upload" ? "Uploading…" : "Upload"}
         </button>

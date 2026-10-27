@@ -1,0 +1,10 @@
+{
+  "code": "MH-PUNE-DC",
+  "name": "District and Sessions Court, Pune",
+  "complex": "Pune District Court, Shivajinagar",
+  "state": "Maharashtra",
+  "timings": {},
+  "coverage": "manual_or_ecourtsindia_api",
+  "status": "draft",
+  "note": "District cause lists on services.ecourts.gov.in sit behind a captcha that is never bypassed: listings come from the eCourtsIndia API or are entered by hand. No sitting hours recorded yet, so no reach windows are estimated for this court."
+}

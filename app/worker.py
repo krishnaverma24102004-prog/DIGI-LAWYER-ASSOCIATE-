@@ -44,6 +44,8 @@ IST = timezone(timedelta(hours=5, minutes=30))
 
 SENIOR_ROLES = {"owner", "partner"}
 TRASH_PURGE_HOUR_IST = 2  # 02:00 IST (night, low traffic)
+CUSTODY_RECOMPUTE_HOUR_IST = 7  # before the courts sit
+HEARING_BRIEFS_HOUR_IST = 19  # evening, after most cause lists are out
 KNOWLEDGE_ROLES = {"owner", "partner", "associate"}
 
 
@@ -222,6 +224,60 @@ async def task_purge_expired_trash(ctx: dict) -> dict:
     return await run_in_threadpool(purge_expired_trash)
 
 
+async def task_deadline_sweep(ctx: dict) -> dict:
+    """Docket reminders, escalations, orphaned deadlines and blind-check safety (deadline_service)."""
+    from app.services import deadline_service
+
+    return await deadline_service.run_sweep(get_supabase_admin())
+
+
+async def recompute_custody(db=None, today: date | None = None) -> dict:
+    """Default-bail and s.479 BNSS dates for every firm with custody files, each scoped to that firm."""
+    from app.services import custody_service
+
+    db = db or get_supabase_admin()
+    today = today or datetime.now(IST).date()
+    org_ids = sorted({r["org_id"] for r in db.table("custody_files").select("org_id").execute().data})
+    totals: dict[str, int] = {"orgs": 0}
+    for org_id in org_ids:
+        try:
+            counts = await custody_service.arecompute_all(db, org_id, today)
+        except Exception:
+            logger.exception("Custody recompute failed for org %s", org_id)
+            totals["errors"] = totals.get("errors", 0) + 1
+            continue
+        totals["orgs"] += 1
+        for key, value in counts.items():
+            if isinstance(value, int):
+                totals[key] = totals.get(key, 0) + value
+    return totals
+
+
+async def task_custody_recompute(ctx: dict) -> dict:
+    return await recompute_custody()
+
+
+async def task_fetch_cause_lists(ctx: dict) -> dict:
+    """Tonight's public cause lists, reconciled against every firm's matters (causelist_service)."""
+    from app.services import causelist_service
+
+    return await causelist_service.fetch_and_ingest(get_supabase_admin())
+
+
+async def task_escalate_listings(ctx: dict) -> dict:
+    """Unconfirmed appearances escalate to the fallback advocate, then partners, then everyone at 07:30."""
+    from app.services import causelist_service
+
+    return await causelist_service.escalate(get_supabase_admin())
+
+
+async def task_hearing_briefs(ctx: dict) -> dict:
+    """Briefs for matters listed (or due) in the next two days; each write scoped to the case's org."""
+    from app.services import brief_service
+
+    return await brief_service.generate_due_briefs(get_supabase_admin(), datetime.now(timezone.utc))
+
+
 def _utc_time(ist_hour: int) -> tuple[int, int]:
     minutes = (ist_hour * 60 - 330) % (24 * 60)  # IST is UTC+5:30
     return minutes // 60, minutes % 60
@@ -251,6 +307,17 @@ class WorkerSettings:
              minute=_utc_time(get_settings().hearing_reminder_hour_ist)[1], run_at_startup=False, timeout=900),
         cron(task_purge_expired_trash, hour=_utc_time(TRASH_PURGE_HOUR_IST)[0], minute=_utc_time(TRASH_PURGE_HOUR_IST)[1],
              run_at_startup=False, timeout=600),
+        # Every hour from 08:00 to 21:00 IST (xx:30 UTC is xx+6:00 IST).
+        cron(task_deadline_sweep, hour=set(range(2, 16)), minute=30, run_at_startup=False, timeout=900),
+        cron(task_custody_recompute, hour=_utc_time(CUSTODY_RECOMPUTE_HOUR_IST)[0], minute=_utc_time(CUSTODY_RECOMPUTE_HOUR_IST)[1],
+             run_at_startup=False, timeout=900),
+        cron(task_hearing_briefs, hour=_utc_time(HEARING_BRIEFS_HOUR_IST)[0], minute=_utc_time(HEARING_BRIEFS_HOUR_IST)[1],
+             run_at_startup=False, timeout=1800),
+        # Cause lists: every 30 minutes from 17:00 to 10:00 IST (the function also checks the window).
+        cron(task_fetch_cause_lists, hour={11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 0, 1, 2, 3, 4}, minute={0, 30},
+             run_at_startup=False, timeout=1500),
+        # Appearance escalation: every 15 minutes 19:00-22:30 IST, and 07:30-10:00 IST for lists published in the morning.
+        cron(task_escalate_listings, hour={13, 14, 15, 16, 17, 2, 3, 4}, minute={0, 15, 30, 45}, run_at_startup=False, timeout=600),
     ]
     queue_name = queue_service.QUEUE_NAME
     on_startup = startup

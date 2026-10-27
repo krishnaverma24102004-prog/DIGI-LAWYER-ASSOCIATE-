@@ -22,6 +22,7 @@ logger = logging.getLogger(__name__)
 TABLE = "documents"
 METADATA_COLUMNS = "id, user_id, org_id, filename, content_type, size_bytes, page_count, char_count, extraction, governing_law, created_at"
 
+DOCX_TYPE = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
 MAX_UPLOAD_BYTES = 10 * 1024 * 1024
 MAX_PDF_PAGES = 500
 MAX_EXTRACTED_CHARS = 2_000_000
@@ -93,10 +94,12 @@ def extract_text(filename: str, content_type: str, data: bytes) -> ExtractedDocu
         text, pages, kind, extraction = result.text, len(result.pages), image_type, result.summary()
     elif content_type == "application/pdf" or lower_name.endswith(".pdf"):
         raise DocumentError("The file is not a valid PDF")
+    elif data.startswith(b"PK\x03\x04") and (content_type == DOCX_TYPE or lower_name.endswith(".docx")):
+        text, pages, kind = _extract_docx(data), None, DOCX_TYPE
     elif content_type.startswith("text/") or lower_name.endswith((".txt", ".md")):
         text, pages, kind = _decode_text(data), None, "text/plain"
     else:
-        raise DocumentError("Unsupported file type. Upload a PDF, an image (PNG, JPEG, TIFF, WebP) or a .txt file.")
+        raise DocumentError("Unsupported file type. Upload a PDF, a Word file (.docx), an image (PNG, JPEG, TIFF, WebP) or a .txt file.")
 
     text = _normalize(text)
     if len(text) < 20:
@@ -106,6 +109,27 @@ def extract_text(filename: str, content_type: str, data: bytes) -> ExtractedDocu
     if len(text) > MAX_EXTRACTED_CHARS:
         raise DocumentError(f"Document is too long ({len(text):,} characters; limit {MAX_EXTRACTED_CHARS:,})")
     return ExtractedDocument(text=text, content_type=kind, page_count=pages, extraction=extraction)
+
+
+def _extract_docx(data: bytes) -> str:
+    """Paragraphs and table rows of a Word document, in document order (tables keep their place in a contract)."""
+    from docx import Document
+    from docx.table import Table
+    from docx.text.paragraph import Paragraph
+
+    try:
+        document = Document(io.BytesIO(data))
+    except Exception as exc:
+        raise DocumentError("The file is not a valid Word document") from exc
+    lines = []
+    for child in document.element.body.iterchildren():
+        if child.tag.endswith("}p"):
+            lines.append(Paragraph(child, document).text)
+        elif child.tag.endswith("}tbl"):
+            for row in Table(child, document).rows:
+                cells = list(dict.fromkeys(cell.text.strip() for cell in row.cells))  # merged cells repeat
+                lines.append(" | ".join(c for c in cells if c))
+    return "\n".join(lines)
 
 
 def _extract_pdf(data: bytes) -> tuple[str, int, dict]:

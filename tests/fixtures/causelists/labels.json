@@ -1,0 +1,495 @@
+{
+  "_about": "Real public cause lists, downloaded once by hand on 2026-10-27 (not by the fetcher) and cut to a few pages. Items were labelled by reading each page, not from parser output. '.pdf' fixtures are page subsets of the court's PDF (end-to-end extraction); '.lines.json' fixtures are the positioned text pypdfium2 extracts from the court's PDF (pdf_lines output), kept instead of the PDF because each SC PDF embeds ~500 KB of fonts. Delhi High Court terms restrict systematic downloading and storage (see app/services/causelists/dhc.py); these few pages are kept only as parser test fixtures. Delhi High Court fixtures are kept out of the repository (its terms forbid storing its pages in a retrieval system without permission): they live in dhc/ locally, with their labels in dhc/labels.json, and the tests that need them skip when they are absent.",
+  "fixtures": [
+    {
+      "file": "sci/2026-10-27_M_C_1_p1-3.pdf",
+      "court": "SCI",
+      "source_url": "https://api.sci.gov.in/jonew/cl/2026-10-27/M_C_1.pdf",
+      "pages": "1-3 of 14",
+      "list_date": "2026-10-27",
+      "list_type": "daily",
+      "items": [
+        {
+          "item_no": "1701",
+          "courtroom": "16",
+          "case": "SLP(C) 7439/2023",
+          "advocates": [
+            "D. ABHINAV RAO",
+            "ANAND DILIP LANDGE",
+            "RANBIR SINGH YADAV"
+          ],
+          "advocate_codes": [
+            "2277",
+            "2739",
+            "959"
+          ]
+        },
+        {
+          "item_no": "1702",
+          "courtroom": "16",
+          "case": "SLP(C) 20047/2024"
+        },
+        {
+          "item_no": "1703",
+          "courtroom": "16",
+          "case": "SLP(C) 10968/2024"
+        },
+        {
+          "item_no": "1704",
+          "courtroom": "16",
+          "case": "C.A. 13091/2024"
+        },
+        {
+          "item_no": "1705",
+          "courtroom": "16",
+          "case": "Diary 4278/2025"
+        },
+        {
+          "item_no": "1706",
+          "courtroom": "16",
+          "case": "Diary 8799/2025"
+        },
+        {
+          "item_no": "1707",
+          "courtroom": "16",
+          "case": "SLP(C) 16285/2025"
+        },
+        {
+          "item_no": "1708",
+          "courtroom": "16",
+          "case": "SLP(C) 16900/2025"
+        },
+        {
+          "item_no": "1709",
+          "courtroom": "16",
+          "case": "Diary 25585/2025"
+        },
+        {
+          "item_no": "1710",
+          "courtroom": "16",
+          "case": "SLP(C) 24435/2025",
+          "advocates": [
+            "RISHI MATOLIYA",
+            "DESHPANDES AND MANDLIKS"
+          ]
+        },
+        {
+          "item_no": "1710.1",
+          "courtroom": "16",
+          "case": "SLP(C) 24436/2025",
+          "connected_to": "1710"
+        },
+        {
+          "item_no": "1711",
+          "courtroom": "16",
+          "case": "SLP(C) 26147-26149/2025"
+        },
+        {
+          "item_no": "1712",
+          "courtroom": "16",
+          "case": "C.A. 7699/2025"
+        },
+        {
+          "item_no": "1713",
+          "courtroom": "16",
+          "case": "Diary 32332/2025"
+        },
+        {
+          "item_no": "1714",
+          "courtroom": "16",
+          "case": "SLP(C) 17188/2025"
+        },
+        {
+          "item_no": "1714.1",
+          "courtroom": "16",
+          "case": "SLP(C) 17201/2025",
+          "connected_to": "1714"
+        }
+      ]
+    },
+    {
+      "file": "sci/2026-10-27_M_J_1_p1-3.lines.json",
+      "court": "SCI",
+      "source_url": "https://api.sci.gov.in/jonew/cl/2026-10-27/M_J_1.pdf",
+      "pages": "1-3 of 280",
+      "list_date": "2026-10-27",
+      "list_type": "daily",
+      "bench_judges": 3,
+      "items": [
+        {
+          "item_no": "1",
+          "courtroom": "1",
+          "case": "Crl.A. 438/2014"
+        },
+        {
+          "item_no": "2",
+          "courtroom": "1",
+          "case": "Crl.A. 452/2017"
+        },
+        {
+          "item_no": "2.1",
+          "courtroom": "1",
+          "case": "Crl.A. 458/2017",
+          "connected_to": "2"
+        },
+        {
+          "item_no": "3",
+          "courtroom": "1",
+          "case": "C.A. 11142-11143/2025"
+        },
+        {
+          "item_no": "4",
+          "courtroom": "1",
+          "case": "C.A. 41/2025"
+        },
+        {
+          "item_no": "5",
+          "courtroom": "1",
+          "case": "C.A. 14469/2024"
+        },
+        {
+          "item_no": "6",
+          "courtroom": "1",
+          "case": "Diary 41941/2026",
+          "segment": "fresh"
+        },
+        {
+          "item_no": "7",
+          "courtroom": "1",
+          "case": "SLP(Crl) 16596/2026"
+        },
+        {
+          "item_no": "8",
+          "courtroom": "1",
+          "case": "SLP(C) 23253-23255/2026",
+          "segment": "fresh"
+        },
+        {
+          "item_no": "8.1",
+          "courtroom": "1",
+          "case": "Diary 29608/2026",
+          "connected_to": "8"
+        },
+        {
+          "item_no": "9",
+          "courtroom": "1",
+          "case": "Diary 35347/2026"
+        },
+        {
+          "item_no": "10",
+          "courtroom": "1",
+          "case": "Diary 36173/2026"
+        },
+        {
+          "item_no": "11",
+          "courtroom": "1",
+          "case": "Diary 45589/2026"
+        }
+      ]
+    },
+    {
+      "file": "sci/2026-10-27_M_J_1_p59-60.lines.json",
+      "court": "SCI",
+      "source_url": "https://api.sci.gov.in/jonew/cl/2026-10-27/M_J_1.pdf",
+      "pages": "59-60 of 280 (connected item numbers wrap: '35.1' over '0')",
+      "list_date": "2026-10-27",
+      "list_type": "daily",
+      "items": [
+        {
+          "item_no": "35.5",
+          "courtroom": "3",
+          "case": "SLP(C) 3799/2016",
+          "connected_to": "35"
+        },
+        {
+          "item_no": "35.6",
+          "courtroom": "3",
+          "case": "SLP(C) 3965/2016",
+          "connected_to": "35"
+        },
+        {
+          "item_no": "35.7",
+          "courtroom": "3",
+          "case": "SLP(C) 2601/2018",
+          "connected_to": "35"
+        },
+        {
+          "item_no": "35.8",
+          "courtroom": "3",
+          "case": "SLP(C) 4005/2017",
+          "connected_to": "35"
+        },
+        {
+          "item_no": "35.9",
+          "courtroom": "3",
+          "case": "SLP(C) 27048/2018",
+          "connected_to": "35"
+        },
+        {
+          "item_no": "35.10",
+          "courtroom": "3",
+          "case": "SLP(C) 14035/2020",
+          "connected_to": "35"
+        },
+        {
+          "item_no": "35.11",
+          "courtroom": "3",
+          "case": "SLP(C) 14112/2020",
+          "connected_to": "35"
+        },
+        {
+          "item_no": "35.12",
+          "courtroom": "3",
+          "case": "SLP(C) 14135/2020",
+          "connected_to": "35"
+        }
+      ]
+    },
+    {
+      "file": "sci/2026-10-26_M_J_2_p1,4.lines.json",
+      "court": "SCI",
+      "source_url": "https://api.sci.gov.in/jonew/cl/2026-10-26/M_J_2.pdf",
+      "pages": "1 and 4 of 32 (page 4 has a drop note)",
+      "list_date": "2026-10-26",
+      "list_type": "supplementary",
+      "items": [
+        {
+          "item_no": "43",
+          "courtroom": "1",
+          "case": "SLP(C) 36231/2026"
+        },
+        {
+          "item_no": "57",
+          "courtroom": "4",
+          "case": "Diary 50866/2026"
+        },
+        {
+          "item_no": "58",
+          "courtroom": "4",
+          "case": "Diary 36667/2026"
+        }
+      ],
+      "deletions": [
+        {
+          "item_no": "42",
+          "courtroom": "4",
+          "case": "SLP(C) 13820/2026"
+        }
+      ]
+    },
+    {
+      "file": "sci/2026-10-27_M_R_1_p1-2.lines.json",
+      "court": "SCI",
+      "source_url": "https://api.sci.gov.in/jonew/cl/2026-10-27/M_R_1.pdf",
+      "pages": "1-2 of 16",
+      "list_date": "2026-10-27",
+      "list_type": "daily",
+      "items": [
+        {
+          "item_no": "1",
+          "courtroom": "R1",
+          "case": "Diary 40651/2026",
+          "segment": "fresh"
+        },
+        {
+          "item_no": "2",
+          "courtroom": "R1",
+          "case": "Diary 60041/2026",
+          "segment": "fresh"
+        },
+        {
+          "item_no": "3",
+          "courtroom": "R1",
+          "case": "SLP(C) 21894/2015"
+        },
+        {
+          "item_no": "4",
+          "courtroom": "R1",
+          "case": "C.A. 3769/2017"
+        },
+        {
+          "item_no": "5",
+          "courtroom": "R1",
+          "case": "Crl.A. 1563/2023"
+        },
+        {
+          "item_no": "5.1",
+          "courtroom": "R1",
+          "case": "Crl.A. 1564/2023",
+          "connected_to": "5"
+        },
+        {
+          "item_no": "6",
+          "courtroom": "R1",
+          "case": "C.A. 4454-4455/2021"
+        },
+        {
+          "item_no": "7",
+          "courtroom": "R1",
+          "case": "SLP(C) 15645/2023"
+        },
+        {
+          "item_no": "8",
+          "courtroom": "R1",
+          "case": "SLP(C) 23702/2023"
+        },
+        {
+          "item_no": "9",
+          "courtroom": "R1",
+          "case": "T.P.(C) 1918/2023"
+        },
+        {
+          "item_no": "10",
+          "courtroom": "R1",
+          "case": "C.A. 10071/2026"
+        },
+        {
+          "item_no": "11",
+          "courtroom": "R1",
+          "case": "SLP(Crl) 16356/2023"
+        },
+        {
+          "item_no": "12",
+          "courtroom": "R1",
+          "case": "SLP(C) 5475-5477/2026"
+        }
+      ]
+    },
+    {
+      "file": "sci/2026-10-27_F_J_1_p1-2.lines.json",
+      "court": "SCI",
+      "source_url": "https://api.sci.gov.in/jonew/cl/2026-10-27/F_J_1.pdf",
+      "pages": "1-2 of 104 (regular hearing; connected numbers wrap: '101.' over '1')",
+      "list_date": "2026-10-27",
+      "list_type": "daily",
+      "items": [
+        {
+          "item_no": "101",
+          "courtroom": "1",
+          "case": "C.A. 329-330/2004",
+          "segment": "regular"
+        },
+        {
+          "item_no": "101.1",
+          "courtroom": "1",
+          "case": "C.A. 327/2004",
+          "connected_to": "101"
+        },
+        {
+          "item_no": "101.2",
+          "courtroom": "1",
+          "case": "C.A. 328/2004",
+          "connected_to": "101"
+        },
+        {
+          "item_no": "101.3",
+          "courtroom": "1",
+          "case": "W.P.(C) 180/2004",
+          "connected_to": "101"
+        },
+        {
+          "item_no": "101.4",
+          "courtroom": "1",
+          "case": "W.P.(C) 94/2005",
+          "connected_to": "101"
+        },
+        {
+          "item_no": "101.5",
+          "courtroom": "1",
+          "case": "W.P.(C) 625/2005",
+          "connected_to": "101"
+        },
+        {
+          "item_no": "101.6",
+          "courtroom": "1",
+          "case": "W.P.(C) 47/2006",
+          "connected_to": "101"
+        },
+        {
+          "item_no": "101.7",
+          "courtroom": "1",
+          "case": "SLP(C) 38003/2013",
+          "connected_to": "101"
+        },
+        {
+          "item_no": "101.8",
+          "courtroom": "1",
+          "case": "W.P.(C) 13/2008",
+          "connected_to": "101"
+        }
+      ]
+    },
+    {
+      "file": "sci/advance_2026-10-30_M_J_p1-2.lines.json",
+      "court": "SCI",
+      "source_url": "https://api.sci.gov.in/jonew/cl/advance/2026-10-30/M_J.pdf",
+      "pages": "1-2 of 492",
+      "list_date": "2026-10-30",
+      "list_type": "advance",
+      "items": [
+        {
+          "item_no": "1",
+          "courtroom": null,
+          "case": "SLP(C) 24205/2026"
+        },
+        {
+          "item_no": "2",
+          "courtroom": null,
+          "case": "Diary 44144/2026"
+        },
+        {
+          "item_no": "3",
+          "courtroom": null,
+          "case": "SLP(Crl) 20936/2025"
+        },
+        {
+          "item_no": "4",
+          "courtroom": null,
+          "case": "SLP(Crl) 9222/2026"
+        },
+        {
+          "item_no": "4.1",
+          "courtroom": null,
+          "case": "SLP(Crl) 14314/2026",
+          "connected_to": "4"
+        },
+        {
+          "item_no": "5",
+          "courtroom": null,
+          "case": "SLP(Crl) 16836/2026"
+        },
+        {
+          "item_no": "6",
+          "courtroom": null,
+          "case": "SLP(Crl) 10644/2026"
+        },
+        {
+          "item_no": "7",
+          "courtroom": null,
+          "case": "SLP(Crl) 17743/2026"
+        },
+        {
+          "item_no": "7.1",
+          "courtroom": null,
+          "case": "SLP(Crl) 17742/2026",
+          "connected_to": "7"
+        },
+        {
+          "item_no": "8",
+          "courtroom": null,
+          "case": "SLP(Crl) 15719/2026"
+        },
+        {
+          "item_no": "9",
+          "courtroom": null,
+          "case": "SLP(Crl) 14278/2026"
+        },
+        {
+          "item_no": "10",
+          "courtroom": null,
+          "case": "SLP(Crl) 13511/2026"
+        }
+      ]
+    }
+  ]
+}

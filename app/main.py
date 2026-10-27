@@ -17,17 +17,23 @@ from app.routers import (
     billing,
     case_threads,
     caselaw,
+    causelists,
     cases,
+    custody,
+    deadlines,
     documents,
     drafting,
     evidence,
     health,
+    hearings,
     jobs,
+    limitation,
     knowledge,
     organizations,
     practice_areas,
     public_config,
     reviews,
+    rules,
     safety,
     telephony,
     transcripts,
@@ -132,6 +138,12 @@ app.include_router(cases.router, prefix="/api/v1")
 app.include_router(whatsapp.router, prefix="/api/v1")
 app.include_router(caselaw.router, prefix="/api/v1")
 app.include_router(safety.router, prefix="/api/v1")
+app.include_router(rules.router, prefix="/api/v1")
+app.include_router(limitation.router, prefix="/api/v1")
+app.include_router(custody.router, prefix="/api/v1")
+app.include_router(deadlines.router, prefix="/api/v1")
+app.include_router(hearings.router, prefix="/api/v1")
+app.include_router(causelists.router, prefix="/api/v1")
 
 
 def _metrics_auth(request: Request) -> None:

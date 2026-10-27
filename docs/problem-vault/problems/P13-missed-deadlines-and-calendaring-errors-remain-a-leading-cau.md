@@ -1,0 +1,93 @@
+# P13. Missed deadlines and calendaring errors remain a leading cause of malpractice claims
+
+**Severity:** critical · **Size:** big · **Region:** Global (US data strongest; same failure in Indian chambers)
+
+**Who has it:** Solo practitioners and small litigation firms (the largest share of claims), but every litigation practice; Indian chambers still keeping diaries by hand
+
+## What goes wrong
+
+A limitation date is computed correctly but entered wrongly, entered and never checked, or diarised only as the final date with no earlier reminders. The person who keeps the docket goes on leave and nobody covers. Discovery, summons-renewal and appeal deadlines slip. Each miss can kill a claim and bring a malpractice suit. Insurers say the main cause is the lack of a good calendaring and docket system.
+
+## Evidence of scale
+
+- Lawyers Mutual: missed deadlines (expired limitation, late summons, overdue discovery, missed appellate filings) remain 'the number one source of claims'. ([source](https://www.lawyersmutualnc.com/blog/missed-deadlines-are-top-cause-of-legal-malpractice))
+- Lawyers Mutual: missed deadlines were the leading cause of malpractice claims in 2021; lack of a good calendaring and docket system is the main reason. ([source](https://lawyersmutualnc.com/blog/missed-deadlines-top-2021-malpractice-claims))
+- CNA summarising the ABA Profile of Legal Malpractice Claims (2020-2023): solo practitioners had 28% of claims, 2-5 lawyer firms 25%. ([source](https://www.cna.com/sites/default/files/assets/fb08bac9-82f9-455b-b43e-aaa7bf104618/rc-cna-pro-counsel-gatekeepers-and-guardrails.pdf))
+- Oregon PLF: a mid-size firm missed a client's deadline a week after its long-time paralegal, who alone handled deadlines, left; the client moved firms. ([source](https://osbplf.org/blog/post/plugging-the-knowledge-drain--how-to-retain-knowledge-and-ensure-your-firms-continued-success/))
+
+## Why current tools don't solve it
+
+Harvey, CoCounsel and Lexis+ AI don't docket deadlines from a pleading or order. Rules-based docketing (CompuLaw, LawToolBox, Aderant Milana, Clio court rules) covers US courts only, is sold per court per user, and needs manual setup per matter. None reads an order, computes the deadline with its basis and escalates when nobody acts. Nothing comparable exists for Indian courts.
+
+## Panel verdict
+
+**Status:** solved (round 3)
+
+**Effort:** L
+
+### What software can fix
+
+The docketing failure itself: a deadline computed but entered wrongly, entered once with no earlier reminders, owned by one person who goes on leave, or never entered because nobody read the order. Software can make every deadline (a) carry its inputs, rule and basis, (b) have a named owner and backup, (c) fire a reminder ladder from the moment it exists, escalating when nobody acknowledges, (d) be checked when it rests on hand-entered dates, either by a second person who truly cannot see the first entry or, in a one-lawyer chamber, by a delayed blind self re-entry, and (e) be caught when a live matter has no forward date at all.
+
+### What it can't fix
+
+We can't make a lawyer act on a reminder they acknowledged, stop a client giving instructions too late, or guarantee a court accepts our reading of a rule. A self re-entry is weaker than a second person's check and is labelled 'self-verified'. The checker can and should read the source documents (the order, the return memo). Blindness covers only the first person's typed values and computed date, not the record itself. Where a reminder must reach the checker (escalation, or the owner on leave), safety wins: the check is cancelled and the deadline stays unverified. Deadlines that live only in a lawyer's head can't be tracked. Malpractice insurance and BCI discipline are outside the product.
+
+### What the user sees
+
+A firm docket at /deadlines lists every open deadline, coloured by status: verified, self-verified, awaiting check, AI-proposed, disputed, overdue. Each row shows the date, days left, rule and basis, input dates, owner and backup, and the latest reminder's delivery and acknowledgement. The one exception is the assigned checker. For them a pending row reads 'Awaiting your check: <matter> - <deadline kind>' with no date, inputs or computed result, and a 'Start check' button opens the blank re-entry form beside the source documents. A disputed or unverified deadline shows 'earliest of 2 candidate dates' in bold, and reminders run to the earlier one. A solo sees 'Re-enter the dates tomorrow to self-verify (available from 09:40)'. Partners get a Monday digest of overdue items, unacknowledged reminders, unverified and cancelled checks, and orphan matters. While someone is on leave their reminders go to the backup, and the docket shows 'covered by X'. In Settings > Escalation contacts, a non-member can be added only as 'employed clerk / staff of <advocate>' with an uploaded confidentiality undertaking. Such a contact only ever receives 'A deadline in your diary needs attention today. Please call <advocate name>.'
+
+### What the system does
+
+1. Tables (migration 014): `deadlines` (matter link, kind, rule_id + version, basis, owner_id, backup_id, checker_id, check_state none/pending/submitted/cancelled, status, verification, source, effective_due_date, done_evidence); `deadline_entries` (deadline_id, entered_by, entered_at, inputs jsonb, computed_date, kind first/check/self); `deadline_reminders` (target, channel, payload_class member/content_free, delivered_at, acknowledged_at); `member_absences`; `escalation_contacts` (org_id, advocate_id, name, phone, relationship 'employed_clerk'|'employed_staff', undertaking_file, undertaking_signed_on, consent_at, verified_by_partner).
+2. No direct reads of deadline values: revoke select, insert, update and delete on deadlines, deadline_entries and deadline_reminders from anon and authenticated. All reads go through security-definer RPCs `list_deadlines(filters)`, `get_deadline(id)` and `my_deadline_entries(id)`. They apply the old visibility rule (owners and partners see the org; others see their own and those they back up) plus a masking rule. When check_state = 'pending' and auth.uid() = checker_id, effective_due_date, candidate dates, inputs, basis-computed values and reminder payloads come back NULL and the status is 'awaiting_your_check'. deadline_entries rows are returned only to their entered_by until check_state leaves 'pending'. Writes go only through RPCs (create_deadline, submit_entry, acknowledge, complete).
+3. Checker assignment happens at creation, inside create_deadline, before anyone but the maker has seen the values. The checker is an eligible member: another member with matter access, associate or above (paralegal if the firm allows), not absent today, not the owner, and preferably not the backup or the matter's partner (they are used only when nobody else qualifies). Every unmasked read through the RPCs, and every reminder delivery, writes `deadline_value_views` (user, deadline, at). A user with a view row can never be assigned as checker, so a reassigned check can't go to someone who has already seen the date.
+4. Audit and side channels: audit_logs rows for deadline events store ids, statuses and sha256(inputs), never the dates or inputs, so a partner-checker reading the audit log learns nothing. Notifications and n8n agenda posts exclude pending-check deadlines' values for the checker. The DB test covers every table and view the checker can select.
+5. Safety overrides blindness: whenever a reminder or escalation would go to the checker (owner absent so the backup receives it, a 4-hour escalation to a partner who is the checker, the T-1 broadcast), or the effective date is within 3 days, the check is first set to 'cancelled' (reason logged), the deadline stays unverified, and the reminder goes out with the date. Verification status never suppresses or delays a reminder.
+6. Maker-checker outcome as before. The checker re-enters the inputs blind and the engine recomputes. Agreement gives 'verified' and rebases the ladder; disagreement gives 'disputed', both users are flagged, and the earlier date governs.
+7. Ladder from creation, earliest-candidate rule, self re-entry for orgs with no eligible checker (blind, opening no sooner than 12 h later, labelled 'self_verified'), leave routing, orphan sweep, AI order reading with quote_found and computed dates, and full audit: unchanged from round 2.
+8. Escalation payload classes, in code: a recipient who is an org member gets the member payload. On WhatsApp that is the matter short code, deadline kind and date, with no party names (full details in the app); email carries the same plus a link. Any recipient who is not an org member gets the content_free template: 'A deadline in your diary needs attention today. Please call <advocate name>.' It has no party, case number, CNR, court, rule, basis or date. The template is a fixed Meta-approved template whose only variable is the advocate's display name, and the content_free sender function takes only (contact_id, advocate_id), so it can't receive matter data. A non-member contact may be registered only with relationship employed_clerk or employed_staff of that advocate, an uploaded signed confidentiality undertaking and a partner's confirmation; otherwise the row is refused. Solo orgs escalate to their own secondary channel first, then to such a contact.
+
+### Where it is built
+
+Extend app/services/workflow_service.py (packs emit `Result.deadlines`). New app/services/deadline_service.py (candidates, ladder, checker assignment, masking, safety cancel, escalation payload classes, self re-entry, orphan sweep) and app/routers/deadlines.py, which calls only the RPCs. app/worker.py adds `task_deadline_sweep` (hourly 08:00-21:00 IST). whatsapp_service.send_template (new templates deadline_member_v1 and deadline_contentfree_v1) and n8n_service; audit_service (hash-only details for deadlines); approval_requests from migration 013. New migration supabase/migrations/014_deadlines.sql (tables, revokes, RPCs, deadline_value_views, escalation_contacts and the Storage bucket for undertakings with RLS). frontend/src/app/deadlines/page.tsx, a timeline panel in frontend/src/app/cases/page.tsx and the escalation-contacts settings. CLAUDE.md invariant 2 gains the deadline sweep.
+
+### Why current tools fail and this won't
+
+Harvey, CoCounsel and Lexis+ AI don't docket. CompuLaw, LawToolBox and Clio court rules are US-only and need manual setup per matter, and their 'second review' is a visible approval of what the first person typed. Indian trackers (eCourts app, eCourtsIndia API, LawStar) show next dates only. We tie each deadline to its rule and inputs and fire reminders from creation against the earliest plausible date. The second check is enforced as blind in the database, not just in one endpoint. Reminders to anyone outside the firm carry no matter data at all.
+
+### Safeguards
+
+Deadline tables have no direct client access. Reads go through masking security-definer RPCs, and writes through RPCs. The cron sweep uses the service role scoped to one org at a time, added to invariant 2's list. Order text is PII-masked before Claude. AI-proposed deadlines are never verified without a lawyer, and self-verified is never shown as verified. Blindness never withholds a date from someone a reminder must reach. People outside the firm receive only a content-free ping, and only if they are recorded as the advocate's employed clerk or staff with a signed confidentiality undertaking (s.132-134 BSA privilege and the BCI duty reach the advocate's clerks and servants). Member WhatsApp reminders carry no party names. Reminders never go to clients.
+
+### How the panel's objections were answered
+
+Objection 1 (outside contact breaks confidentiality): (a) a non-member contact can be registered only as the advocate's employed clerk or staff, with an uploaded signed confidentiality undertaking and a partner's confirmation (test_contact_requires_employment_and_undertaking); (b) every non-member gets only a fixed content-free template, 'A deadline in your diary needs attention today. Please call <advocate name>.', from a sender function that takes only contact and advocate ids. test_contentfree_payload asserts over 200 randomized matters that no party name, case number, CNR, court, rule, basis or date reaches that payload, and test_contentfree_sender_signature asserts it can't read deadline data. Member WhatsApp reminders also drop party names. Objection 2 (the check isn't blind; partners and backups can read values through PostgREST): direct select on deadlines, deadline_entries and deadline_reminders is revoked from authenticated. All reads go through security-definer RPCs that mask the date, candidates, inputs and computed values for the assigned checker while the check is pending, and deadline_entries are returned only to their author until then. The checker is assigned at creation, before anyone else has seen the values. Anyone with a recorded unmasked view is never eligible. Audit rows store only hashes. A reminder that must reach the checker cancels the check rather than staying hidden. test_checker_direct_select (a partner-checker's direct PostgREST selects and RPC responses contain none of the first entry's values), test_checker_audit_and_side_channels, test_viewer_never_checker and test_safety_cancels_check prove it.
+
+### Acceptance tests
+
+- tests/db/test_deadlines_blind.py::test_checker_direct_select: logged in as the assigned checker (a partner with org-wide visibility), direct PostgREST selects on deadlines, deadline_entries and deadline_reminders return permission denied; rpc list_deadlines and get_deadline return the row with null date, inputs and computed values and status 'awaiting_your_check'; my_deadline_entries returns nothing. A grep of every response body for the first entry's date strings (ISO and dd.mm.yyyy) and input values finds none.
+- test_checker_audit_and_side_channels: the checker's select on audit_logs, notifications and the n8n agenda payload contain no first-entry date or input values for the pending deadline.
+- test_values_visible_after_submit: after the checker submits, get_deadline returns both candidates and my_deadline_entries shows both entries to both users.
+- test_viewer_never_checker: a member with a deadline_value_views row is never chosen when the check is reassigned; if no un-viewed eligible member remains, the deadline falls back to self re-entry or stays unverified.
+- test_safety_cancels_check: with the owner absent so a reminder routes to the backup who is the checker, the check is cancelled before delivery, the reminder carries the date, and the deadline stays unverified; the same happens when the due date is within 3 days.
+- test_contentfree_payload: across 200 randomized matters (party names, CNRs, case numbers, courts, rules and dates drawn from fixtures), every payload sent to a non-member escalation contact equals the fixed template with only the advocate's name substituted, and contains none of the matter's identifiers, dates or rule text (exact-match and substring asserts).
+- test_contentfree_sender_signature: the content_free send function accepts only (contact_id, advocate_id); a static check asserts it never imports or reads deadlines.
+- test_contact_requires_employment_and_undertaking: registering a contact without relationship employed_clerk/employed_staff, an undertaking file, or a partner's confirmation is refused.
+- test_member_whatsapp_no_party_names: member WhatsApp reminders carry the short code, kind and date and no party names.
+- test_ladder, test_unverified_fires_ladder, test_disputed_uses_earliest, test_earlier_candidate_fires_past_rungs, test_double_entry, test_self_verify_one_member_org, test_self_verify_when_colleague_absent, test_self_verify_mismatch, test_escalation, test_leave_routing, test_orphan_sweep, test_ai_proposal_quote_check: carried over from round 2.
+- tests/db RLS test: an associate in org A cannot read deadlines of org B or another associate's matters through any RPC; partners see all in their org except the masked fields of checks assigned to them.
+- Audit test: every state change writes one audit_logs row whose details contain no date or input values.
+
+### Reviewers' minor notes
+
+- deadline_value_views rows are written on every unmasked list_deadlines read. A partner who opens the firm docket therefore becomes ineligible as checker for every visible deadline. That is intended, but in small firms the eligible pool will quickly run dry. Show in the UI why a check fell back to self re-entry.
+- The maker can still leak the date through matter notes, the case timeline, eCourts next-date fields or chat. State that blindness covers the deadline record only, and keep the eCourts next-hearing date of the same matter out of the checker's view while the check is pending, or note that it isn't covered.
+- The '3 days' safety cancel threshold should be per-rule data (short IBC or bail windows may need more lead).
+- Migration 014 is claimed by P02, P03, P29, P36 and P08 too. Renumber or merge them.
+- The audit rows store sha256(inputs). Inputs are a handful of dates, so the hash can be reversed by enumeration: a partner-checker could hash every plausible date combination and recover the first entry. That makes the claim 'a partner-checker reading the audit log learns nothing' untrue. Use an HMAC with a server-held per-org key, or write no hash until check_state leaves 'pending'. Then add a test that brute-forces dates over a one-year window and fails to match.
+- The escalation contact's phone number and undertaking are personal data of a non-member. Record a DPDP notice to the clerk and a purpose limited to deadline pings. Purge the row when the employment relationship or undertaking ends, with a partner review at least yearly.
+- Every unmasked list_deadlines call writes deadline_value_views rows, and partners browse the whole docket. So after creation almost nobody stays eligible for a reassigned check, and small firms will mostly fall back to self re-entry. The partner digest should say this openly ('re-check impossible: all eligible members have viewed'), not leave it as a silent fallback.
+- Choose the migration number together with P02, P03, P29, P36 and P08, which also claim 014.
+- The checker can still read court_cases hearing and order dates and the /workflows outputs. That is the 'source record' exception the proposal already states, but the DB test should list those tables explicitly as allowed exposures so a reviewer doesn't count them as leaks.
+

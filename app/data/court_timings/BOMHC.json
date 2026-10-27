@@ -1,0 +1,10 @@
+{
+  "code": "BOMHC",
+  "name": "Bombay High Court (Principal Seat)",
+  "complex": "Bombay High Court, Fort, Mumbai",
+  "state": "Maharashtra",
+  "timings": {"sitting_start": "11:00", "lunch_start": "13:30", "lunch_end": "14:30", "rising": "17:00"},
+  "coverage": "cause_list_pdf",
+  "status": "draft",
+  "note": "Default profile until the courts table holds this court's timings. Verify against the court's notified sitting hours before relying on it."
+}

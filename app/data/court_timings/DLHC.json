@@ -1,0 +1,10 @@
+{
+  "code": "DLHC",
+  "name": "Delhi High Court",
+  "complex": "Delhi High Court, Sher Shah Road",
+  "state": "Delhi",
+  "timings": {"sitting_start": "10:30", "lunch_start": "13:00", "lunch_end": "14:15", "rising": "16:30"},
+  "coverage": "cause_list_pdf",
+  "status": "draft",
+  "note": "Default profile until the courts table holds this court's timings. Verify against the court's notified sitting hours before relying on it."
+}

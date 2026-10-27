@@ -59,6 +59,10 @@ ACTS: tuple[Act, ...] = (
     Act("NIA", "Negotiable Instruments Act, 1881", ("Negotiable Instruments Act", "N.I. Act", "NI Act"), 147),
     Act("SRA", "Specific Relief Act, 1963", ("Specific Relief Act",), 44),
     Act("LIMITATION", "Limitation Act, 1963", ("Limitation Act",), 32),
+    # "Article 116 of the Schedule to the Limitation Act": the periods themselves, numbered as articles.
+    Act("LIMITATION_SCHEDULE", "Schedule to the Limitation Act, 1963", ("Schedule to the Limitation Act",), 137,
+        unit="Article", lettered=False),
+    Act("COMMERCIAL_COURTS", "Commercial Courts Act, 2015", ("Commercial Courts Act",), 23),
     Act("TPA", "Transfer of Property Act, 1882", ("Transfer of Property Act", "TPA"), 137),
     Act("CPA", "Consumer Protection Act, 2019", ("Consumer Protection Act",), 107),
     Act("ARBITRATION", "Arbitration and Conciliation Act, 1996", ("Arbitration and Conciliation Act", "Arbitration Act"), 87),
@@ -81,6 +85,7 @@ ACTS: tuple[Act, ...] = (
     Act("IBC", "Insolvency and Bankruptcy Code, 2016", ("Insolvency and Bankruptcy Code", "IBC"), 255),
     Act("POCSO", "Protection of Children from Sexual Offences Act, 2012", ("Protection of Children from Sexual Offences Act", "POCSO Act", "POCSO"), 46),
     Act("NDPS", "Narcotic Drugs and Psychotropic Substances Act, 1985", ("Narcotic Drugs and Psychotropic Substances Act", "NDPS Act", "NDPS"), 83),
+    Act("UAPA", "Unlawful Activities (Prevention) Act, 1967", ("Unlawful Activities (Prevention) Act", "UAPA"), 53),
     # State rent laws: known acts, sections not checked here.
     Act("MH_RENT", "Maharashtra Rent Control Act, 1999", ("Maharashtra Rent Control Act",), None),
     Act("DL_RENT", "Delhi Rent Control Act, 1958", ("Delhi Rent Control Act",), None),

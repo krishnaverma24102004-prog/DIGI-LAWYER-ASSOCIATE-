@@ -143,8 +143,8 @@ def test_fetch_and_sync_use_the_provider_api(monkeypatch):
 
     async def scenario():
         async with httpx.AsyncClient(transport=httpx.MockTransport(provider)) as client:
-            db = FakeDB(court_cases=[{"id": "c1", "cnr": "MHPU010012342026", "title": "Sharma cheque case"},
-                                     {"id": "c2", "cnr": "MHPU019999992026", "title": "Other"}])
+            db = FakeDB(court_cases=[{"id": "c1", "org_id": ORG_ID, "cnr": "MHPU010012342026", "title": "Sharma cheque case"},
+                                     {"id": "c2", "org_id": ORG_ID, "cnr": "MHPU019999992026", "title": "Other"}])
             ok = await ecourts_service.sync(db, db.tables["court_cases"][0], http_client=client)
             missing = await ecourts_service.sync(db, db.tables["court_cases"][1], http_client=client)
             return ok, missing

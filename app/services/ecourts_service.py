@@ -107,16 +107,40 @@ async def fetch_case(cnr: str, *, http_client: httpx.AsyncClient | None = None) 
     return from_provider(response.json())
 
 
-async def sync(db, case: dict, *, http_client: httpx.AsyncClient | None = None) -> dict:
-    """Refresh one case from the provider; a failure is recorded on the case, not raised."""
-    now = datetime.now(timezone.utc).isoformat()
+def provider_update(case: dict, fields: dict, *, keep: dict | None = None) -> dict:
+    """The update that stores provider data on a case: what the lawyer typed (`keep`) wins, and
+    fields the provider now fills are provider-confirmed again (removed from user_edited_fields)."""
+    keep = {k: v for k, v in (keep or {}).items() if v not in (None, "", [])}
+    update = {**{k: v for k, v in fields.items() if k not in keep}, "last_synced_at": datetime.now(timezone.utc).isoformat()}
+    edited = [f for f in (case.get("user_edited_fields") or []) if f not in update] + [f for f in keep if f in fields]
+    update["user_edited_fields"] = sorted(set(edited))
+    return update
+
+
+async def sync(admin_db, case: dict, *, http_client: httpx.AsyncClient | None = None) -> dict:
+    """Refresh one case from the provider; a failure is recorded on the case, not raised.
+
+    Provider data is server-owned (migration 014): `admin_db` is the service-role client, and the
+    write is scoped to this case and its organization. Callers check the user may see the case first.
+    """
     try:
         fields = await fetch_case(case["cnr"], http_client=http_client)
         fields.pop("title")  # the case keeps the title it was given
-        update = {**fields, "last_synced_at": now, "sync_error": None}
+        update = {**provider_update(case, fields), "sync_error": None}
     except CaseDataError as exc:
-        update = {"last_synced_at": now, "sync_error": str(exc)}
-    rows = await run_in_threadpool(lambda: db.table(TABLE).update(update).eq("id", case["id"]).execute().data)
+        update = {"last_synced_at": datetime.now(timezone.utc).isoformat(), "sync_error": str(exc)}
+    rows = await run_in_threadpool(
+        lambda: admin_db.table(TABLE).update(update).eq("id", case["id"]).eq("org_id", case["org_id"]).execute().data
+    )
+    return rows[0] if rows else {**case, **update}
+
+
+async def store_fetched(admin_db, case: dict, fields: dict, typed: dict) -> dict:
+    """Stores the provider's record on a case the user just added (server-owned fields, migration 014)."""
+    update = provider_update(case, fields, keep=typed)
+    rows = await run_in_threadpool(
+        lambda: admin_db.table(TABLE).update(update).eq("id", case["id"]).eq("org_id", case["org_id"]).execute().data
+    )
     return rows[0] if rows else {**case, **update}
 
 

@@ -18,7 +18,8 @@ from dataclasses import dataclass, field
 from datetime import date, timedelta
 from typing import Callable
 
-CRIMINAL_CODES_START = date(2024, 7, 1)  # BNS / BNSS / BSA in force
+from app.services import custody_service
+from app.services.criminal_codes import criminal_codes  # IPC/BNS and CrPC/BNSS: one shared decision
 
 
 class WorkflowError(ValueError):
@@ -241,26 +242,27 @@ def _consumer(inputs: dict, today: date) -> Result:
 
 
 def _bail(inputs: dict, today: date) -> Result:
+    """Bail pack. Shares its rules with the custody watch (custody_service) and the code choice with
+    criminal_codes(): the procedure (CrPC or BNSS) follows when the investigation began (s. 531
+    BNSS), the 60/90-day period the minimum term, and s. 479 BNSS applies to every undertrial."""
     r = Result()
     offence_on = _date(inputs, "offence_date")
+    fir_on = _date(inputs, "fir_date")
     custody_from = _date(inputs, "custody_since")
     max_years = _amount(inputs, "max_punishment_years")
+    min_years = _amount(inputs, "min_punishment_years")
     life_or_death = str(inputs.get("punishable_with_death_or_life", "")).lower() in ("true", "yes", "1")
     first_offender = str(inputs.get("first_time_offender", "")).lower() in ("true", "yes", "1")
     chargesheet_filed = str(inputs.get("chargesheet_filed", "")).lower() in ("true", "yes", "1")
     if offence_on is None:
-        raise WorkflowError("The date of the alleged offence is needed (it decides BNSS or CrPC)")
+        raise WorkflowError("The date of the alleged offence is needed (it decides IPC or BNS for the punishment)")
 
-    new = offence_on >= CRIMINAL_CODES_START
-    code = "BNSS" if new else "CrPC"
-    regular, sessions, anticipatory, default, undertrial = (
-        ("s. 480 BNSS", "s. 483 BNSS", "s. 482 BNSS", "s. 187(3) BNSS", "s. 479 BNSS") if new
-        else ("s. 437 CrPC", "s. 439 CrPC", "s. 438 CrPC", "s. 167(2) CrPC", "s. 436A CrPC")
-    )
-    r.next_steps.append(
-        f"The offence is dated {offence_on:%d %b %Y}, {'on or after' if new else 'before'} 1 July 2024: "
-        f"procedure under the {code}" + ("" if new else " (proceedings begun before 1 July 2024 continue under it)") + "."
-    )
+    codes = criminal_codes(offence_on, fir_date=fir_on, arrest_date=custody_from, today=today)
+    code = codes.procedural
+    regular, sessions, anticipatory, default = (codes.provision(k) for k in ("regular_bail", "sessions_bail", "anticipatory_bail", "default_bail"))
+    r.next_steps.append(codes.explain())
+    for f in codes.flags:
+        r.flag(f["severity"], f["message"])
     if custody_from is None:
         r.next_steps.append(f"Not in custody: anticipatory bail under {anticipatory} (Sessions Court or High Court).")
         r.draft = {
@@ -270,24 +272,32 @@ def _bail(inputs: dict, today: date) -> Result:
             "instructions": f"Application for anticipatory bail under {anticipatory}.",
         }
     else:
-        serious = life_or_death or (max_years is not None and max_years >= 10)
-        days = 90 if serious else 60
-        reason = "punishable with death, life imprisonment or imprisonment of 10 years or more" if serious else "other offences"
+        # 90 days only for death, life or a minimum term of ten years or more (not "up to ten years").
+        days, reason, notes = custody_service.default_bail_period(
+            death=False, life=life_or_death, min_years=min_years, max_years=max_years, procedural=code)
+        serious = days == 90
+        _, accrues = custody_service.custody_period(days, custody_from)
         default_on = r.deadline(
-            "Default bail if no chargesheet", custody_from + timedelta(days=days),
-            f"{default}: investigation must be completed within {days} days ({reason})", today, done=chargesheet_filed,
+            "Default bail if no chargesheet", accrues,
+            f"{default}: investigation must be completed within {days} days ({reason}); the custody date counts as day 1",
+            today, done=chargesheet_filed,
         )
+        r.next_steps += notes
         if not chargesheet_filed and today >= default_on:
             r.flag("high", f"{days} days in custody have passed: if no chargesheet has been filed, apply for default bail "
                            f"under {default} now (the right is lost once the chargesheet is filed).")
-        if max_years and not life_or_death:
-            share = 1 / 3 if (new and first_offender) else 1 / 2
-            undertrial_on = custody_from + timedelta(days=round(max_years * 365.25 * share))
-            r.deadline(
-                "Release as an undertrial", undertrial_on,
-                f"{undertrial}: detention up to {'one-third' if share < 0.5 else 'one-half'} of the maximum sentence"
-                + (" (first-time offender)" if share < 0.5 else ""), today,
-            )
+        # s. 479 BNSS for every undertrial, whatever the offence, FIR or arrest date.
+        ut = custody_service.undertrial(max_years=max_years, death=False, life=life_or_death, first_time=first_offender,
+                                        periods=[(custody_from, None)], codes=codes, other_pending=False)
+        if ut["date"]:
+            r.deadline("Release as an undertrial", date.fromisoformat(ut["date"]), ut["basis"], today)
+            r.next_steps.append("s. 479(2) BNSS: not eligible if other cases are pending against the accused; confirm, and "
+                                "exclude any delay caused by the accused.")
+            alt = ut.get("alternative")
+            if alt and alt.get("date"):
+                r.next_steps.append(f"Alternative citation: {alt['basis']} (from {date.fromisoformat(alt['date']):%d %b %Y}).")
+        elif ut.get("explanation") and (life_or_death or max_years is not None):
+            r.next_steps.append(ut["explanation"])
         r.next_steps.append(f"Regular bail: {regular} (Magistrate) or {sessions} (Sessions Court / High Court).")
         r.draft = {
             "doc_type": "bail_application",
@@ -340,12 +350,16 @@ PACKS: dict[str, Pack] = {
         ),
         Pack(
             "bail", "Bail (BNSS / CrPC)", "Criminal",
-            "Which code applies, default-bail and undertrial-release dates, and the right bail application.",
+            "Which code applies (procedure by FIR date), default-bail and s. 479 BNSS undertrial dates, and the right bail application.",
             (
                 Field("sections", "Sections alleged", help="e.g. 318(4) BNS"),
-                Field("offence_date", "Date of the alleged offence", "date", True),
-                Field("custody_since", "In custody since", "date", help="Leave empty for anticipatory bail"),
+                Field("offence_date", "Date of the alleged offence", "date", True, help="Decides IPC or BNS for the punishment"),
+                Field("fir_date", "FIR registered on", "date",
+                      help="Decides CrPC or BNSS (s. 531 BNSS); for a complaint case, the date the complaint was filed"),
+                Field("custody_since", "In custody since (first remand)", "date", help="Leave empty for anticipatory bail"),
                 Field("max_punishment_years", "Maximum punishment (years)", "number"),
+                Field("min_punishment_years", "Minimum punishment (years)", "number",
+                      help="Only if the section fixes a minimum term ('not less than ...'); it decides 60 or 90 days"),
                 Field("punishable_with_death_or_life", "Punishable with death or life imprisonment", "boolean"),
                 Field("first_time_offender", "First-time offender", "boolean"),
                 Field("chargesheet_filed", "Chargesheet filed", "boolean"),

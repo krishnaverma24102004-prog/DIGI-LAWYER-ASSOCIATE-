@@ -1,0 +1,10 @@
+{
+  "code": "SCI",
+  "name": "Supreme Court of India",
+  "complex": "Supreme Court of India, Tilak Marg",
+  "state": "Delhi",
+  "timings": {"sitting_start": "10:30", "lunch_start": "13:00", "lunch_end": "14:00", "rising": "16:00"},
+  "coverage": "cause_list_pdf",
+  "status": "draft",
+  "note": "Default profile until the courts table holds this court's timings. Verify against the court's notified sitting hours before relying on it."
+}

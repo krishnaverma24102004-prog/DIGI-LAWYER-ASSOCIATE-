@@ -232,7 +232,7 @@ function NewReview({ token, orgId, jurisdiction, onCreated }: { token: string; o
           <h3 className="font-medium text-slate-900 dark:text-slate-100">Documents ({chosen.size} selected)</h3>
           <label className="ml-auto cursor-pointer text-sm text-indigo-700 hover:underline dark:text-indigo-300">
             Upload PDFs
-            <input type="file" multiple accept=".pdf,.txt,image/*" className="hidden" onChange={(e) => e.target.files && upload(e.target.files)} />
+            <input type="file" multiple accept=".pdf,.docx,.txt,image/*" className="hidden" onChange={(e) => e.target.files && upload(e.target.files)} />
           </label>
         </div>
         <ul className="mt-2 max-h-56 overflow-y-auto">

@@ -57,7 +57,27 @@ def test_rejects_fake_pdf_and_unknown_types():
     with pytest.raises(DocumentError, match="not a valid PDF"):
         document_service.extract_text("lease.pdf", "application/pdf", b"hello there, not a pdf")
     with pytest.raises(DocumentError, match="Unsupported"):
+        document_service.extract_text("lease.xlsx", "application/octet-stream", b"PK\x03\x04....")
+    with pytest.raises(DocumentError, match="not a valid Word document"):
         document_service.extract_text("lease.docx", "application/octet-stream", b"PK\x03\x04....")
+
+
+def test_word_documents_keep_tables_in_place():
+    from docx import Document
+
+    document = Document()
+    document.add_paragraph("1. The Licensee shall pay the licence fee monthly.")
+    table = document.add_table(rows=2, cols=2)
+    table.cell(0, 0).text, table.cell(0, 1).text = "Licence fee", "Rs. 32,000"
+    table.cell(1, 0).text, table.cell(1, 1).text = "Deposit", "Rs. 1,00,000"
+    document.add_paragraph("2. This agreement is governed by the laws of India.")
+    buffer = io.BytesIO()
+    document.save(buffer)
+    extracted = document_service.extract_text("licence.docx", document_service.DOCX_TYPE, buffer.getvalue())
+    assert extracted.content_type == document_service.DOCX_TYPE
+    lines = extracted.text.splitlines()
+    assert lines.index("Licence fee | Rs. 32,000") < lines.index("2. This agreement is governed by the laws of India.")
+    assert "Deposit | Rs. 1,00,000" in lines
 
 
 def test_plain_text_is_decoded_and_normalized():

@@ -1,0 +1,1504 @@
+{
+ "problems": [
+  {
+   "title": "Clients can't find out what is happening in their case and chase the lawyer constantly; poor communication is the top complaint against lawyers",
+   "description": "After every hearing, clients phone or WhatsApp asking what happened and when the next date is. The advocate is in court all day, the junior is in another court, and the order is uploaded days later, so the questions pile up on personal phones with no record linked to the matter. Answering them takes unbilled evenings. When clients hear nothing they assume nothing is happening. Some then find out weeks later that the matter was adjourned, dismissed for default, or never filed. NRI and out-of-town clients have it worst: they can't walk into court, and eCourts shows unexplained English stage labels ('Appearance', 'Misc. Arguments') that don't say what the client must do. Silence leads to complaints, unpaid fees, clients changing lawyers, forum posts ('lawyer not responding') and Bar Council complaints. In the UK and Ireland, poor communication is the single largest complaint category against lawyers.",
+   "who": "Clients of solo advocates and small/mid firms in litigation, family, criminal, MACT, cheque bounce, consumer and property work, especially NRIs, tier-2/3 town clients and non-English speakers; the firms, which lose trust, referrals and fees",
+   "region": "Global (UK, Ireland, US data); India (WhatsApp-first, vernacular clients)",
+   "scale_evidence": [
+    {
+     "claim": "Legal Ombudsman (England & Wales) 2024/25: poor communication was the most common complaint type at 24% of complaint-type selections, then delay/failure to progress 23% and failure to advise 19%; 7,203 complaints accepted; poor service found in 70% of complaints assessed (1,778).",
+     "source_url": "https://www.legalombudsman.org.uk/information-centre/data-centre/complaints-data/legal-ombudsman-202425-annual-complaints-data-and-insight/"
+    },
+    {
+     "claim": "Of upheld LeO complaints in 2024/25: poor communication 25%, delay 18%, costs 11%.",
+     "source_url": "https://todaysfamilylawyer.co.uk/leo-reveals-significant-rise-in-demand-for-help-with-poor-communication-and-delays-most-common-complaints/"
+    },
+    {
+     "claim": "UK Legal Ombudsman 2025/26: poor communication 24% and delay/failure to progress 22% of complaint types; 72% of assessed complaints showed poor service; 25% of consumers got no final response from their provider.",
+     "source_url": "https://www.legalombudsman.org.uk/information-centre/data-centre/complaints-data/legal-ombudsman-202526-annual-complaints-data-and-insight/"
+    },
+    {
+     "claim": "Ireland LSRA annual report: poor communication is 'very much at the heart of' most complaints against solicitors and barristers; 143 misconduct complaints in 2020 cited a failure to communicate.",
+     "source_url": "https://www.lawsociety.ie/gazette/top-stories/2021/07-july/poor-communication-behind-most-complaints"
+    },
+    {
+     "claim": "Oregon State Bar Client Assistance Office (2013 data): communication and neglect were the largest complaint category, at 20.33%.",
+     "source_url": "https://www.osbar.org/publications/bulletin/14apr/barcounsel.html"
+    },
+    {
+     "claim": "Case Status 2025 Legal Client Experience Report (433 clients, 109 attorneys; vendor survey): only 35% of firms measure response time and 25% track total case resolution time.",
+     "source_url": "https://www.casestatus.com/blog/nearly-80-of-law-firm-clients-feel-uncared-for-new-survey-reveals-major-disconnect"
+    },
+    {
+     "claim": "The founder of KanoonKit, an Indian practice-management app, lists clients asking about their next hearing date and forgotten hearing dates among advocates' main pain points (vendor anecdote).",
+     "source_url": "https://hunted.space/product/kanoonkit"
+    },
+    {
+     "claim": "In Meera Devi v State (reported 17 Dec 2024), the SC strongly disapproved of a senior advocate who took fees but didn't tell his client the case had been filed, and raised concern about litigants left without updates.",
+     "source_url": "https://www.barandbench.com/news/litigation/supreme-court-senior-advocate-lack-of-communication-client"
+    },
+    {
+     "claim": "The SC gave the BCI three more months and asked it to finish complaints against lawyers transferred from State Bar Councils by the end of the calendar year.",
+     "source_url": "https://www.barandbench.com/news/litigation/bci-swift-disposal-of-complaints-against-lawyers-supreme-court"
+    },
+    {
+     "claim": "NRI forum post: a Hyderabad lawyer took the documents, sent a legal notice, never filed the suit and stopped replying to calls and emails.",
+     "source_url": "https://www.lawyersclubindia.com/forum/civl-case-hyderabad-lawyer-is-not-responding-to-us-152031.asp"
+    },
+    {
+     "claim": "Chennai client forum post: paid a fee after a 25-minute call; the lawyer stopped taking calls the next day, later asked for more money per call, and didn't respond to a refund request.",
+     "source_url": "https://lawrato.com/family-legal-advice/lawrato-lawyer-charged-big-fee-but-no-service-action-to-take-272291"
+    }
+   ],
+   "current_tools_gap": "Harvey, CoCounsel and Lexis+ AI face the lawyer only and have no client channel. Clio, MyCase and Case Status offer portals and texting, but a human still has to write and post each update (the step that lapses), clients have to install an app and log in, and everything is in English. None of them pulls Indian eCourts/NJDG hearing data or cause lists. The eCourts app gives raw status, not what happened and what the client must do next, and it doesn't reach clients on WhatsApp. Indian trackers send date alerts, not a plain-language summary such as 'today the judge gave 2 weeks for a reply; you need not come on the 14th'. No tool turns the day's cause-list result or order into a lawyer-approved, informational (non-advice), consented WhatsApp update in Hindi or another regional language, or flags a client message left unanswered and drafts the reply from the matter's actual state.",
+   "severity": "critical",
+   "size": "big"
+  },
+  {
+   "title": "Fabricated AI case citations in filings bring sanctions, disqualification and bar referrals, and paid legal AI tools still produce them",
+   "description": "An associate or partner asks an AI tool for supporting authority, pastes the result into a brief, and files it without opening each case. Opposing counsel or the judge can't find the case, and the lawyer faces a show-cause hearing, fee awards (USD 110,204.38 against two lawyers in one Oregon case), disqualification and bar referral. Each incident is reported publicly under the firm's name. Using paid tools is no defence: in Lacey v. State Farm the fake citations came from research done with CoCounsel, Westlaw and Gemini, and the judge nearly put them into an order. The number of reported decisions has grown from about 712 at end-2025 to over 2,200 by October 2026, and these are only the cases where someone was caught.",
+   "who": "Litigators at every firm size, from solos to large firms (Butler Snow, K&L Gates, Latham); supervising partners who sign briefs drafted by others; judges and clients who rely on filings",
+   "region": "Global (US-heavy; also UK, Canada, Australia, India)",
+   "scale_evidence": [
+    {
+     "claim": "The Charlotin AI Hallucination Cases database lists 2,207 cases (last updated 23 Oct 2026): 877 involve lawyers and 16 are from India.",
+     "source_url": "https://www.damiencharlotin.com/hallucinations/"
+    },
+    {
+     "claim": "By 10 October 2026 Charlotin's database listed 2,184 decisions worldwide, 1,492 in US courts. US decisions involving a lawyer: 14 in 2024, 207 in 2025, 361 in the part of 2026 counted. Sanctions include Couvrette v. Wisnovsky (D. Or.) USD 110,204.38 against two lawyers, Whiting v. City of Athens (6th Cir.) USD 15,000 each plus fees and double costs, ByoPlanet v. Johansson fee awards of USD 85,567.75, Lacey v. State Farm USD 31,100.",
+     "source_url": "https://vaquill.ai/blog/ai-hallucination-sanctions-tracker"
+    },
+    {
+     "claim": "Charlotin's database page reported '1,545 legal cases so far' and said it is actively updated.",
+     "source_url": "https://tinyapps.org/blog/ai-hallucinations-in-court.html"
+    },
+    {
+     "claim": "About 1,058 US cases as of early June 2026 (about 720 federal, 340 state), roughly 60% pro se and 40% attorneys; Westlaw created Key Number 46Hk789, 'Use of artificial intelligence'.",
+     "source_url": "https://library.law.unc.edu/2026/06/handling-hallucinations-a-reflection/"
+    },
+    {
+     "claim": "AFP (June 2026): Charlotin's database holds about 1,600 court documents with AI hallucinations from 35 countries (1,116 US, 173 Canada, 74 Australia, 59 UK); hallucinations in filings rose eightfold over the past year.",
+     "source_url": "https://www.malaymail.com/news/tech-gadgets/2026/06/16/do-your-job-global-courts-face-rising-tide-of-ai-generated-fake-cases-and-quotes/223865"
+    },
+    {
+     "claim": "Bloomberg Law (29 Dec 2025): about 712 rulings worldwide had addressed hallucinated content in court filings, about 90% of them issued in 2025.",
+     "source_url": "https://news.bloomberglaw.com/in-house-counsel/ai-faked-cases-become-core-issue-irritating-overworked-judges"
+    },
+    {
+     "claim": "Johnson v. Dunn (N.D. Ala., July 2025): three Butler Snow lawyers were disqualified and referred to the Alabama State Bar over ChatGPT-generated citations, in breach of the firm's AI policy, and the order was to be shared with clients, opposing counsel, every lawyer at the firm and judges in their pending cases.",
+     "source_url": "https://edrm.net/2025/07/when-ai-policies-fail-the-ai-sanctions-in-johnson-v-dunn-and-what-they-mean-for-the-profession/"
+    },
+    {
+     "claim": "Lacey v. State Farm: USD 31,100 in sanctions against Ellis George and K&L Gates; Judge Wilner said he almost included the fake citations in a judicial order.",
+     "source_url": "https://getcoai.com/news/sloplaw-and-disorder-ai-generated-citations-nearly-fool-judge-in-court-ruling"
+    },
+    {
+     "claim": "AI Vortex case brief lists CoCounsel, Westlaw Precision and Google Gemini as the tools used in Lacey and describes a 'systemic failure in verification and supervision' (the site's summary).",
+     "source_url": "https://www.aivortex.io/legal-ai-risk/cases/lacey-v-state-farm-general-insurance-2025-05-06/brief"
+    },
+    {
+     "claim": "Stanford RegLab/HAI benchmark: Lexis+ AI and Ask Practical Law AI gave incorrect answers on more than 17% of queries, Westlaw AI-Assisted Research on more than 34%, despite 'hallucination-free' marketing.",
+     "source_url": "https://hai.stanford.edu/news/ai-trial-legal-models-hallucinate-1-out-6-or-more-benchmarking-queries"
+    },
+    {
+     "claim": "Stanford RegLab/HAI 'AI on Trial': legal AI research tools from LexisNexis and Thomson Reuters hallucinated on at least 1 in 6 benchmark queries.",
+     "source_url": "https://hai.stanford.edu/news/ai-trial-legal-models-hallucinate-1-out-6-queries"
+    }
+   ],
+   "current_tools_gap": "Harvey, CoCounsel and Lexis+ AI generate text with citations, but none blocks a draft from being exported or filed until every authority has been checked against a primary source. In US v. Farris (6th Cir.) counsel drafted with CoCounsel and was removed and referred; in Gauthier v. Goodyear a Lexis AI check didn't flag the fabricated cases. Citators (KeyCite, Shepard's) say whether a case is still good law, not whether the propositions in an AI-written paragraph are supported. They don't check citations a lawyer pastes in from elsewhere or that an opponent files.",
+   "severity": "critical",
+   "size": "big"
+  },
+  {
+   "title": "India: courts now treat unverified AI citations as misconduct, fake precedents are reaching Indian filings and orders, and practitioners have no cheap pre-filing check",
+   "description": "Indian advocates (often solos or juniors using free ChatGPT), tribunal members and trial judges are relying on SCC, AIR or INSC judgments that don't exist. The Supreme Court has declared 'zero tolerance', held that citing AI-generated precedents without verifying them is advocate misconduct, said a decision based on fake judgments is misconduct and not an error, and asked the BCI to frame norms. Benches have recorded matters where every precedent cited was non-existent, and the Bombay HC imposed costs on a litigant over one. Repealed IPC/CrPC/Evidence Act sections are also cited after the BNS/BNSS/BSA changeover. Verifying means searching SCC Online, Manupatra or Indian Kanoon one citation at a time, and many district-level advocates don't subscribe to the paid databases.",
+   "who": "Indian advocates at every level, especially solo and district-court practitioners and junior associates; litigants in person; in-house tax and insolvency teams; tribunals and the district judiciary",
+   "region": "India",
+   "scale_evidence": [
+    {
+     "claim": "In Pooja Ramesh Singh v. J&K Bank (reported 2 July 2026) the SC said courts must take a zero-tolerance approach to AI-generated precedents cited without verification, held that an advocate citing them commits misconduct, and asked the BCI to frame norms.",
+     "source_url": "https://www.barandbench.com/news/litigation/supreme-court-declares-zero-tolerance-to-citing-fake-ai-generated-judgments-asks-bci-to-frame-norms"
+    },
+    {
+     "claim": "Pooja Ramesh Singh: the SC directed the Bar Council of India to form a committee to prescribe guiding principles and disciplinary action.",
+     "source_url": "https://www.freepressjournal.in/mumbai/supreme-court-declares-zero-tolerance-for-ai-generated-fake-legal-precedents-directs-bar-council-to-act"
+    },
+    {
+     "claim": "Pooja Ramesh Singh (Civil Appeal 11950/2025): the SC set aside NCLT and NCLAT orders influenced by several non-existent or AI-fabricated precedents and restored the Section 7 proceedings.",
+     "source_url": "https://desikaanoon.in/supreme-court-warns-courts-against-blind-reliance-on-ai-generated-case-law/"
+    },
+    {
+     "claim": "On 17 Feb 2026 a bench led by CJI Surya Kant called lawyers' unchecked AI drafting 'alarming'. In one matter before Justice Dipankar Datta none of the precedents cited existed; Justice Nagarathna flagged a fictitious case, 'Mercy vs Mankind'.",
+     "source_url": "https://organiser.org/2026/02/18/340579/bharat/precedents-cited-never-existed-supreme-court-flags-alarming-ai-use-in-court-filings/"
+    },
+    {
+     "claim": "Greenopolis Welfare Association v. Narender Singh (Delhi HC, 25 Sept 2025): the petition cited a non-existent case (Chitra Narain v. DDA) and quoted paras 73-74 of a 27-paragraph judgment; dismissed as withdrawn.",
+     "source_url": "https://lawbeat.in/amp/news-updates/delhi-high-court-allows-withdrawal-of-plea-citing-non-existent-judgments-and-ai-generated-content-1532103"
+    },
+    {
+     "claim": "Gummadi Usha Rani v. Sure Mallikarjuna Rao (SC order 27 Feb 2026): a trial court relied on four AI-generated judgments; the SC said a decision based on them 'would be a misconduct' and issued notice to the AG, SG and BCI.",
+     "source_url": "https://www.verdictum.in/pdf_upload/gummadi-usha-rani-anr--1772891.pdf"
+    },
+    {
+     "claim": "Bombay HC (Justice MM Sathaye) ordered Heart & Soul Entertainment to pay Rs 50,000 costs, citing its reliance on a non-existent AI-generated judgment.",
+     "source_url": "https://moneylife.in/article/fake-case-law-ai-submissions-bombay-hc-imposes-rs50000-cost-on-litigant/79395.html"
+    },
+    {
+     "claim": "Bombay HC imposed Rs 50,000 costs on a party-in-person for relying on a non-existent AI-generated judgment in written submissions (Jan 2026).",
+     "source_url": "https://www.freepressjournal.in/amp/mumbai/bombay-hc-fines-litigant-50000-for-citing-fake-ai-generated-judgment-in-written-submissions"
+    },
+    {
+     "claim": "Manupatra's sponsored article says a senior lawyer had to apologise in the SC because a rejoinder contained many fake cases.",
+     "source_url": "https://www.barandbench.com/law-firms/view-point/beyond-generic-ai-tools-built-for-the-law"
+    },
+    {
+     "claim": "As of June 2026 the BCI had issued no AI-specific rule for advocates; existing duties of confidentiality, competence, verification and candour apply.",
+     "source_url": "https://lawsikho.com/blog/ai-ethics-for-lawyers-in-india-bci-dpdp-privilege/"
+    }
+   ],
+   "current_tools_gap": "Harvey (partnered with SAM) and CoCounsel are priced for large firms and built on US/UK law, not grounded in a complete index of SCC, AIR, INSC and High Court reporters. SCC Online, Manupatra and CaseMine AMICUS retrieve from their own corpora but don't audit a draft written elsewhere (an associate's draft, ChatGPT output, an opponent's filing). None checks citations against an authoritative index, flags repealed IPC/CrPC provisions, or confirms a quoted paragraph exists. Free ChatGPT verifies nothing. No tool produces a per-citation verification record an Indian advocate could show a bench as proof of due diligence.",
+   "severity": "critical",
+   "size": "big"
+  },
+  {
+   "title": "Adjournment churn and counsel double-booking: 66.6 lakh district-court cases delayed because the lawyer isn't available, and clients lose a day's wages each time",
+   "description": "An advocate has five matters in three courtrooms or two court complexes on the same morning. Clashes are found that morning or not at all. While counsel argues one matter, the others are adjourned, passed over, or handled by a proxy junior who seeks a date without knowing the file and is briefed over WhatsApp. Each adjournment means another hearing, another client trip, more risk of ex parte orders and costs. The client takes leave, travels and waits all day for nothing ('tareekh pe tareekh'), paying lost income plus the per-appearance fee, with no warning that their lawyer had a clash. NJDG records 'counsel not available' as the single largest category of delay in district courts.",
+   "who": "Busy trial-court and High Court litigators, chambers of busy seniors, district-court advocates with 50-plus matters a day, proxy juniors, and litigants (especially daily-wage and salaried clients)",
+   "region": "India",
+   "scale_evidence": [
+    {
+     "claim": "NJDG as of 14 Sep 2024: 66,59,565 district-court cases delayed because lawyers were unavailable, against over 38 lakh for absconding accused, 29,20,033 for witnesses and 24,62,051 stayed.",
+     "source_url": "https://barandbench.com/news/66-lakh-cases-district-courts-delayed-unavailability-lawyers"
+    },
+    {
+     "claim": "CJI D Y Chandrachud (Dec 2022): NJDG shows over 63 lakh cases delayed for non-availability of counsel; he asked for the Bar's support.",
+     "source_url": "https://www.outlookindia.com/national/national-judicial-database-says-63-lakh-cases-considered-delayed-due-to-non-availability-of-counsels-cji-news-249581"
+    },
+    {
+     "claim": "Odisha (NJDG): more than 4.61 lakh cases pending for non-availability of counsel, alongside more than 16 lakh pending in district and lower courts.",
+     "source_url": "https://www.orissapost.com/over-16-lakh-cases-pending-in-district-lower-courts-1l-in-hc-in-odisha-njdg-data/amp/"
+    },
+    {
+     "claim": "As of 31 Dec 2025 (NJDG, Law Ministry in Parliament): 4,76,57,328 cases pending in district and subordinate courts, 63,66,023 in the High Courts and 92,101 in the Supreme Court.",
+     "source_url": "https://ianslive.in/over-476-crore-cases-pending-across-indian-courts-govt-tells-parliament--20260213184542"
+    },
+    {
+     "claim": "DAKSH (2015): 20 to 68 days on average between scheduled hearings of the same case across the High Courts studied (about 25 in Calcutta, 61 in Delhi, 68 in Karnataka).",
+     "source_url": "https://www.legallyindia.com/the-bar-and-bench/daksh-cases-speed-high-courts-20150827-6504"
+    },
+    {
+     "claim": "DAKSH survey of 9,329 litigants: average spend of Rs 520 a day to attend court; lost wages and business income equal 0.48% of GDP; litigants earning under Rs 1 lakh a year spend 25% of their earnings attending hearings.",
+     "source_url": "https://www.dakshindia.org/access-to-justice-survey-findings-india"
+    },
+    {
+     "claim": "DAKSH Access to Justice survey (9,329 litigants, 305 locations, 24 states): about Rs 30,000 crore a year in direct litigation expenses plus Rs 50,387 crore in lost wages and business income.",
+     "source_url": "https://countercurrents.org/2026/10/the-invisible-queue-why-millions-of-indians-walk-away-before-justice-even-begins/"
+    },
+    {
+     "claim": "DAKSH (2016): lost wages and legal fees cost litigants over Rs 80,000 crore a year.",
+     "source_url": "https://www.dakshindia.org/2016/04/21/"
+    }
+   ],
+   "current_tools_gap": "Clio and US docketing tools assume one court calendar per matter and US rules. Indian diaries and trackers (eCourts app, per-case and per-court) list next dates but have no advocate-level, firm-wide clash view across district courts, High Courts and tribunals, no sense of when an item in a given courtroom is likely to be reached, and no automatic proxy brief (last order, stage, what to seek and not concede). Nothing warns the client not to travel. Harvey, CoCounsel and Lexis+ AI have no scheduling layer.",
+   "severity": "critical",
+   "size": "big"
+  },
+  {
+   "title": "Missed listings and one-day notice: cause lists, supplementary lists, next dates and orders are spread across portals and lag the court file, leading to dismissals for default",
+   "description": "Every evening an advocate or munshi checks, matter by matter, which cases are listed tomorrow, in which court and at what item number, and what happened last time. Status, cause lists and orders sit on separate eCourts pages, and the SC, 25 High Courts and thousands of district courts each publish their own PDFs. Supplementary lists come out for the same day, several per complex, with 'no passover' warnings. Cause lists load slowly or render badly on phones, data differs between portals, and sites go down on hearing days. Orders are uploaded whenever the clerk gets to them, and cases can show 'disposed' before the judgment is online, confusing limitation. At the Karnataka HC advocates get about one day's notice of final hearings since the advance list was discontinued in 2021. If nobody appears, the matter is dismissed for non-prosecution, and the firm must seek restoration plus condonation, costing months and the client's trust.",
+   "who": "Solo advocates and small chambers with 100-500 live matters; munshis and juniors keeping several seniors' boards; outstation counsel; women advocates with caregiving duties; AoRs; mid-size litigation firms",
+   "region": "India",
+   "scale_evidence": [
+    {
+     "claim": "Practitioner guide: eCourts portals make you open separate pages for status, cause lists and orders; cause lists often load slowly or display poorly on mobile; data is sometimes inconsistent across portals; FAQs cover cases wrongly shown as 'disposed' and sites down on hearing day.",
+     "source_url": "https://sudhirrao.com/insights/common-issues-faced-by-advocates-using-indian-court-websites"
+    },
+    {
+     "claim": "Karnataka HC published an advance cause list for final hearings until November 2021, then stopped; advocates now get about a day's notice, women advocates with caregiving duties are hit hardest, and DAKSH and advocates have petitioned the Chief Justice to restore it.",
+     "source_url": "https://dakshindia.org/advance-causelist-petition-high-court-of-karnataka"
+    },
+    {
+     "claim": "No fixed national deadline for uploading orders; a Nagpur suit showed 'disposed' on eCourts three weeks before the judgment appeared online.",
+     "source_url": "https://righttoinformation.wiki/practical-guides/court-order-not-uploaded-online-case-status-wrong"
+    },
+    {
+     "claim": "Delhi HC (April 2025): because of an acute shortage of judges, the list of regular matters often isn't reached by the end of the day.",
+     "source_url": "https://www.verdictum.in/court-updates/high-courts/delhi-high-court/mukesh-gupta-vs-central-bureau-of-investigation-2025-dhc-2936-acute-shortage-of-judges-1575708"
+    },
+    {
+     "claim": "Gujarat HC launched 'Email My Case Status', sending automated updates on HC and District Court cases, an official attempt to push status changes rather than make people check the portal.",
+     "source_url": "https://www.barandbench.com/news/gujarat-high-court-email-my-case-status-service"
+    },
+    {
+     "claim": "A Supreme Court daily cause list (12-02-2026, Court 17 chamber matters) lists consecutive items carrying both a 'restoration' IA and a 'condonation of delay in filing application for restoration' IA.",
+     "source_url": "https://api.sci.gov.in/jonew/cl/2026-02-12/M_C_1.pdf"
+    },
+    {
+     "claim": "Delhi HC issues multiple supplementary cause lists for the same day (e.g. 03.07.2026), with notes such as 'no passover will be given in the first five cases in supplementary list'.",
+     "source_url": "https://delhihighcourt.nic.in/files/2026-07/cause-list/sup-7_for_03.07.26_revised.pdf"
+    }
+   ],
+   "current_tools_gap": "Harvey, CoCounsel and Lexis+ AI have no connection to Indian court data. SCC Online and Manupatra are research databases, not docket tools. The eCourts app, eCourtsIndia API, LawStar and India Case Status re-serve portal data by CNR and inherit its lag; they miss late supplementary lists, matters listed under a different counsel or wrong number, tribunals and High Court-specific board formats, and need manual CNR entry. None reconciles a firm's whole matter list against that night's cause-list PDFs from every court, resolves court and item number, flags a misprinted counsel name, warns that a past order is still not uploaded, assigns a responsible person and fallback, or escalates when nobody confirms appearance.",
+   "severity": "critical",
+   "size": "big"
+  },
+  {
+   "title": "Indian limitation and statutory deadlines are unforgiving: certified-copy delays, hand-computed exclusions, forfeited written statements and courts refusing condonation",
+   "description": "Some Indian deadlines destroy a right outright. A written statement in a commercial suit not filed within 120 days of summons is forfeited, and since A.K. Ghosh (July 2026) the same limit binds a plaintiff's reply to a counter-claim. An appeal, revision or SLP needs a certified copy of the impugned order: the advocate applies, waits, has to remember to collect it, and then works out the excluded period under s.12 Limitation Act along with ss.4 and 14 exclusions, COVID-era windows and special-statute periods. Juniors compute this by hand in diaries. Whether a given copy even counts for limitation can itself be litigated. Meanwhile the Supreme Court has hardened on s.5: administrative lethargy, including the State's, is not sufficient cause, so a missed date can end the client's remedy.",
+   "who": "Litigators who file appeals and revisions, government panel counsel and PSU legal departments, AoRs, defendants in commercial suits, solo district-court advocates, and clients who lose their remedy",
+   "region": "India",
+   "scale_evidence": [
+    {
+     "claim": "Karnataka HC (June 2021): waiting for certified copies may be one reason appeals against acquittal are filed late; it directed the State to start forming its opinion from depositions and an ordinary copy of the judgment.",
+     "source_url": "https://barandbench.com/news/litigation/scst-act-waiting-for-certified-copies-reason-for-delay-filing-appeals-acquittal-karnataka-high-court"
+    },
+    {
+     "claim": "Shivamma v Karnataka Housing Board (2025 INSC 1104): the SC set aside an HC order condoning a 3,966-day delay; administrative lethargy can never be sufficient cause.",
+     "source_url": "https://www.verdictum.in/court-updates/supreme-court/shivamma-v-karnataka-housing-board-2025-insc-1104-state-authorities-condonation-of-delay-1591239"
+    },
+    {
+     "claim": "Shivamma: bureaucratic lethargy cannot be routinely excused under s.5 Limitation Act.",
+     "source_url": "https://theindianlawyer.in/supreme-court-re-defines-standards-for-condonation-of-delay-under-the-limitation-act/"
+    },
+    {
+     "claim": "On 9 Feb 2026 the SC refused to condone Odisha's delay and dismissed its SLP as time-barred, calling the State 'utterly lethargic, tardy and indolent'.",
+     "source_url": "https://www.scconline.com/blog/post/2026/02/20/sc-rejects-condonation-of-delay-in-government-litigation/"
+    },
+    {
+     "claim": "SBI v India Power Corporation (2024): NCLAT held a free copy of an NCLT order was not a certified copy for limitation and threw out an appeal; the SC reversed, condoned a 3-day delay and restored it.",
+     "source_url": "https://www.scconline.com/blog/?p=332718"
+    },
+    {
+     "claim": "SCG Contracts (2019): filing the written statement within 120 days of summons in commercial suits is mandatory; the right is forfeited and the court has no power to take it on record.",
+     "source_url": "https://www.khaitanco.com/thought-leadership/supreme-court-filing-of-written-statement-within-120-days-from-issuance-of-summons-is-mandatory"
+    },
+    {
+     "claim": "A.K. Ghosh & Co. v. Biman Bose (2026 INSC 684, 14 July 2026): the 120-day outer limit under Order VIII Rule 1 CPC also binds a plaintiff's reply to a counter-claim; a reply filed after 238 days was rightly refused.",
+     "source_url": "https://www.verdictum.in/supreme-court/ak-ghosh-company-and-others-v-biman-bose-and-others-2026-insc-684-1617737"
+    }
+   ],
+   "current_tools_gap": "No Indian practice tool (Manupatra, SCC Online, LegitQuest, eCourts app, LawStar) computes limitation from the Schedule to the Limitation Act with s.4/12/14 exclusions (copy applied, ready, delivered), COVID windows and special-statute periods per forum. They retrieve judgments about limitation but don't calculate a matter's date, chase copy-section status or alert before a window closes. Clio-style calendaring follows US rules; Harvey and CoCounsel don't model Indian procedure.",
+   "severity": "critical",
+   "size": "big"
+  },
+  {
+   "title": "New client enquiries go unanswered, especially after hours, so prospects hire whoever replies first",
+   "description": "A prospective client calls at 9 pm, emails, fills a form or sends a WhatsApp voice note in Hinglish about an arrest, a cheque bounce or an eviction. The solo advocate is in court all day and nobody owns intake, because the advocate is also the receptionist. Enquiries arrive on WhatsApp, Instagram DMs and a personal number and get lost. Nobody replies within the first hours with next steps or a fee indication, and by morning the person has hired someone else. US secret-shopper studies show most firms miss email and calls entirely, and responsiveness is getting worse. Revenue is lost before any conflict check or engagement letter, and urgent deadlines (e.g., the 30-day s.138 notice window) can run in the meantime.",
+   "who": "Solo practitioners and small firms (PI, family, criminal, consumer, property, cheque bounce) with no front office; prospective clients in urgent matters",
+   "region": "Global (US measured); India (WhatsApp/phone intake, no front office)",
+   "scale_evidence": [
+    {
+     "claim": "Clio 2024 secret-shopper test (1,000 firms emailed, 500 called): 67% didn't respond to email; 48% didn't answer or call back; only 2% referenced similar legal situations or case law (27% in 2019).",
+     "source_url": "https://abovethelaw.com/2024/10/law-firms-failing-at-the-single-most-basic-lawyering-task/"
+    },
+    {
+     "claim": "Clio 2024: 33% responded to email (40% in 2019), 40% answered calls (56% in 2019), 12% of shoppers would recommend the firm they contacted.",
+     "source_url": "https://www.2civility.org/2024-clio-legal-trends-report-fixing-the-first-impression-problem-for-law-firms/"
+    },
+    {
+     "claim": "Clio 2019 secret shopper: 60% of firms contacted by email didn't respond and 27% didn't answer or return calls.",
+     "source_url": "https://www.ncbar.org/?p=10300"
+    },
+    {
+     "claim": "Clio secret-shopper test: 60% of firms did not respond to email; more than half didn't return voicemails within 72 hours; 64% of consumers had contacted a firm that never responded.",
+     "source_url": "https://www.2civility.org/clio-legal-trends-report-finds-law-firms-arent-responsive-to-potential-clients/"
+    },
+    {
+     "claim": "Clio 2019: 82% of consumers say timeliness is essential; 79% expect a response within 24 hours; 76% want a clear sense of cost.",
+     "source_url": "https://lawyersmutualnc.com/blog/survey-most-clients-shop-around-before-picking-a-lawyer"
+    },
+    {
+     "claim": "Martindale-Avvo: 78.9% of consumers who hired a lawyer contacted more than one attorney first.",
+     "source_url": "https://www.martindale-avvo.com/academy/learning/three-things-to-know-about-legal-consumers"
+    },
+    {
+     "claim": "Clio 2025: referrals are the top lead source for 59% of solo and small firms; firms combining referrals with digital intake report stronger conversion.",
+     "source_url": "https://www.canadianlawyermag.com/news/general/solos-and-small-firms-lag-with-ai-adoption-clio-report/392441"
+    },
+    {
+     "claim": "Clio 2025 Legal Trends: 14% of consumers have used AI for legal questions and another 43% would.",
+     "source_url": "https://www.2civility.org/2025-clio-legal-trends-report/"
+    }
+   ],
+   "current_tools_gap": "Harvey, CoCounsel and Lexis+ AI do no intake. Clio Grow, Lawmatics, intake chatbots and answering services are US web-form/email products in English, with no WhatsApp Business channel, no Hindi/Hinglish voice notes, no consent before data reaches an AI, and canned replies that can drift into unauthorised advice. None does PII-safe fact capture, automatic conflict check, deadline triage (s.138 notice window, default bail days) and a structured brief the lawyer accepts in one tap. In India, US-style marketing bots could breach BCI Rule 36, so the product must only reply to people who made contact and never solicit.",
+   "severity": "critical",
+   "size": "big"
+  },
+  {
+   "title": "People don't recognise their problem is legal or know where to go, and legal aid reaches only a sliver of those eligible",
+   "description": "Most people with a tenancy, wage, consumer, domestic violence or cheque problem never treat it as legal, never approach a lawyer, and never use free legal aid they qualify for. Over 80% of India's population is eligible, but only about 1.5 crore people received legal aid from 1995 to 2019. The system is thinly staffed and legal aid counsel are underpaid and paid late, so eligible people pay private lawyers they can't afford or give up, often after the limitation period has run.",
+   "who": "Low-income and rural Indians, first-generation litigants, migrant workers; globally 1.4 billion people with unmet justice needs; DLSAs and legal aid counsel",
+   "region": "Global and India",
+   "scale_evidence": [
+    {
+     "claim": "WJP: 1.4 billion people have unmet civil and administrative justice needs; in its 101-country survey only 29% of people with a legal problem sought advice, only 29% saw the problem as legal, 16% found it hard to find the money and 17% gave up.",
+     "source_url": "https://worldjusticeproject.org/news/groundbreaking-study-reveals-unmet-legal-needs-worldwide"
+    },
+    {
+     "claim": "India Justice Report 2019: over 80% of about 1.25 billion people are eligible for legal aid, but only about 15 million received it since 1995; only five states used over 90% of NALSA funds (2017-18).",
+     "source_url": "https://www.barandbench.com/columns/india-justice-report-2019-15-million-out-of-1-billion-eligible-indians-provided-legal-aid-services"
+    },
+    {
+     "claim": "One legal aid lawyer per 18,609 people (CHRI 2018); an Agra retainer earns Rs 5,000 against the Rs 15,000 guideline; 34% of legal aid counsel cited delayed payment; private fees start around Rs 20,000 against Rs 18,000 per case paid to legal aid counsel in Delhi; nearly 60% of cases take over a year at subordinate level.",
+     "source_url": "https://idronline.org/article/livelihoods/why-is-the-quality-of-indias-free-legal-aid-so-poor/"
+    },
+    {
+     "claim": "LSC Justice Gap 2022: low-income Americans got no or inadequate help for 92% of substantial civil legal problems; the most common reason for not seeking help was believing they couldn't afford it.",
+     "source_url": "https://lsc.gov/press-release/low-income-americans-face-immense-justice-gap-according-new-legal-services-corporation-report"
+    },
+    {
+     "claim": "UNDP India names the digital divide and the legal literacy gap as primary mechanics of exclusion; 24% of respondents from marginalised groups never attended school.",
+     "source_url": "https://www.policyedge.in/p/undp-enhancing-meaningful-access-to-justice-in-india"
+    }
+   ],
+   "current_tools_gap": "Harvey, CoCounsel, Lexis+ AI and Clio sell to lawyers who already have the client. Government channels (Tele-Law, NALSA helplines) rely on thin human staff. No tool offers vernacular, voice-first, PII-safe triage that tells a person 'this is a legal problem, this is the statute and deadline, you may qualify for legal aid, here is a lawyer' and hands a structured intake to a firm or DLSA, while staying informational and not advice.",
+   "severity": "critical",
+   "size": "big"
+  },
+  {
+   "title": "Fees are agreed orally, paid late or never, and Indian advocates must go to slow civil suits to recover them",
+   "description": "Many Indian litigators charge an advance and a final fee, or per appearance, often in cash or UPI instalments, tracked in a diary or Excel, with no signed terms or itemised invoices. Once the matter ends or the next date is a year away, clients stop paying or dispute the balance. Advocates can't keep the file as security (no lien, per R.D. Saxena) or stall the case (the Kerala HC imposed Rs 50,000 costs for trying). High Courts send fee disputes to civil courts, so recovery is a slow suit, even against government departments and PSUs whose panel counsel wait years. Without matter-wise records of appearances and work, the advocate struggles to prove what is owed.",
+   "who": "Solo advocates, small litigation chambers, government and PSU panel counsel; retail clients who want to pay in instalments",
+   "region": "India (and global small firms)",
+   "scale_evidence": [
+    {
+     "claim": "Kalyan civil court (ex parte) ordered a client to pay the Rs 35,000 balance of a Rs 50,000 agreed fee with 6% interest (18% sought).",
+     "source_url": "https://www.freepressjournal.in/mumbai/kalyan-court-orders-client-to-pay-35000-pending-legal-fee-with-6-per-cent-interest-to-advocate"
+    },
+    {
+     "claim": "Delhi HC (July 2026): unpaid agreed fees may be adjusted from a client's compensation, but the balance must be returned promptly.",
+     "source_url": "https://www.scconline.com/blog/post/2026/07/07/delhi-high-court-advocate-fees-client-compensation/"
+    },
+    {
+     "claim": "Uttarakhand HC urged litigants to pay lawyers by cheque, draft or online banking and asked the State Bar Council to frame fee rules.",
+     "source_url": "https://www.barandbench.com/news/uttarakhand-hc-litigants-pay-lawyers-cashless"
+    },
+    {
+     "claim": "Invoice-format guide: advocate fees are usually split into advances and final fees; some charge a filing advance of 10-20%.",
+     "source_url": "https://vyaparapp.in/invoice-formats/advocate"
+    },
+    {
+     "claim": "Kerala HC (2026): an advocate can't halt proceedings or hold files until fees are paid; Rs 50,000 costs for stalling an award about ten months; fee disputes belong in a civil court.",
+     "source_url": "https://www.verdictum.in/court-updates/high-courts/kerala-high-court/2026ker31575-mary-help-john-david-j-v-jv-anoop-1611880"
+    },
+    {
+     "claim": "Allahabad HC deprecated the State's failure to pay its counsel but dismissed four writs claiming about Rs 4.8 crore, with liberty to approach a civil court.",
+     "source_url": "https://www.livelaw.in/high-court/allahabad-high-court/allahabad-high-court-deprecates-state-failure-pay-counsels-fee-rejects-claim-546404"
+    },
+    {
+     "claim": "Delhi HC criticised DDA for holding up an advocate's fees and held a writ is maintainable against State instrumentalities.",
+     "source_url": "https://www.barandbench.com/news/delhi-high-court-pulls-up-dda-for-not-paying-advocates-fee"
+    },
+    {
+     "claim": "Delhi HC ordered the Centre, Delhi government and departments to clear empanelled lawyers' bills raised before 1 Feb 2020 within 4 weeks, warning it would stop the finance secretary's salary.",
+     "source_url": "https://indialegallive.com/top-story/pay-panel-lawyers-fees-in-4-weeks-or-will-stay-finance-secys-salary-delhi-hc-warns-govt/"
+    },
+    {
+     "claim": "Clio: payment plans linked to 27% more billings and 71% more collections; nearly 40% of solo firms offer no payment plan; 81% of consumers find payment plans attractive.",
+     "source_url": "https://canadianlawyermag.com/resources/practice-management/solos-and-smalls-excel-in-finding-new-business-but-lag-in-turning-it-into-billables-clio-report/386381"
+    }
+   ],
+   "current_tools_gap": "Clio Payments, LawPay and Clio-style billing assume hourly entries, trust accounting and cards; no UPI mandates, GST/reverse-charge invoices or Indian-language reminders. Indian billing apps produce GST invoices but no evidence trail: BCI-compliant engagement terms (no contingency or share of recovery, per B. Sunitha), a per-appearance work log tied to cause-list dates, and dated reminders that hold up in a recovery suit. Harvey and CoCounsel have no billing function.",
+   "severity": "critical",
+   "size": "big"
+  },
+  {
+   "title": "Billable time is lost through late reconstruction and unrecorded calls, WhatsApp advice and appearances",
+   "description": "Lawyers do the work but don't record it: quick calls, WhatsApp advice, emails, reviewing a draft at night. Timesheets are rebuilt from memory at the end of the day, week or month, so short tasks disappear and durations are guessed. Only a fraction of the workday is billable, and part of that is never invoiced or collected. Indian firms billing per appearance or stage see the same leak as appearances, drafts and conferences that are never invoiced.",
+   "who": "All hourly-billing firms (solo to BigLaw); Indian firms billing per appearance or retainer; associates under hours targets",
+   "region": "Global (US, UK); India",
+   "scale_evidence": [
+    {
+     "claim": "Access Legal/Censuswide (April 2026, 200 UK legal professionals): fee earners lose 4.16 billable hours a week, just under GBP 2m a year for a 50-fee-earner firm; 71% say admin burden makes accurate time capture difficult; switching between disconnected apps is a top frustration for 26%.",
+     "source_url": "https://www.legalfutures.co.uk/associate-news/uk-law-firms-losing-nearly-2m-a-year-to-legal-tech-that-frustrates-fee-earners/print/"
+    },
+    {
+     "claim": "Research attributed to Ann Guinn for the ABA: recording time at day's end loses about 10-15% of billable hours, next day about 25%, end of week about 50% (quoted secondhand by a vendor).",
+     "source_url": "https://minutedock.com/academy/the-real-cost-of-late-time-entry-why-reconstructed-timesheets-kill-law-firm-revenue"
+    },
+    {
+     "claim": "Clio Legal Trends (2017): lawyers spend about 2.3 hours a day on billable work, collect about 1.6 hours, and firms collect 86% of what they bill.",
+     "source_url": "https://www.clio.com/about/press/second-annual-legal-trends-report-dives-deeper-state-legal-industry/"
+    }
+   ],
+   "current_tools_gap": "Passive time capture (Clio, Smokeball, Intapp Time, Laurel) records desktop and email activity, missing court appearances, phone and WhatsApp advice and Indian per-appearance work; narratives are still hand-written. Harvey, CoCounsel and Lexis+ AI never turn work into a billable entry. Nothing drafts time entries or appearance invoices from the hearing calendar, call transcripts, WhatsApp threads and drafts produced, with OCG-compliant narratives.",
+   "severity": "critical",
+   "size": "big"
+  },
+  {
+   "title": "Legal AI isn't trusted: premium tools hallucinate 17-33% of the time, checking eats the time savings, and paid seats go underused",
+   "description": "Firms buy Lexis+ AI, Westlaw AI or Harvey because they are marketed as grounded, yet independent testing found roughly one answer in six to one in three hallucinated or misgrounded. Lawyers must re-verify everything, and longer answers take longer to check, so hours saved drafting go back into checking. Partners can't tell which answers are safe. Associates then use the licensed tools less (one says Harvey gets them '20% of the way'), firm-level use lags personal use, and firms pay heavily for little measurable output. Inaccuracy is now UK lawyers' top AI worry.",
+   "who": "Associates, knowledge-management and IT heads at mid-size and large firms, in-house teams, firm management and the clients paying for the work",
+   "region": "Global (US/UK benchmarks)",
+   "scale_evidence": [
+    {
+     "claim": "Stanford RegLab study: Lexis+ AI accurate 65% (about 17% hallucinated), Westlaw AI-Assisted Research 41-42% (about one-third hallucinated), Ask Practical Law AI 19-20% (62% incomplete); misgrounded answers require clicking through and reading every source.",
+     "source_url": "https://arxiv.org/html/2405.20362v1"
+    },
+    {
+     "claim": "Stanford found AI legal research tools hallucinate in 17% of queries; Thomson Reuters denied three access requests before granting it.",
+     "source_url": "https://www.lawnext.com/2024/05/stanford-will-augment-its-study-finding-that-ai-legal-research-tools-hallucinate-in-17-of-queries-as-some-raise-questions-about-the-results.html"
+    },
+    {
+     "claim": "LexisNexis UK survey of 543 legal professionals (2026): 83% worry about hallucinations, up from 57% at the start of 2024; 94% use AI; 81% prefer AI grounded in legal sources.",
+     "source_url": "https://www.legalcheek.com/2026/09/hallucinations-top-lawyers-ai-worry-list-research-finds/amp/"
+    },
+    {
+     "claim": "An academic 'verification-value paradox' argues GenAI efficiency gains are erased by verification time; Slaw's Mitch Kowalski disputes it.",
+     "source_url": "https://www.slaw.ca/2025/11/20/genai-the-verification-value-paradox-a-critique/"
+    },
+    {
+     "claim": "Thomson Reuters: 91% say AI should meet a higher accuracy standard than humans; 41% say output must be 100% accurate to use without review; accuracy is the top barrier to investment (50%).",
+     "source_url": "https://www.thomsonreuters.com/en/insights/articles/addressing-top-ai-concerns-what-you-really-want-to-know"
+    },
+    {
+     "claim": "Thomson Reuters: only 22% of firms have a visible AI strategy; 30% admit moving too slowly; 'adoption without integration' and hidden training/integration costs cause budget overruns.",
+     "source_url": "https://legal.thomsonreuters.com/blog/why-law-firms-are-struggling-with-ai-roi/"
+    },
+    {
+     "claim": "2025 Legal Industry Report (MyCase, 2,800+ respondents): firm-level generative AI use 21% in 2024, down from 24%, while 31% used it personally, pointing to restrictive policies arising from accuracy and ethics concerns.",
+     "source_url": "https://www.abajournal.com/advertising/article/legal-industry-report-2025-2"
+    },
+    {
+     "claim": "Harvey's Reddit AMA: founders disputed an alleged former employee's low-usage claims by citing DAU/MAU and renewal rates.",
+     "source_url": "https://www.lawnext.com/2025/12/harvey-cofounders-answer-tough-questions-in-reddit-ama-valuation-competition-and-the-future-of-legal-ai.html"
+    },
+    {
+     "claim": "Fishbowl thread 'More and more lawyers at the firm are complaining about Harvey AI'; one associate says it gets them 20% of the way and they always catch errors; other replies are positive.",
+     "source_url": "https://www.fishbowlapp.com/post/more-and-more-lawyers-at-the-firm-are-complaining-about-harvey-ai-anyone-else-having-bad-experiences"
+    }
+   ],
+   "current_tools_gap": "Vendors report no per-answer confidence or verification status, so every answer looks equally authoritative. None separates verified claims (quote found in source, authority exists and is in force) from unverified ones so a lawyer checks only the risky part. Incumbents sell a general assistant and leave workflows, verification and measurement to the firm, instead of packaged workflows whose output is checked by code (computed deadlines, verified quotes, citation status per authority). No independent accuracy benchmark exists for Indian law.",
+   "severity": "critical",
+   "size": "big"
+  },
+  {
+   "title": "The harder hallucination: real case, fake quote, wrong paragraph or unsupported proposition",
+   "description": "The cited judgment exists, so a quick existence check or citator passes it. But the quoted paragraph isn't in the judgment, the pin cite points to a paragraph that doesn't exist (para 73 of a 27-paragraph judgment), or the case doesn't support the proposition. Supreme Court of India judges report real SC cases cited with non-existent quotes, and tribunals have relied on genuine cases padded with AI-written paragraphs. Catching this means reading each cited passage against the claim, the slowest part of verification and the part existing checkers skip.",
+   "who": "Litigators drafting written submissions and appeals, judges and law clerks checking them, opposing counsel",
+   "region": "Global, with acute recent instances in India",
+   "scale_evidence": [
+    {
+     "claim": "Stanford RegLab (arXiv 2405.20362) counts 'misgrounded' answers (real source misread or inapplicable) as hallucinations; checking requires reading every cited source against the claim.",
+     "source_url": "https://arxiv.org/html/2405.20362v1"
+    },
+    {
+     "claim": "Justice Nagarathna (Feb 2026): some lawyers cite real SC cases, but the quoted portions don't exist in the judgment.",
+     "source_url": "https://organiser.org/2026/02/18/340579/bharat/precedents-cited-never-existed-supreme-court-flags-alarming-ai-use-in-court-filings/"
+    },
+    {
+     "claim": "Greenopolis (Delhi HC, Sept 2025): paras 73-74 of Raj Narain v. Indira Nehru Gandhi were quoted although the judgment has 27 paragraphs.",
+     "source_url": "https://lawbeat.in/amp/news-updates/delhi-high-court-allows-withdrawal-of-plea-citing-non-existent-judgments-and-ai-generated-content-1532103"
+    },
+    {
+     "claim": "Pooja Ramesh Singh (2026 INSC 668): NCLT and NCLAT relied on non-existent cases and on genuine citations carrying AI-generated paragraphs never in the judgments; the SC set the orders aside.",
+     "source_url": "https://blog.ipleaders.in/ai-hallucinated-case-law-fake-citations-india/"
+    },
+    {
+     "claim": "Concord v. Anthropic (May 2025): a Latham & Watkins attorney declared Claude gave a real article an inaccurate title and authors, and the firm's manual check missed it.",
+     "source_url": "https://www.theregister.com/2025/05/15/anthopics_law_firm_blames_claude_hallucinations/"
+    }
+   ],
+   "current_tools_gap": "KeyCite and Shepard's check treatment, not whether a quoted sentence appears at the pin cite. Lexis+ AI and Westlaw AI link to sources but leave the passage-level comparison to the user, and the Stanford study found misgrounding among their errors. No mainstream tool does verbatim quote matching against full judgment text plus a proposition-support check for every citing sentence, which Indian benches now demand.",
+   "severity": "critical",
+   "size": "big"
+  },
+  {
+   "title": "Missed deadlines and calendaring errors remain a leading cause of malpractice claims",
+   "description": "A limitation date is computed correctly but entered wrongly, entered and never checked, or diarised only as the final date with no earlier reminders. The person who keeps the docket goes on leave and nobody covers. Discovery, summons-renewal and appeal deadlines slip. Each miss can kill a claim and bring a malpractice suit. Insurers say the main cause is the lack of a good calendaring and docket system.",
+   "who": "Solo practitioners and small litigation firms (the largest share of claims), but every litigation practice; Indian chambers still keeping diaries by hand",
+   "region": "Global (US data strongest; same failure in Indian chambers)",
+   "scale_evidence": [
+    {
+     "claim": "Lawyers Mutual: missed deadlines (expired limitation, late summons, overdue discovery, missed appellate filings) remain 'the number one source of claims'.",
+     "source_url": "https://www.lawyersmutualnc.com/blog/missed-deadlines-are-top-cause-of-legal-malpractice"
+    },
+    {
+     "claim": "Lawyers Mutual: missed deadlines were the leading cause of malpractice claims in 2021; lack of a good calendaring and docket system is the main reason.",
+     "source_url": "https://lawyersmutualnc.com/blog/missed-deadlines-top-2021-malpractice-claims"
+    },
+    {
+     "claim": "CNA summarising the ABA Profile of Legal Malpractice Claims (2020-2023): solo practitioners had 28% of claims, 2-5 lawyer firms 25%.",
+     "source_url": "https://www.cna.com/sites/default/files/assets/fb08bac9-82f9-455b-b43e-aaa7bf104618/rc-cna-pro-counsel-gatekeepers-and-guardrails.pdf"
+    },
+    {
+     "claim": "Oregon PLF: a mid-size firm missed a client's deadline a week after its long-time paralegal, who alone handled deadlines, left; the client moved firms.",
+     "source_url": "https://osbplf.org/blog/post/plugging-the-knowledge-drain--how-to-retain-knowledge-and-ensure-your-firms-continued-success/"
+    }
+   ],
+   "current_tools_gap": "Harvey, CoCounsel and Lexis+ AI don't docket deadlines from a pleading or order. Rules-based docketing (CompuLaw, LawToolBox, Aderant Milana, Clio court rules) covers US courts only, is sold per court per user, and needs manual setup per matter. None reads an order, computes the deadline with its basis and escalates when nobody acts. Nothing comparable exists for Indian courts.",
+   "severity": "critical",
+   "size": "big"
+  },
+  {
+   "title": "Bail and default-bail deadlines are missed, so people stay in jail",
+   "description": "Default bail (s.187(3) BNSS / s.167(2) CrPC) must be applied for once the 60- or 90-day chargesheet period passes and before a chargesheet is filed; filing is the 'point of no return'. If not filed in time, the right is lost when even a late chargesheet arrives. Undertrials who have served half (one-third for first-time offenders) of the maximum sentence are eligible under s.479 BNSS, but the SC found identification of eligible undertrials deficient. Defence and legal-aid lawyers with dozens of custody files count days by hand from remand dates.",
+   "who": "Criminal defence advocates, DLSA panel lawyers, undertrials and families; prosecutors and jail superintendents",
+   "region": "India",
+   "scale_evidence": [
+    {
+     "claim": "Prison Statistics India 2023: undertrials are 76.2% of prisoners (4,22,238 of 5,54,034); nearly one-third have spent over a year in custody.",
+     "source_url": "https://www.policyedge.in/p/ncrbs-prison-statistics-india-2023"
+    },
+    {
+     "claim": "About three in four of India's prisoners are undertrials, per NCRB data for 2023.",
+     "source_url": "https://www.moneylife.in/article/half-a-million-indians-behind-bars-74-percentage-still-awaiting-trial/78578.html"
+    },
+    {
+     "claim": "SC (23 Aug 2024) directed jail superintendents to process s.479 BNSS applications and later found identification of eligible undertrials 'somewhat deficient'.",
+     "source_url": "https://www.livelaw.in/amp/top-stories/take-proactive-steps-to-release-deserving-undertrial-prisoners-under-s479-bnss-supreme-court-to-statesuts-273246"
+    },
+    {
+     "claim": "SC: identifying s.479 BNSS-eligible undertrials should be continuous; justice must reach those 'standing unheard and unseen within the four walls of jails'.",
+     "source_url": "https://www.verdictum.in/court-updates/supreme-court/in-re-inhuman-conditions-in-1382-prisons-release-undertrial-prisoners-prolonged-incarceration-1559091"
+    },
+    {
+     "claim": "Practitioner analysis: the default-bail right survives a later chargesheet only if availed of by filing; 'the point of no return is the filing of the application'.",
+     "source_url": "https://bhattandjoshiassociates.com/the-indefeasible-right-a-jurisprudential-treatise-on-default-bail-and-the-temporal-efficacy-of-subsequent-chargesheet-filing/"
+    }
+   ],
+   "current_tools_gap": "No tool watches a custody file (remand date, offence and maximum sentence, 60 vs 90 days, BNSS vs CrPC by offence date, s.479 eligibility date), alerts on the exact day and drafts the application. Global tools are US-centric; Indian research databases return case law, not computed dates.",
+   "severity": "critical",
+   "size": "big"
+  },
+  {
+   "title": "In-house contract review is a bottleneck: small legal teams face rising demand with the same headcount and cut budgets",
+   "description": "Sales, procurement and HR send NDAs, MSAs, vendor and customer paper to a legal team of one to five people who also handle disputes, compliance and board work. Routine contracts wait days in an inbox; the business signs counterparty paper unreviewed or deals slip. Demand is rising while budgets are cut, and departments absorb it with existing staff rather than hiring, so routine work that went to panel firms lands on an already full desk, and panel firms are squeezed on fees. The few high-risk contracts get the least attention.",
+   "who": "In-house counsel and GCs at mid-size companies (often 1-5 lawyers in India); panel law firms; business teams waiting on signatures",
+   "region": "Global (US/UK survey data; Indian pattern anecdotal)",
+   "scale_evidence": [
+    {
+     "claim": "LegalOn 2025 State of Contracting (286 respondents, vendor-sponsored): legal teams spent an average of 188 working days on contract review in the previous year.",
+     "source_url": "https://abovethelaw.com/2025/03/overwhelmed-by-contracts-survey-says-youre-not-alone/"
+    },
+    {
+     "claim": "LegalOn survey of 150+ in-house professionals (vendor-sponsored): contract review takes about 600 hours a year; nearly half of teams face cost-cutting.",
+     "source_url": "https://abovethelaw.com/?p=1133314"
+    },
+    {
+     "claim": "CLOC 2025: 83% expect demand to rise; 39% will increase internal workload, 36% use current tech more, 34% automate, 33% use more outside counsel; 54% plan AI within a year; contract management implemented at 62% and planned by 30%.",
+     "source_url": "https://abovethelaw.com/2025/05/interpreting-the-2025-cloc-in-house-survey-results/"
+    },
+    {
+     "claim": "HyperStart citing WorldCC: the average cost of processing a basic contract has risen to USD 6,900 (secondary citation).",
+     "source_url": "https://www.hyperstart.com/blog/contract-economics/"
+    },
+    {
+     "claim": "LegalOn 2025: only 14% actively use AI for contract review (up from 8.1%); 79% cite time savings; many want pre-built playbooks or to turn their own into AI review.",
+     "source_url": "https://www.legalontech.com/resources/2025-state-of-contracting"
+    },
+    {
+     "claim": "ContractWorks survey of 100 UK in-house respondents: legal-tech adoption barriers are lack of resources (36%), not knowing solutions (29%), low priority (20%).",
+     "source_url": "https://legalfutures.co.uk/latest-news/half-of-in-house-lawyers-say-companies-miss-contract-renewals"
+    }
+   ],
+   "current_tools_gap": "Harvey, CoCounsel and Lexis+ AI are priced for BigLaw and large departments; Ironclad, Icertis and Agiloft take months to set up. SpotDraft fits India best but its AI review is generic, missing Indian-law points (stamp duty, s.27 non-competes, arbitration seat). No tool safely separates 'standard, sign it' from 'needs a lawyer' with a verified reason, or takes routine intake end to end: request, triage, playbook redline, stamping and registration needs, signature-ready draft and obligation calendar.",
+   "severity": "critical",
+   "size": "big"
+  },
+  {
+   "title": "Renewal, notice and obligation deadlines are missed after signing because nobody tracks them",
+   "description": "After signature the contract sits in a drive or email thread. Auto-renewal notice windows, lock-ins, price-escalation dates, SLA credits, rent escalation in leave and licence deals and indemnity notice periods sit in clause text nobody re-reads. Companies renew contracts they meant to exit, miss termination windows, fail to claim credits or breach their own obligations. Teams track dates with spreadsheets, phone reminders and Post-it notes.",
+   "who": "In-house legal and procurement teams, SMEs, landlords and tenants, and their law firms",
+   "region": "Global (UK data; same pattern assumed for India)",
+   "scale_evidence": [
+    {
+     "claim": "ContractWorks survey (100 respondents, mostly UK in-house): almost half say their companies miss automatic renewals, about 2.5 a year, average contract value about GBP 29,807.",
+     "source_url": "https://legalfutures.co.uk/latest-news/half-of-in-house-lawyers-say-companies-miss-contract-renewals"
+    },
+    {
+     "claim": "ContractWorks (2021): 15% track milestones on Post-it notes, 12% on their hand, 34% phone reminders, 20% paper diary; 71% say their business doesn't focus enough on post-signature obligations.",
+     "source_url": "https://www.artificiallawyer.com/2021/05/06/15-of-inhousers-use-post-it-notes-to-track-contract-milestones/"
+    },
+    {
+     "claim": "Superscript research on UK small businesses: 37% lost money through an auto-renewal they weren't aware of; 60% say auto-renewals are an issue.",
+     "source_url": "https://smallbusiness.co.uk/small-firms-lost-billions-of-pounds-on-unexpected-contract-renewals-in-2020-2552976/"
+    },
+    {
+     "claim": "WorldCC (Aug 2025): the average business loses 8.6% of annual value to poor contract management; data sits in 24 systems on average; almost 90% of business users find contracts hard or impossible to understand; only 39% think contracts deliver the desired outcome.",
+     "source_url": "https://info.worldcc.com/contract-management-aug-2025"
+    },
+    {
+     "claim": "Deloitte (1,200+ organisations): average contract value erosion 8.6%, worst performers over 20%; contract data in 24 systems on average.",
+     "source_url": "https://www.deloitte.com/us/en/services/tax/articles/contract-management-lifecycle-insights.html"
+    }
+   ],
+   "current_tools_gap": "CLM date fields only cover contracts someone entered, missing legacy paper, scans, side letters and amendments. Harvey, CoCounsel and Lexis+ AI answer questions on a document but don't turn signed text into live dated obligations with owners and reminders. Clio is matter- and time-centred. No tool reads an Indian scanned stamp-paper lease or vendor contract, computes the notice deadline in code from the clause, and sends a WhatsApp or email alert quoting it.",
+   "severity": "critical",
+   "size": "big"
+  },
+  {
+   "title": "India: stamp duty and e-stamping is a state-by-state, partly physical step that delays or breaks digital execution",
+   "description": "A Bengaluru company e-signs with a Mumbai counterparty, then finds the instrument needs stamping, with rate, method (e-stamp, franking, impressed paper) and portal depending on state and place of execution. E-stamp certificates must still be printed and collected, vendors run out of stock, some states only offer impressed paper. Teams skip stamping, delay signing or courier stamp paper. Leases, leave and licence, loans and SPAs are hit hardest; powers of attorney and sale contracts for immovable property can't be e-signed at all.",
+   "who": "Indian in-house teams, startups, NBFCs, real-estate and commercial firms, paralegals handling execution",
+   "region": "India",
+   "scale_evidence": [
+    {
+     "claim": "Leegality: methods vary by state (e.g., Gujarat, UP, Delhi, Karnataka e-stamp only; Kerala, Odisha, Punjab, Goa impressed only); SHCIL certificates are printed so vendors have limited stock; NeSL digital stamping is open only to financial institutions; unstamped documents may be inadmissible and liable to up to ten times the duty.",
+     "source_url": "https://leegality.com/blog/stamp-duty-online"
+    },
+    {
+     "claim": "Legistify: stamp duty is a state subject; rules follow place of execution; penalty up to ten times the deficit; powers of attorney and immovable-property sale contracts still need wet ink; once duty and penalty are paid the document becomes admissible.",
+     "source_url": "https://legistify.com/learn/e-stamping-services/"
+    },
+    {
+     "claim": "Taxguru (older): e-stamping rollout was uneven; mandatory in Delhi above Rs 500, only in a few districts in Maharashtra, pilot in Tamil Nadu and Assam.",
+     "source_url": "https://taxguru.in/finance/e-stamping-the-easy-and-cost-effective-way-to-pay-stamp-duty.html"
+    }
+   ],
+   "current_tools_gap": "Harvey, CoCounsel, Lexis+ AI, Clio and Ironclad have no concept of Indian stamp duty. SpotDraft and Leegality integrate e-stamp purchase but, at drafting, don't say which article of which state's Stamp Act applies, the duty on the actual consideration, whether registration is compulsory, or the penalty on an existing unstamped contract. Lawyers look up schedules by hand.",
+   "severity": "critical",
+   "size": "big"
+  },
+  {
+   "title": "Fabricated authority in incoming orders: courts', tribunals' and tax officers' orders now cite AI-invented cases",
+   "description": "Indian orders have relied on non-existent authority: a trial court order upheld by the AP HC, an ITAT order involving a Rs 669-crore trust, a Rs 27.91-crore faceless tax assessment, and NCLT/NCLAT orders. The firm receiving such an order must audit every citation by hand, under limitation pressure, to build grounds for rectification (s.254(2)), appeal or writ. Clients pay for litigation to undo orders resting on fabricated law.",
+   "who": "Tax, insolvency and litigation teams at Indian firms, in-house tax and legal departments, appellate counsel",
+   "region": "India",
+   "scale_evidence": [
+    {
+     "claim": "Gummadi Usha Rani (SLP (C) 7575 of 2026): a trial court relied on fake AI judgments and the AP HC upheld it; the SC called it misconduct and issued notice to the AG, SG and BCI.",
+     "source_url": "https://www.verdictum.in/court-updates/supreme-court/cognizance-using-fake-ai-generated-precedents-trial-court-judgments-1609159"
+    },
+    {
+     "claim": "Buckeye Trust v. PCIT-1 Bangalore: an ITAT order (Dec 2024) cited three SC and one Madras HC judgment that couldn't be found, reportedly ChatGPT-generated; retracted about a week later.",
+     "source_url": "https://lawtrend.in/bengaluru-tax-tribunal-withdraws-order-based-on-non-existent-case-law-cited-by-chatgpt/"
+    },
+    {
+     "claim": "Buckeye Trust involved a trust worth about Rs 669 crore and was recalled under s.254(2); Bombay HC set aside a Rs 27.91 crore assessment on three fictitious precedents; Pooja Ramesh Singh called such decisions 'no decision in the eyes of the law'.",
+     "source_url": "https://blog.ipleaders.in/ai-hallucinated-case-law-fake-citations-india/"
+    },
+    {
+     "claim": "KMG Wires v. NFAC (Bombay HC, Oct 2025): quashed a Rs 27.91-crore assessment (returned income Rs 3.09 crore) resting on non-existent decisions.",
+     "source_url": "https://www.livelawbiz.com/high-court/bombay-high-court/dont-blindly-trust-ai-bombay-hc-quashes-income-tax-assessment-passed-on-unverified-ai-generated-case-laws-307866"
+    }
+   ],
+   "current_tools_gap": "Westlaw Quick Check, Lexis Brief Analysis and Clearbrief check the user's own draft against mainly US authority. None takes an incoming Indian court, tribunal or tax order, flags every non-existent citation, fabricated quote or repealed provision, and turns them into ready grounds for rectification, appeal or writ with limitation dates.",
+   "severity": "high",
+   "size": "big"
+  },
+  {
+   "title": "Enterprise legal AI is priced and packaged for BigLaw, locking out solos, small firms and nearly all Indian firms outside the top tier",
+   "description": "Harvey and Legora publish no prices and sell quote-based contracts; third-party reports put Harvey around USD 1,200-2,000+ per seat per month with 20-25 seat minimums on 12-month terms (about USD 288,000-360,000 a year), with no self-serve sign-up or trial, and reportedly declined demos for small firms. CoCounsel tiers run about USD 360-784 per user per month. A 3-10 lawyer firm can't get in and falls back on consumer ChatGPT with confidentiality and fake-citation risk, while large firms like SAM roll out Harvey firm-wide. AI use grows much faster at large firms than solos.",
+   "who": "Solo practitioners, small and mid firms (2-50 lawyers), Indian district and High Court practitioners",
+   "region": "Global, especially acute in India",
+   "scale_evidence": [
+    {
+     "claim": "Harvey publishes no pricing; leaked figures cite USD 1,200/seat/month (USD 399 reduced tier up to USD 2,400-2,500), 20-seat minimum on 12 months (about USD 288k/yr), no self-serve or trial, reportedly declined small-firm demos (competitor source).",
+     "source_url": "https://www.eesel.ai/blog/harvey-ai-pricing"
+    },
+    {
+     "claim": "Reported Harvey pricing about USD 1,200-2,000+/user/month, 12-month terms, floor of about 25 seats (about USD 360k/yr) (competitor source).",
+     "source_url": "https://www.vaquill.ai/blog/harvey-legora-cocounsel-pricing-reality"
+    },
+    {
+     "claim": "Harvey: unconfirmed 20-25 seat minimum and USD 1,200-2,000+/user/month (Harvey called one estimate 'wildly off'); targets firms and enterprise.",
+     "source_url": "https://www.bindlegal.com/resources/comparisons/harvey-pricing-2026/"
+    },
+    {
+     "claim": "ABA 2024 TechReport: 18% of solos use AI tools vs 30% at 10-49 lawyer firms and 46% at 100+.",
+     "source_url": "https://lawnext.com/2025/03/aba-tech-survey-finds-growing-adoption-of-ai-in-legal-practice-with-efficiency-gains-as-primary-driver.html"
+    },
+    {
+     "claim": "Manupatra survey (sponsored): implementation costs, ethical implications and shortage of skilled professionals are the main barriers to AI adoption in India.",
+     "source_url": "https://www.barandbench.com/news/ai-adoption-and-impact-legal-industry-indian-perspective"
+    },
+    {
+     "claim": "Shardul Amarchand Mangaldas announced a firm-wide Harvey partnership across seven offices (June 2025).",
+     "source_url": "https://www.barandbench.com/news/corporate/shardul-amarchand-mangaldas-announces-partnership-with-harvey-ai"
+    }
+   ],
+   "current_tools_gap": "Harvey, CoCounsel and Lexis+ AI are priced in USD per seat for US/UK large-firm work, with sales-led contracts and seat minimums. Clio and SpotDraft handle practice and contract management, not verified Indian litigation research. No tool offers transparent, usage-priced, single-seat or per-matter access in INR with verified Indian authority and an audit trail.",
+   "severity": "high",
+   "size": "big"
+  },
+  {
+   "title": "Confidentiality and privilege: client data in AI tools may be unprivileged, outside DPDP compliance, and restricted by courts",
+   "description": "Lawyers and clients paste facts, contracts and strategy into AI tools that process raw client text in vendor clouds. In US v. Heppner (SDNY, Feb 2026) a defendant's chats with Claude were held neither privileged nor work product. ABA Opinion 512 requires informed client consent before confidential data goes into self-learning tools. In India, BSA privilege, BCI confidentiality and the DPDP Act apply: the firm is the data fiduciary and needs processor contracts, insurers may view claims less favourably without vendor due care, and sharing privileged material with an AI vendor is untested. The Kerala HC bars generative AI like ChatGPT for judicial work and warns that cloud AI may breach confidentiality. Firms either ban AI (and lawyers use it anyway) or accept the risk.",
+   "who": "Every firm handling client confidences (white-collar, M&A, disputes), Indian firms under DPDP, in-house counsel, clients using chatbots before engaging a lawyer, courts and staff",
+   "region": "Global (US privilege ruling, ABA); India (DPDP/BCI, Kerala HC)",
+   "scale_evidence": [
+    {
+     "claim": "US v. Heppner (SDNY, 17 Feb 2026): a defendant's chats with Claude (31 documents) were not protected by privilege or work product.",
+     "source_url": "https://news.bloomberglaw.com/business-and-practice/heppner-shows-attorney-client-privileges-fragility-in-ai-era"
+    },
+    {
+     "claim": "53% of UK legal professionals worry about confidential data leaking through AI (LexisNexis 2026 survey of 543).",
+     "source_url": "https://www.legalcheek.com/2026/09/hallucinations-top-lawyers-ai-worry-list-research-finds/amp/"
+    },
+    {
+     "claim": "Under DPDP a firm using AI is usually the data fiduciary and the vendor the processor, requiring a valid contract, sub-processor disclosure and cross-border clarity; insurers may take a less favourable position without due care.",
+     "source_url": "https://www.bharatlaw.ai/blog/using-ai-for-client-work-under-dpdp-what-legal-teams-should-contract-for/"
+    },
+    {
+     "claim": "Kerala HC policy prohibits generative AI such as ChatGPT and DeepSeek for district judiciary work, warns cloud AI may breach confidentiality, and requires a detailed record of all AI use.",
+     "source_url": "https://www.medianama.com/2025/07/223-kerala-hc-bars-ai-tools-chatgpt-deepseek/"
+    },
+    {
+     "claim": "ABA Formal Opinion 512: investigate a GAI tool's security, get informed client consent before entering confidential information into self-learning tools (boilerplate isn't enough), verify output.",
+     "source_url": "https://technologylaw.fkks.com/post/102jwnl/aba-issues-comprehensive-formal-ethics-opinion-on-lawyers-use-of-generative-ai"
+    }
+   ],
+   "current_tools_gap": "Harvey, Thomson Reuters and Lexis tools offer zero-retention enterprise contracts but still process raw client text and don't mask identifiers before the model sees them; they give no artifact showing work was done at counsel's direction (the Heppner gap). Consumer models used by small firms offer no such terms. None ships India-specific DPDP consent records, on-shore processing or pre-model masking of Aadhaar, PAN, bank and phone numbers, or the per-matter, per-user AI-use record court policies now expect.",
+   "severity": "high",
+   "size": "big"
+  },
+  {
+   "title": "Shadow AI and paper policies: firms have no AI policy, clients want disclosure, and nobody can prove what was checked",
+   "description": "Most lawyers use AI but many firms have no AI policy, and lawyers paste client data into general chatbots. Where policies exist, they are breached (Butler Snow's lawyers used ChatGPT against policy and were disqualified anyway). Clients increasingly want disclosure of AI use and many distrust it. When a fake citation surfaces, the firm can't show who used which tool, what was verified or when. Courts are starting to require documentation (Kerala HC requires an audit of every AI use including verification). Supervising partners carry liability for work they can't audit, and in India this meets DPDP consent and purpose obligations.",
+   "who": "Managing partners, GCs reviewing panel firms, risk and compliance teams, small and mid firms, clients, court registries",
+   "region": "Global (US/UK); India (Kerala HC policy, DPDP)",
+   "scale_evidence": [
+    {
+     "claim": "Clio 2025: 79% of legal professionals use AI but 53% say their firm has no AI policy or don't know of one; 78% of clients want disclosure, 35% of professionals rarely or never disclose; 36% of clients would trust an AI-using lawyer less; legal-specific AI use fell to 40% from 58%.",
+     "source_url": "https://www.2civility.org/2025-clio-legal-trends-report/"
+    },
+    {
+     "claim": "Kerala HC policy (July 2025): bars district judges from using AI for findings or judgments, requires meticulous verification including citations and a detailed audit of every AI use.",
+     "source_url": "https://www.medianama.com/2025/07/223-kerala-hc-bars-ai-tools-chatgpt-deepseek/"
+    },
+    {
+     "claim": "Johnson v. Dunn: the ChatGPT use breached Butler Snow's own AI policy, yet three lawyers were disqualified, referred and ordered to disclose the sanction.",
+     "source_url": "https://edrm.net/2025/07/when-ai-policies-fail-the-ai-sanctions-in-johnson-v-dunn-and-what-they-mean-for-the-profession/"
+    }
+   ],
+   "current_tools_gap": "Enterprise tools log prompts for IT, but none produces a filing-ready verification record (each citation, status, who checked, when) a partner can sign off or a court can accept, or a client-facing AI-use disclosure. Small firms can't afford enterprise governance and fall back on chatbots with no masking, audit log or matter scoping. Nothing stops a lawyer switching to a general chatbot when the firm tool is slow.",
+   "severity": "high",
+   "size": "big"
+  },
+  {
+   "title": "Global AI tools miss most of the Indian law advocates need: trial courts, tribunals, state law and the IPC/CrPC to BNS/BNSS changeover",
+   "description": "Harvey, CoCounsel, Lexis+ AI and Westlaw are built on US/UK law; Harvey's Indian users are top-tier firms. Most Indian matters run in district courts, tribunals and High Courts under state rent, stamp and land laws, and since 1 July 2024 under BNS/BNSS/BSA alongside IPC/CrPC for older offences, with High Courts diverging on straddling proceedings. General models default to IPC/CrPC sections, FIRs and charge sheets cite repealed provisions, and an advocate drafting a bail or cheque-bounce matter gets SC-level answers and fixes section numbers by hand.",
+   "who": "Indian district-court and High Court litigators, criminal and tax practitioners, mid-size Indian firms",
+   "region": "India",
+   "scale_evidence": [
+    {
+     "claim": "Shardul Amarchand Mangaldas announced a firm-wide Harvey rollout across seven offices on 3 June 2025.",
+     "source_url": "https://www.amsshardul.com/sam-leads-indian-legal-market-with-rollout-of-harvey-ai/"
+    },
+    {
+     "claim": "Harvey announced a Bengaluru office; the Indian firms named are SAM, S&A Law Offices and CAM, all top tier.",
+     "source_url": "https://www.barandbench.com/news/corporate/harvey-ai-announces-opening-of-bengaluru-office"
+    },
+    {
+     "claim": "Punjab & Haryana, Rajasthan and Kerala HCs took different approaches to IPC/BNSS co-existence around the changeover; Delhi HC left it open.",
+     "source_url": "https://www.barandbench.com/columns/confusion-at-the-midnight-hour-can-the-ipc-and-the-bnss-co-exist"
+    },
+    {
+     "claim": "LawSikho: district court reports showed FIRs under wrong sections and charge sheets citing repealed provisions; several HCs issued IPC-to-BNS clarificatory circulars (secondary, no dates).",
+     "source_url": "https://lawsikho.com/blog/ipc-to-bns-conversion"
+    }
+   ],
+   "current_tools_gap": "Global tools have little Indian primary law and no date-aware IPC to BNS or CrPC to BNSS logic. Indian databases focus on SC and HCs and their AI only searches; it doesn't compute limitation, determine applicable law from the offence date, or draft to state-specific court practice.",
+   "severity": "high",
+   "size": "big"
+  },
+  {
+   "title": "Vernacular records need costly, error-prone translation before a case can move up, and AI translation errors are fluent and silent",
+   "description": "Trial-court records (FIRs, depositions, revenue records, orders) are in Hindi, Marathi, Tamil, Kannada and other languages, while SC and many HC filings need English translations. AoRs pay private translators who are expensive and make mistakes, and the cost passes to clients. A wrong translation changes meaning ('reinstatement' became 're-establishment' in one SC matter). Machine translation errors (an indemnity rendered as a guarantee) read fluently and go unnoticed, and since certification attaches to a named person, the advocate or translator carries the risk.",
+   "who": "AoRs and HC counsel taking appeals from district courts, trial advocates working in regional languages, court translators and registries, non-English-reading clients",
+   "region": "India",
+   "scale_evidence": [
+    {
+     "claim": "SCAORA told CJI Sanjiv Khanna that AoRs are pushed to outside translators who are expensive and error-prone, with costs passed to litigants; asked for an official translator pool and AoR access to the SC's translation software.",
+     "source_url": "https://www.livelaw.in/amp/top-stories/scaora-highlights-aors-difficulties-in-translating-documents-requests-cji-to-re-establish-official-pool-of-translators-in-sc-286933"
+    },
+    {
+     "claim": "The SC was displeased with mistranslated documents ('reinstatement' as 're-establishment') and sought a solution from SCAORA.",
+     "source_url": "https://www.barandbench.com/news/supreme-court-irked-mistranslated-documents-seeks-solution-scaora"
+    },
+    {
+     "claim": "The SC's translation project slowed almost to a halt: only 31 judgments translated between March 2020 and October 2021; litigants from lower and middle strata are often not well-versed in English.",
+     "source_url": "https://www.scobserver.in/journal/the-supreme-courts-translation-project-is-slowing-to-a-halt/"
+    },
+    {
+     "claim": "Allahabad HC's SUVAS cell reached 1,00,000 AI-assisted judgment translations into Hindi in October 2026.",
+     "source_url": "https://www.livelaw.in/news-updates/allahabad-high-court-makes-1-lakh-judgments-available-hindi-through-ai-assisted-translation-554106"
+    },
+    {
+     "claim": "SUVAS/Anuvaad had translated about 36,271 SC judgments into Hindi and 17,142 into 16 other languages by 2024.",
+     "source_url": "https://www.tarento.com/case-studies/anuvaad-domain-specific-translation-engine-for-the-supreme-court-of-india/"
+    },
+    {
+     "claim": "10-model test: only 1 of 10 translated an indemnification clause precisely; one rendered it as a guarantee; AI translations have no independent legal status in Indian courts and certification attaches to a named person.",
+     "source_url": "https://lawbhoomi.com/can-lawyers-trust-ai-translations-a-10-model-case-study-exposes-the-risk/"
+    }
+   ],
+   "current_tools_gap": "SUVAS and Anuvaad translate judgments for courts as reading aids; advocates can't use them on their own records. Harvey, CoCounsel and Lexis+ AI are English-first. Generic MT doesn't produce filing-ready true translations with legal terms preserved, doesn't handle handwritten Hindi/Urdu FIRs and depositions, doesn't flag operative terms whose translation changes legal meaning, and doesn't tie translated quotes back to the original side by side.",
+   "severity": "high",
+   "size": "big"
+  },
+  {
+   "title": "English-only AI and English-only documents in a multilingual system: clients sign affidavits and read orders they don't understand",
+   "description": "Clients speak Hindi, Hinglish, Marathi, Tamil or Bengali, while HC/SC proceedings, judgments and most pleadings are in English. Clients sign affidavits and agreements they can't read, can't follow what the judge ordered, and depend on the lawyer's verbal paraphrase, which breeds mistrust and errors (wrong facts in an affidavit, missed compliance). Advocates translate a client's Hindi voice note and draft or proofread vernacular pleadings by hand. Even the SC's AI-assisted Hindi translation needs human review ('leave granted' as 'avkash prapt hua'), and courts are starting to require local speech-to-text for depositions.",
+   "who": "Non-English-speaking clients (the majority), district-court advocates, firms with criminal, family or property practices outside metros, NRIs' families",
+   "region": "India",
+   "scale_evidence": [
+    {
+     "claim": "CJI Chandrachud: about 37,000 SC judgments translated into Hindi with AI first pass and human review; AI rendered 'leave granted' as 'avkash prapt hua'.",
+     "source_url": "https://www.siasat.com/nearly-37k-sc-judgements-since-1947-translated-in-hindi-cji-3099056/amp/"
+    },
+    {
+     "claim": "From 1 Nov 2025 Kerala HC requires district-court witness depositions to be primarily recorded with the Adalat AI voice-to-text tool.",
+     "source_url": "https://www.medianama.com/2025/10/223-kerala-hc-adalat-ai-witness-deposition-transcription/"
+    },
+    {
+     "claim": "Translated copies were only 6.71% of 34,015 judgments on eSCR in 2023; 2,106 of 2,283 vernacular translations were in Hindi.",
+     "source_url": "https://www.scobserver.in/journal/sc-releases-1268-judgment-translations-on-republic-day/"
+    }
+   ],
+   "current_tools_gap": "Incumbent legal AI is English-first; Indian databases index mostly English judgments; court translation covers selected judgments, not the client's own order sheet, affidavit or contract. No tool takes a Hinglish/Hindi client conversation to a correctly cited court-ready draft in the court's language, or explains a document clause by clause in the client's language, verified against the source text.",
+   "severity": "high",
+   "size": "big"
+  },
+  {
+   "title": "Filing-to-listing limbo: Registry defects raised in stages, then matters not listed for weeks",
+   "description": "In the SC and High Courts, a petition gets a diary number and the Registry raises defects (certified copies, court fee, pagination, affidavits, vakalatnama, illegible annexures, condonation applications, IA nomenclature); after curing, a new set can appear. Under SC Rules 2013 O.III R.8 cure time is capped at 28 days total, and defects uncured after 90 days go to the Judge in Chambers. Even after curing, verification and listing take days or weeks. In urgent matters (liberty, demolition, auction, limitation) every extra round hurts.",
+   "who": "SC AoRs, HC practitioners, filing clerks, litigants in urgent matters",
+   "region": "India",
+   "scale_evidence": [
+    {
+     "claim": "LiveLaw (12 June 2026): defects sometimes raised in instalments; lists recurring types; SC Rules O.III R.8 allows up to 28 days to cure and sends defects uncured after 90 days to Chambers; proposes a one-shot defect memo and checklist.",
+     "source_url": "https://www.livelaw.in/articles/filing-becomes-battle-defect-scrutiny-supreme-court-registry-537576"
+    },
+    {
+     "claim": "A SCAORA representation by 137 AoRs flagged lags in Registry defect curing and lack of timelines.",
+     "source_url": "https://www.livelaw.in/amp/top-stories/supreme-court-advocates-on-record-raises-concerns-regarding-filing-listing-process-online-appearances-etc-269353"
+    },
+    {
+     "claim": "SC Observer: after registration it could take days or weeks for an urgent matter to be verified.",
+     "source_url": "https://www.scobserver.in/journal/the-listing-game-and-the-registry-at-the-supreme-court-of-india/"
+    },
+    {
+     "claim": "Madras HC (July 2026) dismissed an advocate's writ to list 21 pending matters; listing involves thousands of filings a week and there is no vested right to out-of-turn listing.",
+     "source_url": "https://www.verdictum.in/madras-high-court/individual-litigant-counsel-no-vested-fundamental-right-out-of-turn-listing-matter-1617314"
+    }
+   ],
+   "current_tools_gap": "No tool pre-scrutinises a draft SLP or writ against a specific court's Registry checklist before filing (court fee, pagination, legibility, translation, limitation/condonation, vakalatnama). Harvey and CoCounsel don't know Indian Registry rules. E-filing portals show defects only after filing, one round at a time. Nothing tracks cure deadlines or listing status across matters.",
+   "severity": "high",
+   "size": "big"
+  },
+  {
+   "title": "Mandatory e-filing burden: OCR rejections, too few terminals, juniors losing whole days to uploads",
+   "description": "With e-filing compulsory (Tamil Nadu trial courts, leading to a boycott from Dec 2025; Kerala HC for nearly all case types), advocates must produce OCR-readable, correctly formatted PDFs. One pen correction can get a page rejected and retyped. Complexes have 2-4 filing systems, so a junior can lose a day on one upload. Scanners, typists and internet are a new fixed cost for rural and first-generation practitioners; munshis say the rules ignore them, and bars have boycotted courts.",
+   "who": "Trial-court advocates, especially rural and small practices; juniors and munshis; bar associations",
+   "region": "India",
+   "scale_evidence": [
+    {
+     "claim": "Tamil Nadu trial-court boycott (3 Dec 2025 to at least 7 Jan 2026): a missed pen correction means retyping; about 2-4 systems per complex; a junior can lose a day uploading one case; workload said to have tripled.",
+     "source_url": "https://www.barandbench.com/columns/trial-courts-offline-algorithms-online-tamil-nadus-dec-2025jan-2026-boycott"
+    },
+    {
+     "claim": "Kerala Advocate Clerks Association told the CJI that e-filing rules ignore clerks and put over 10,000 livelihoods at risk.",
+     "source_url": "https://barandbench.com/news/e-filing-and-loss-of-livelihood-kerala-advocate-clerks-association-writes-to-cji-nv-ramana-with-concerns"
+    },
+    {
+     "claim": "Kerala advocate clerks held a hunger strike against mandatory e-filing; Justice PV Kunhikrishnan spoke in support.",
+     "source_url": "https://www.livelaw.in/amp/news-updates/kerala-advocate-clerks-association-hunger-strike-mandatory-e-filing-onam-236556"
+    },
+    {
+     "claim": "KHCAA resolved not to file under the Kerala HC e-filing system; AILU said only 1,500 of 7,000 members had registered.",
+     "source_url": "https://livelaw.in/news-updates/kerala-high-court-bar-expresses-concerns-about-e-filing-rules-174233"
+    }
+   ],
+   "current_tools_gap": "Global AI tools stop at drafting. None turns a typed or handwritten Indian pleading into a court-compliant e-filing bundle (OCR text layer, bookmarks, pagination, index, font/margin rules, size limits), runs a per-court pre-upload check, or lets a munshi prepare and queue a filing on a phone in Hindi or Tamil. Indian vendors sell e-filing services without AI compliance checks.",
+   "severity": "high",
+   "size": "big"
+  },
+  {
+   "title": "Cheque-bounce (s.138 NI Act): 43 lakh pending cases, trap-filled timelines and stalled summons",
+   "description": "A s.138 case has a strict sequence: cheque presented within validity, demand notice within 30 days of the return memo, 15 days for payment, complaint within one month after the cause of action. One day early is premature, one day late is time-barred, and multiple cheques mean parallel clocks. Firms and NBFC/collection desks run thousands of files; once filed, cases stall on service of summons, and lawyers track s.143-A interim compensation, mediation and warrants by hand.",
+   "who": "Recovery and banking-litigation firms, NBFC/MSME in-house teams, solo advocates with s.138-heavy practices, complainants",
+   "region": "India",
+   "scale_evidence": [
+    {
+     "claim": "43,05,932 s.138 cases pending (Parliament reply 20.12.2024), up from about 35.16 lakh at end-2019; Delhi District Courts had 6,50,283 pending (Sep 2025), close to half of Delhi's trial-court criminal pendency; Kolkata 2,65,985, Mumbai 1,17,190.",
+     "source_url": "https://www.scconline.com/blog/post/2026/10/13/section-138-cheque-bounce-case-backlog-india-judicial-reforms/"
+    },
+    {
+     "claim": "On 23 Sept 2025 the SC directed all States, UTs and HC Registrars General to file status reports on increasing disposal of cheque-bounce cases.",
+     "source_url": "https://www.verdictum.in/app-lite/court-updates/supreme-court/file-status-reports-on-steps-taken-to-increase-disposal-of-cheque-bounce-cases-supreme-court-to-states-uts-1592274?hasShare=1"
+    },
+    {
+     "claim": "SC: service of summons on the accused remains one of the main reasons for delay in these complaints.",
+     "source_url": "https://www.tribuneindia.com/news/india/sc-issues-fresh-guidelines-to-reduce-staggeringly-high-backlog-of-cheque-dishonour-cases/"
+    }
+   ],
+   "current_tools_gap": "No legal AI tool (Harvey, CoCounsel, SpotDraft, Manupatra or SCC AI) handles bulk s.138 work: per-cheque notice and complaint windows from the return memo, notice and complaint drafting, service and s.143-A tracking, and flags for files about to go premature or time-barred. Clio doesn't know NI Act timelines.",
+   "severity": "high",
+   "size": "big"
+  },
+  {
+   "title": "Contradictions across FIR, s.161/180 statements and depositions are found by hand, late or never",
+   "description": "Criminal trials and civil evidence turn on material omissions and contradictions between a witness's earlier statements (FIR, s.161 CrPC/s.180 BNSS, s.164) and court testimony, or between testimony and documents. Counsel must confront the witness with the exact passage. Statements run to hundreds of pages, often vernacular, scanned or handwritten, and juniors cross-check the night before. Missed contradictions lose acquittals; overstated ones damage credibility.",
+   "who": "Criminal defence and prosecution advocates, civil trial lawyers, US/UK litigators doing deposition prep",
+   "region": "India (also global)",
+   "scale_evidence": [
+    {
+     "claim": "Vinobhai v. State of Kerala (2025 INSC 1191): SC acquitted a murder convict who had served over 12 years, finding 'material omissions which amount to contradiction'.",
+     "source_url": "https://www.verdictum.in/court-updates/supreme-court/vinobhai-v-state-of-kerala-2025-insc-1191-murder-convict-material-omissions-contradiction-1566392"
+    },
+    {
+     "claim": "SC (May 2024) acquitted in a s.302/149 IPC case because material omissions affected witness reliability; the s.162(1) CrPC procedure must be followed.",
+     "source_url": "https://www.scconline.com/blog/post/2024/05/28/sc-acquits-offence-302-149-on-material-omissions-affecting-reliability-of-witnesses-legal-news/"
+    },
+    {
+     "claim": "Darshan Singh v. State of Punjab (2024 INSC 19): testimony implicating an accused not named in s.161 statements cannot be relied upon.",
+     "source_url": "https://www.verdictum.in/court-updates/supreme-court/darshan-singh-v-state-of-punjab-2024-insc-19-prosecution-witnesss-161-crpc-statement-1513633"
+    },
+    {
+     "claim": "NJDG (Sep 2024): 29,20,033 district court cases delayed for witness-related reasons.",
+     "source_url": "https://barandbench.com/news/66-lakh-cases-district-courts-delayed-unavailability-lawyers"
+    }
+   ],
+   "current_tools_gap": "CoCounsel and Harvey offer English deposition prep for US-style transcripts; they don't produce contradiction findings with verified verbatim quotes across vernacular FIRs, s.161 statements and depositions, and can paraphrase or invent a quote, fatal in cross-examination. Indian research tools have no evidence analysis.",
+   "severity": "high",
+   "size": "big"
+  },
+  {
+   "title": "Reliable Indian legal research is costly and split across subscriptions, so solos borrow logins, use free sites or ChatGPT and risk fake citations",
+   "description": "A newly independent advocate often can't afford SCC Online (often over Rs 30,000 a year) or Manupatra, so they pick one, share a senior's subscription, use bar library terminals in 30-45 minute slots, or use free Indian Kanoon plus ChatGPT. Incumbents now layer credit-based AI on firm-tier subscriptions costing lakhs, with unannounced prices. Research, citation checking, drafting and court tracking sit in separately paid tools; some lawyers reverse-engineer subscription APIs in breach of terms. The risk is unverified or repealed citations (IPC instead of BNS) in filings.",
+   "who": "Junior and solo advocates, district-court practitioners, small chambers",
+   "region": "India",
+   "scale_evidence": [
+    {
+     "claim": "Legally India thread: a newly independent lawyer can't afford both SCC and Manupatra; replies suggest Indian Kanoon, a senior's subscription, court e-libraries or eSCR.",
+     "source_url": "https://www.legallyindia.com/convos/topic/291466-scc-or-manupatra-subscription-for-a-newly-independent-lawyer"
+    },
+    {
+     "claim": "SCC Online annual subscriptions often exceed Rs 30,000; starter package subsidised up to 60%; bar library slots typically 30-45 minutes; Rs 50 per TruePrint download.",
+     "source_url": "https://jurigram.com/advocates/resources/legal-research/scc-online-free-access-advocates"
+    },
+    {
+     "claim": "2026 guide: SCC Online and Manupatra 'still expensive at firm tier' and 'now layered with credit-based AI', firm tier at 'Multiple lakhs / year'.",
+     "source_url": "https://blog.ipleaders.in/ai-tools-for-lawyers-in-india-the-2026-definitive-guide/"
+    },
+    {
+     "claim": "SCC Online announced 'AI Pro' on 26 Jan 2026 as 'Coming soon', with no pricing.",
+     "source_url": "https://www.scconline.com/blog/post/2026/01/26/scc-online-ai-pro-republic-day-announcement/"
+    },
+    {
+     "claim": "A Legally India commenter reverse-engineered SCC Online and Westlaw APIs into MCP connectors, admitting it is 'kind of violating ToS'.",
+     "source_url": "https://www.legallyindia.com/convos/topic/479871-h"
+    },
+    {
+     "claim": "iManage research: the average Indian legal professional loses about 37-40 minutes a day searching for information.",
+     "source_url": "https://legaltechnology.com/indias-legal-tech-market-homegrown-ambition-and-global-inroads/"
+    }
+   ],
+   "current_tools_gap": "SCC Online and Manupatra sell content subscriptions with early AI layers; Indian Kanoon is free but not an authenticated reporter; ChatGPT invents Indian citations. None bundles research, IPC-BNS mapping, citation checking against the SC index, drafting and deadline tracking in one INR-priced seat for a single advocate built on free sources (SC open data, Indian Kanoon, India Code).",
+   "severity": "high",
+   "size": "big"
+  },
+  {
+   "title": "Junior and solo advocates earn too little, do all the unbilled admin themselves, and can't afford tools priced in dollars per seat",
+   "description": "Juniors do the nightly cause-list checks, copy-section and filing queues, proxy appearances, first drafts and client follow-ups, often for under Rs 10,000-20,000 a month. Solos do their own typing, filing, client calls and collections, so most of their day goes unbilled. Bar Councils and High Courts push minimum stipends, raising chambers' costs without making routine work faster. Practice-management and legal AI tools are priced in dollars per user, a large share of a junior's income, so those who most need automation are priced out.",
+   "who": "Junior advocates (0-5 years), solo practitioners, senior advocates and small chambers relying on juniors; about 20 lakh enrolled advocates in India",
+   "region": "India and Global",
+   "scale_evidence": [
+    {
+     "claim": "Vidhi survey (about 2,800 advocates, 8 HCs): 40-49% at Allahabad, Bombay, Kerala, Madras and Patna put first-two-years income at Rs 5,000-20,000; in Calcutta and Gujarat most put it at Rs 20,000-40,000.",
+     "source_url": "https://www.barandbench.com/amp/story/columns/perception-of-corruption-in-higher-judiciary-average-monthly-income-of-lawyers-and-more-vidhi-survey-of-high-court-advocates"
+    },
+    {
+     "claim": "Vidhi: over 40% chose the Rs 2,000-5,000 a month bracket in later surveys; 50% in Calcutta and Gujarat earned under Rs 10,000.",
+     "source_url": "https://barandbench.com/columns/financial-well-being-of-advocates-is-not-all-black-and-white"
+    },
+    {
+     "claim": "Vidhi survey cited in Delhi HC: over 79% of advocates with under two years' practice across 7 HCs earn under Rs 10,000 a month.",
+     "source_url": "https://lawbeat.in/news-updates/seniors-law-profession-ensure-stipend-paid-juniors-enough-delhi-high-court"
+    },
+    {
+     "claim": "BCI (15 Oct 2024) recommends Rs 20,000 urban / Rs 15,000 rural minimum stipend for three years; not mandatory.",
+     "source_url": "https://www.scconline.com/blog/post/2024/10/16/bci-issues-guidelines-to-pay-minimum-stipend-to-junior-advocates/"
+    },
+    {
+     "claim": "BCI recommended stipends are advisory, not binding.",
+     "source_url": "https://law.careers360.com/articles/early-career-struggles-in-legal-profession-bci-recommends-indian-rupee-20000-minimum-stipend-for-junior-advocates"
+    },
+    {
+     "claim": "MP HC ordered the State Bar Council to frame stipend guidelines (Vipin Pandey v Rani Durgavati University).",
+     "source_url": "https://www.barandbench.com/news/litigation/juniors-lawyers-must-be-paid-stipend-madhya-pradesh-high-court-orders-state-bar-council-to-frame-guidelines"
+    },
+    {
+     "claim": "Delhi HC asked seniors to pay juniors good stipends (Pankaj Kumar v Bar Council of Delhi, Sept 2022).",
+     "source_url": "https://www.barandbench.com/news/delhi-high-court-appeals-senior-lawyers-pay-good-stipend-juniors"
+    },
+    {
+     "claim": "Clio 2025: utilization 27% for solos, 32% for small firms, about 50% for mid-sized; solos lag in AI adoption, mostly experimenting with ChatGPT.",
+     "source_url": "https://www.canadianlawyermag.com/news/general/solos-and-small-firms-lag-with-ai-adoption-clio-report/392441"
+    },
+    {
+     "claim": "About 20 lakh (2.01 million) registered advocates in India (Ministry of Law and Justice reply).",
+     "source_url": "https://lawinsider.in/report/what-is-the-total-number-of-advocates-in-india-today"
+    }
+   ],
+   "current_tools_gap": "Clio, CoCounsel and Harvey charge USD per user for US billing rates and BigLaw research and drafting, not an Indian junior's clerical and court-logistics work. Indian tools are mostly diaries and trackers. No product priced per matter or per minute in INR automates the whole unbilled day: intake, cause list, proxy briefs, copy-section follow-up, client updates, fee reminders and first drafts.",
+   "severity": "high",
+   "size": "big"
+  },
+  {
+   "title": "Clients can't get a price before they hire and fear the cost, so they delay, overpay, give up or pick the lowest quote",
+   "description": "A litigant asks 'how much will my case cost?' and hears 'it depends'. Indian litigation is billed per appearance and nobody says how many appearances there will be, plus drafting fees, court fees and stamp duty. Lawyers quote vaguely or demand money upfront over the phone. Clients drop legitimate claims or switch lawyers midway; firms lose prospects because they can't scope a fee quickly. The SC in B. Sunitha said exorbitant fees violate the poor's access to justice, and price transparency is poor even in regulated markets like England.",
+   "who": "Individual clients, MSMEs, first-time litigants; solo and small firms trying to quote fixed fees",
+   "region": "India and Global",
+   "scale_evidence": [
+    {
+     "claim": "B. Sunitha v. State of Telangana: exorbitant fees violate the poor's right to justice; SC expected legislation to cap fees; Law Commission's 131st Report proposal never acted on; percentage-of-award fee held misconduct.",
+     "source_url": "https://ssrana.in/articles/india-supreme-court-calls-for-regulating-hefty-fees-of-lawyers/"
+    },
+    {
+     "claim": "DAKSH: litigants spend about Rs 30,000 crore a year attending hearings and lose about Rs 50,387 crore in productivity; 90% earn Rs 3 lakh a year or less.",
+     "source_url": "https://www.dakshindia.org/access-to-justice-survey-findings-india"
+    },
+    {
+     "claim": "Uttarakhand HC asked the State Bar Council to draft fee rules and urged cashless payment.",
+     "source_url": "https://www.barandbench.com/news/uttarakhand-hc-litigants-pay-lawyers-cashless"
+    },
+    {
+     "claim": "SRA research (1,001 conveyancing purchasers): 66% considered more than one solicitor, but only 15% could get price information without contacting a solicitor directly.",
+     "source_url": "https://www.sra.org.uk/sra/how-we-work/reports/price-transparency-legal-services-market"
+    },
+    {
+     "claim": "Clio 2019 consumer survey: 76% want a clear sense of cost; 74% want to know the full process.",
+     "source_url": "https://lawyersmutualnc.com/blog/survey-most-clients-shop-around-before-picking-a-lawyer"
+    },
+    {
+     "claim": "LSC Justice Gap 2022: the most common reason low-income Americans didn't seek help was believing they couldn't afford it.",
+     "source_url": "https://lsc.gov/press-release/low-income-americans-face-immense-justice-gap-according-new-legal-services-corporation-report"
+    },
+    {
+     "claim": "WJP: 16% found it difficult or nearly impossible to find the money to resolve their legal problem; 17% gave up.",
+     "source_url": "https://worldjusticeproject.org/news/groundbreaking-study-reveals-unmet-legal-needs-worldwide"
+    },
+    {
+     "claim": "Private fees cited at Rs 20,000 minimum up to Rs 1 lakh, against Rs 18,000 per case for legal aid counsel in Delhi.",
+     "source_url": "https://idronline.org/article/livelihoods/why-is-the-quality-of-indias-free-legal-aid-so-poor/"
+    }
+   ],
+   "current_tools_gap": "No product estimates an Indian matter's cost from its procedural path (likely hearings in a s.138 complaint or consumer case, state court fee, stage-wise drafting and appearances). Clio bills flat fees after engagement but doesn't estimate. Harvey, CoCounsel and Lexis+ AI price their own seats, not the client's case. LawRato/Vakilsearch list consultation prices only. Nothing combines NJDG duration data with the firm's fee card into a written stage-wise quote that respects the BCI ban on contingency fees.",
+   "severity": "high",
+   "size": "big"
+  },
+  {
+   "title": "Clients have no idea how long their case will take in a backlog of about 5.4 crore cases",
+   "description": "Clients are told 'it will take time' and can't plan finances, settlements or life decisions. Over 82 lakh cases have been pending 5-10 years and over 47 lakh for more than 10, and clients feel misled when 'six months' becomes years.",
+   "who": "All litigants in Indian courts; firms setting expectations and recommending mediation, Lok Adalat or settlement",
+   "region": "India",
+   "scale_evidence": [
+    {
+     "claim": "As on 31 Dec 2025: 4,76,57,328 cases pending in district courts, 63,66,023 in HCs, 92,101 in the SC (about 5.4 crore).",
+     "source_url": "https://ianslive.in/over-476-crore-cases-pending-across-indian-courts-govt-tells-parliament--20260213184542"
+    },
+    {
+     "claim": "NJDG as of 21 July 2025: 5.29 crore pending, 4.65 crore in district and subordinate courts.",
+     "source_url": "https://madhyamamonline.com/amp/india/judicial-backlog-mounts-529-crore-cases-pending-indian-courts-1432099"
+    },
+    {
+     "claim": "NJDG (as cited): more than 82 lakh cases pending 5-10 years and more than 47 lakh over 10 years.",
+     "source_url": "https://countercurrents.org/2026/10/the-invisible-queue-why-millions-of-indians-walk-away-before-justice-even-begins/"
+    },
+    {
+     "claim": "Nearly 60% of civil and criminal cases take over a year to dispose of at subordinate level (NJDG, as cited).",
+     "source_url": "https://idronline.org/article/livelihoods/why-is-the-quality-of-indias-free-legal-aid-so-poor/"
+    }
+   ],
+   "current_tools_gap": "NJDG publishes aggregate dashboards, not case-type and court-specific estimates for a client. Harvey, CoCounsel and Lexis+ AI have no Indian duration data; Manupatra and SCC have judgments, not disposal statistics. No tool tells a client in plain language how long matters like theirs take in their court and what would shorten it (mediation, Lok Adalat, s.138 compounding).",
+   "severity": "high",
+   "size": "big"
+  },
+  {
+   "title": "Indian advocates can't advertise, and the online channels they used are under disciplinary attack",
+   "description": "BCI Rule 36 forbids advertising or soliciting. After the Madras HC (P.N. Vignesh, 2024), the BCI sent cease-and-desist notices to Justdial, Sulekha, Quikr and Grotal and told State Bar Councils to act against advocates soliciting online; Sulekha's challenge is pending in the SC. The BCI (March 2025) condemned social-media promotion and influencer endorsements, and the Bar Council of Delhi called it serious misconduct. New advocates with no family practice are left with referrals, a senior's overflow or touts, and can't tell what they may post.",
+   "who": "Independent advocates in their first 10 years, small chambers, boutique firms, lawyer-listing platforms",
+   "region": "India",
+   "scale_evidence": [
+    {
+     "claim": "BCI sent cease-and-desist notices to Quikr, Sulekha, Just Dial and Grotal, told State Bar Councils to act, and set four weeks to remove illegal ads.",
+     "source_url": "https://www.scconline.com/blog/post/2024/07/09/bci-bans-illegal-solicitation-of-legal-services-by-lawyers-on-online-portals-after-madras-hc-decision/"
+    },
+    {
+     "claim": "Madras HC (P.N. Vignesh, 2024 MHC 2515) directed the BCI to act against intermediaries advertising lawyers with ratings and 'Platinum'/'Premium' labels.",
+     "source_url": "https://verdictum.in/court-updates/high-courts/mrpnvignesh-v-the-chairman-and-members-of-the-bar-council-2024mhc2515-madras-high-court-1542732"
+    },
+    {
+     "claim": "In Nov 2024 the SC issued notice on Sulekha's SLP against the Madras HC judgment.",
+     "source_url": "https://www.verdictum.in/court-updates/supreme-court/sulekhacom-new-media-private-limited-v-pn-vignesh-ors-special-leave-to-appeal-c-nos-257942024-1557830"
+    },
+    {
+     "claim": "Bar Council of Delhi (4 Aug 2025): promotion on YouTube, Instagram and X breaching Rule 36 is 'serious misconduct' with Section 35 proceedings.",
+     "source_url": "https://www.verdictum.in/news/delhi-bar-council-issues-caution-against-lawyers-advertising-legal-services-on-social-media-1587620"
+    },
+    {
+     "claim": "BCI (March 2025) warned against social media ads, promotional videos and influencer endorsements.",
+     "source_url": "https://www.medianama.com/2025/03/223-the-bar-council-of-india-warns-against-legal-advertising-online/"
+    },
+    {
+     "claim": "Advocates (Amendment) Bill 2023: courts may publish tout lists; listed touts face up to 3 months' imprisonment.",
+     "source_url": "https://prsindia.org/billtrack/the-advocates-amendment-bill-2023"
+    }
+   ],
+   "current_tools_gap": "Global growth tools (Clio Grow, Avvo, Martindale, legal SEO, review solicitation, paid ads) assume advertising is legal and are a misconduct risk in India. No tool checks a website, bio or post against Rule 36, or turns permitted assets into more work: repeat and referral clients and fast service to people who make contact first.",
+   "severity": "high",
+   "size": "big"
+  },
+  {
+   "title": "Unqualified 'legal influencers' give clients wrong advice and fake certainty",
+   "description": "Clients arrive having watched reels promising 'guaranteed bail', 'instant divorce' or 'sure acquittal', or after advice from accounts run by non-enrolled students soliciting WhatsApp consultations. They distrust their real lawyer, act on wrong law (often repealed IPC/CrPC provisions) or miss limitation periods. The BCI and Delhi Bar Council issued warnings in 2025-2026.",
+   "who": "Clients and prospects on Instagram and YouTube; genuine lawyers who must undo misinformation",
+   "region": "India (global pattern)",
+   "scale_evidence": [
+    {
+     "claim": "BCI (17 Mar 2025): concern over unqualified self-styled legal influencers spreading misinformation; directed an end to unauthorised advice by non-enrolled individuals.",
+     "source_url": "https://www.livelaw.in/amp/top-stories/bci-prohibits-advocates-using-actors-influencers-for-promotion-cautions-against-soliciting-legal-work-through-social-media-286663"
+    },
+    {
+     "claim": "BCI circular (17 July 2026) warns fake judgments and misleading summaries misguide litigants and prohibits clickbait promising 'guaranteed bail', 'instant divorce' or 'sure acquittal'.",
+     "source_url": "https://theprint.in/judiciary/no-court-reels-memes-bar-council-draws-red-line-for-social-media-use-by-lawyers-law-students/2990445/"
+    },
+    {
+     "claim": "@legal.baatein (over 633,000 followers), 'Top Legal Influencer in India', invites WhatsApp messages for advice and is run by a non-enrolled final-year LLB student.",
+     "source_url": "https://www.storyboard18.com/special-coverage/how-legal-influencers-are-breaching-bci-rules-49293.htm"
+    },
+    {
+     "claim": "Delhi Bar Council (4 Aug 2025): soliciting online breaching Rule 36 is serious misconduct and can lead to suspension.",
+     "source_url": "https://www.verdictum.in/news/delhi-bar-council-issues-caution-against-lawyers-advertising-legal-services-on-social-media-1587620"
+    }
+   ],
+   "current_tools_gap": "No legal-AI product checks claims clients bring from social media. Harvey, CoCounsel and Lexis+ AI serve lawyers. Generic chatbots repeat repealed IPC sections and guarantee outcomes. Rule 36 limits lawyers countering it. Missing: a citation-grounded, non-advice, vernacular explainer a firm can give clients that flags repealed or fabricated provisions and states no outcome is guaranteed.",
+   "severity": "high",
+   "size": "big"
+  },
+  {
+   "title": "Small firms keep sensitive client data on personal WhatsApp and Gmail as DPDP obligations approach, with no compliance kit",
+   "description": "A three-lawyer chamber holds clients' Aadhaar and PAN, medical records from MACT and matrimonial files, bank statements and opposing parties' data in personal WhatsApp, phone galleries and shared Gmail. DPDP Rules 2025 are notified, with most obligations binding after 18 months: consent, security safeguards, breach notification, deletion with 48 hours' notice and grievance handling, with penalties up to Rs 250 crore. Firms with private-client work face higher risk, and law-firm cyber incidents are rising.",
+   "who": "Every Indian law firm and chamber, especially family, criminal, MACT and consumer practices, and their clients",
+   "region": "India (global analogues: GDPR, US breach laws)",
+   "scale_evidence": [
+    {
+     "claim": "DPDP Rules 2025 notified with an 18-month window; safeguards include encryption, access restriction, monitoring, backups, audit trails; 48 hours' notice before deletion.",
+     "source_url": "https://www.barandbench.com/law-firms/view-point/digital-personal-data-protection-rules-2025-a-practical-roadmap-for-data-fiduciaries-preparing-for-a-new-compliance-era"
+    },
+    {
+     "claim": "DPDPA applies to law firms as data fiduciaries; firms handling civil, family and criminal matters face higher risk.",
+     "source_url": "https://www.barandbench.com/columns/taking-coals-to-newcastle-the-dpdpas-impact-on-law-firms"
+    },
+    {
+     "claim": "Vidhi: Indian lawyers rely on personal messaging apps, a grey zone under BCI Rule 17.",
+     "source_url": "https://vidhilegalpolicy.in/blog/balancing-professional-responsibility-and-technology/"
+    },
+    {
+     "claim": "BakerHostetler: law-firm cyber incidents it handled nearly doubled in 2025 from more than 30 in 2024.",
+     "source_url": "https://www.abajournal.com/news/article/law-firms-see-more-cyberattacks-ransomware-threats-report-says"
+    }
+   ],
+   "current_tools_gap": "Harvey, CoCounsel and Lexis+ AI are hosted largely outside India and produce no DPDP consent notices or retention schedules for a chamber. Clio isn't built for Indian law. WhatsApp keeps no matter-level retention, consent or breach logs. No affordable tool replaces files on the advocate's phone with consented, masked, access-logged intake that produces DPDP evidence by default.",
+   "severity": "high",
+   "size": "big"
+  },
+  {
+   "title": "Firm knowledge leaves with departing lawyers",
+   "description": "Associates leave within a few years, taking precedents, client preferences, matter history and know-how. Often one person knows a matter type or a client's quirks, and successors rerun research, redraft or miss deadlines only the leaver tracked. In India know-how sits in seniors' heads, personal email and WhatsApp, usually with no DMS.",
+   "who": "Mid-size and large firms with associate turnover; Indian chambers dependent on one senior; in-house teams",
+   "region": "Global; India",
+   "scale_evidence": [
+    {
+     "claim": "NALP Foundation CY25: associate attrition 19% (4,442 departures across 141 firms); 83% left within 5 years; firms of 100 or fewer attorneys had 24%.",
+     "source_url": "https://www.nalpfoundation.org/news/the-nalp-foundation-releases-latest-update-on-associate-attrition-and-hiring-(cy-25)"
+    },
+    {
+     "claim": "LEAP Global Report 2026 (700 professionals): 53% of firms have limited or no documentation to retain knowledge when staff leave.",
+     "source_url": "https://www.lawyersweekly.com.au/sme-law/44540-aussie-law-firms-risk-knowledge-drain-from-lack-of-documentation"
+    }
+   ],
+   "current_tools_gap": "iManage, NetDocuments and Harvey Vault search documents already filed; they don't capture tacit reasoning (why a clause was conceded, judge preferences, failed arguments). Litera and Intapp index deal metadata. Most Indian firms have no DMS. No tool builds a persistent, permissioned matter memory from consultations, calls, drafts and hearing outcomes that a successor can query.",
+   "severity": "high",
+   "size": "big"
+  },
+  {
+   "title": "Matter documents and work are scattered across email, WhatsApp, drives, portals and disconnected point tools",
+   "description": "A matter's documents and facts are spread across Gmail, WhatsApp images, local folders, court portals, e-filing receipts and Excel diaries, and scans are often unsearchable. Each part of the work uses a separate tool (Word-centred drafting, research-only AI, contract-only platforms), so intake notes, research and drafts live apart and the lawyer copies context by hand. Switching between disconnected apps is a top daily frustration, and licences alone don't change how work is done.",
+   "who": "Solo advocates and small/mid firms (acute in India); fee earners using several unconnected systems; in-house teams with 3+ tools per matter",
+   "region": "Global; India (acute)",
+   "scale_evidence": [
+    {
+     "claim": "iManage/Metia research (1,068 US/UK businesses): 28% say most or all documents are spread across multiple systems; 30% receive documents through five or more channels.",
+     "source_url": "https://www.legalfutures.co.uk/associate-news/less-than-a-quarter-of-businesses-adequately-support-knowledge-work"
+    },
+    {
+     "claim": "Tooliverse review aggregate: Spellbook 'restricted primarily to Microsoft Word' (29 reviews); 52 reviews mention hallucinations or incorrect citations; 41 opaque pricing.",
+     "source_url": "https://tooliverse.ai/tools/spellbook"
+    },
+    {
+     "claim": "G2 SpotDraft reviews: constant UI changes, bulk download limits, minor bugs, no notice of updates.",
+     "source_url": "https://ai.g2.com/product/spotdraft"
+    }
+   ],
+   "current_tools_gap": "iManage and NetDocuments are enterprise-priced and heavy for small Indian firms. Harvey Vault and CoCounsel need uploads first. Practice-management tools store files but don't ingest WhatsApp media, OCR Indian-language scans or auto-file to a matter. Each incumbent covers one slice (Spellbook drafting, Lexis/Westlaw research, Clio practice management, SpotDraft CLM); Harvey is broader but enterprise-only. No tool carries one matter's context from client call through research, citation check and draft to the hearing date, or answers 'where is the latest X' across all channels.",
+   "severity": "high",
+   "size": "big"
+  },
+  {
+   "title": "Invoices are rejected or cut because entries break client billing guidelines (OCGs)",
+   "description": "Corporate clients run AI over law-firm invoices against outside counsel guidelines (block billing, vague narratives, unapproved rates or timekeepers). Most firms check compliance by hand, so rejections and write-downs rise and billing staff spend days on appeals. Indian firms on MNC panels face the same checks.",
+   "who": "Mid-size and large firms with institutional clients; Indian firms on MNC panels; billing teams and CFOs",
+   "region": "Global; India (cross-border panel work)",
+   "scale_evidence": [
+    {
+     "claim": "Elite research (about 400 firms): invoice rejection rates rose from 11% to 18% in 2025; 71% rely mainly on manual OCG compliance; 48% of Global 200 CFOs call e-billing their biggest revenue-cycle challenge.",
+     "source_url": "https://itbrief.com.au/story/ai-invoice-checks-drive-law-firms-rejection-rates-up"
+    },
+    {
+     "claim": "ALA/Bellefield survey of 198 US firms: write-offs about 20% of invoice totals; 43% said 5-10% of e-bills rejected or reduced.",
+     "source_url": "https://www.canadianlawyermag.com/news/general/most-law-firms-struggle-with-client-guidelines/323617"
+    }
+   ],
+   "current_tools_gap": "Clients have AI invoice review (Brightflag, LegalVIEW, Onit); most firms don't. Elite, Aderant and Intapp pre-bill checks are rule-based with OCGs configured by hand. Harvey and CoCounsel don't read OCG PDFs or rewrite narratives. Nothing turns each client's OCG into rules and rewrites noncompliant entries from the work record before sending.",
+   "severity": "high",
+   "size": "big"
+  },
+  {
+   "title": "Lawyers burn out from billable pressure, long hours and being always on",
+   "description": "Lawyers work 10-12-hour days and then answer clients at night. Junior associates and young advocates carry the heaviest load and are most burnt out, leading to mistakes, missed deadlines, attrition and worse service while talent costs rise.",
+   "who": "Associates (years 1-5), young advocates, small-firm partners, associates at Indian tier-1/2 firms",
+   "region": "Global (US, UK); India",
+   "scale_evidence": [
+    {
+     "claim": "ALM/Law.com Compass 2023 (nearly 3,000 lawyers): about 71% reported anxiety; about 68% cited billable-hour pressure and 67% inability to disconnect.",
+     "source_url": "https://www.abajournal.com/news/article/mental-health-initiatives-arent-curbing-lawyer-stress-and-anxiety-new-study-shows"
+    },
+    {
+     "claim": "LawCare Life in the Law 2025 (UK): nearly 60% reported poor mental health; 78.7% regularly work beyond contracted hours; average burnout score 37.8, above the 34.8 high-risk threshold.",
+     "source_url": "https://www.lawcareers.net/Explore/News/Nearly-60-of-legal-professionals-report-poor-mental-health-LawCare-report-finds"
+    },
+    {
+     "claim": "Vahura study (1,450+ professionals, 300+ Indian firms): over 50% looking to move; about 45% of those working 10-12 hours routinely stressed; only 18% say their firm encourages work-life balance.",
+     "source_url": "https://www.barandbench.com/amp/story/news/prioritizing-mental-health-enabling-safe-spaces-regulating-work-hours-how-law-firms-in-india-can-curb-attrition-and-attract-talent"
+    },
+    {
+     "claim": "Thomson Reuters 2026: lawyer compensation spending rose 8.2% and technology investment 9.7%.",
+     "source_url": "https://www.thomsonreuters.com/en/press-releases/2026/january/legal-industry-experiencing-tectonic-shift-technology-talent-and-demand-prompting-law-firms-to-evolve"
+    }
+   ],
+   "current_tools_gap": "Harvey, CoCounsel and Lexis+ AI speed individual drafting and research, but the after-hours load is client messages, status questions, intake, timesheets and hearing prep, which they don't touch. No product measures and reduces out-of-hours load by handling routine client contact under supervision.",
+   "severity": "high",
+   "size": "big"
+  },
+  {
+   "title": "Vendor lock-in: tools are acquired, retired or rebundled, and contracts escalate and auto-renew",
+   "description": "Thomson Reuters bought Casetext for USD 650M and retired it on 1 April 2025, moving users to CoCounsel (about USD 360-784 per user per month). Westlaw contracts are often multi-year with escalators and auto-renew unless cancelled by mailed letter in a narrow window; reviewers report out-of-plan charges and USD 30,000+ implementation fees. A firm's prompts, playbooks and history stay inside the vendor, so switching means starting over.",
+   "who": "US solos and small firms on Casetext, Westlaw or Lexis; any firm standardising on one AI vendor",
+   "region": "US / Global",
+   "scale_evidence": [
+    {
+     "claim": "CostBench (Oct 2026): CoCounsel Essentials USD 360, Practical Law with CoCounsel USD 596, CoCounsel Legal USD 784 per user per month; reviewers report auto-renewal, advance billing and USD 30,000+ implementation charges.",
+     "source_url": "https://costbench.com/software/ai-legal-tools/casetext-cocounsel/hidden-costs/"
+    },
+    {
+     "claim": "Westlaw: multi-year contracts commonly carry annual escalators; cancellation by physical letter before auto-renewal; a reviewer reported a USD 174 out-of-plan charge for one document (competitor source).",
+     "source_url": "https://www.vaquill.ai/blog/how-much-does-westlaw-cost-solo-small-firm-pricing"
+    },
+    {
+     "claim": "Westlaw Advantage with CoCounsel Essentials about USD 639/month for a solo; Casetext retired 1 April 2025 after a USD 650M acquisition.",
+     "source_url": "https://www.vaquill.ai/blog/casetext-vs-westlaw-pricing-2026"
+    }
+   ],
+   "current_tools_gap": "Incumbents keep prompts, playbooks, clause libraries and review history inside their platform with no portable export; pricing is opaque and reset at renewal; acquisitions end products. No major tool contractually guarantees data portability or a price cap.",
+   "severity": "high",
+   "size": "big"
+  },
+  {
+   "title": "Electronic evidence is lost for want of a proper s.63 BSA (formerly s.65B) certificate",
+   "description": "WhatsApp chats, emails, call recordings and CCTV are central evidence, but copies are admissible only with a s.63(4) BSA certificate (in force from 1 July 2024), except when the original device is produced. Lawyers file screenshots without a certificate, with the wrong format or signatory; the opponent objects and genuine evidence is excluded. Device preservation, hashes and chain of custody are improvised.",
+   "who": "Indian litigators in matrimonial, criminal, commercial and employment matters; clients holding chat or CCTV evidence",
+   "region": "India",
+   "scale_evidence": [
+    {
+     "claim": "Under BSA s.63, WhatsApp chats need the s.63(4) certificate; screenshots can be refused and a 'no certificate' objection can exclude genuine messages.",
+     "source_url": "https://blog.ipleaders.in/whatsapp-chats-as-evidence-in-india/"
+    },
+    {
+     "claim": "LiveLaw: the s.63(4) certificate must identify the record, explain how it was produced and show a properly functioning device.",
+     "source_url": "https://www.livelaw.in/amp/articles/whatsapp-chats-reliable-source-of-evidence-indian-law-290734"
+    },
+    {
+     "claim": "Arjun Panditrao Khotkar (3-judge bench, 2020): the s.65B certificate is a condition precedent for secondary electronic evidence.",
+     "source_url": "https://conventuslaw.com/report/india-supreme-court-on-the-admissibility-of/"
+    }
+   ],
+   "current_tools_gap": "No Indian or global AI tool ingests a phone export or CCTV file, records hashes and metadata, and generates the correct BSA s.63 certificate and an evidence index tied to the pleadings. E-discovery platforms (Relativity etc.) are US-priced and US-rule-based; research tools only explain the case law.",
+   "severity": "high",
+   "size": "small"
+  },
+  {
+   "title": "Contract data is scattered across ~24 systems and business users can't read their own contracts, so every simple question becomes a ticket to legal",
+   "description": "'Can we terminate this vendor?', 'What's our liability cap with X?', 'Which contracts have change-of-control before this fundraise?' each mean a lawyer opening PDFs one by one across email, Drive, ERP, CRM and e-sign tools. M&A diligence and audits become weeks of manual extraction.",
+   "who": "In-house legal, finance and procurement; law firms running diligence; sales teams",
+   "region": "Global",
+   "scale_evidence": [
+    {
+     "claim": "WorldCC (Aug 2025): contract data spread across 24 systems on average; almost 90% of business users find contracts difficult or impossible to understand; 83% of executives say contracts are too rigid.",
+     "source_url": "https://info.worldcc.com/contract-management-aug-2025"
+    },
+    {
+     "claim": "Deloitte: in large organisations contract data sits in 24 systems on average.",
+     "source_url": "https://www.deloitte.com/us/en/services/tax/articles/contract-management-lifecycle-insights.html"
+    }
+   ],
+   "current_tools_gap": "Harvey and CoCounsel beat the lawyer baseline on extraction in VLAIR but only on documents a lawyer uploads, not a company's whole messy corpus of scanned Indian stamp papers, vernacular annexures and amendments. They don't give non-lawyers answers with verified source quotes and an 'ask legal' escalation. CLM repositories only hold what was migrated.",
+   "severity": "high",
+   "size": "big"
+  },
+  {
+   "title": "CLM software is bought then under-used: nearly half of first implementations fall short",
+   "description": "A department spends a year and a large budget on a CLM. Templates are over-customised, sales and procurement keep emailing Word files, legacy contracts are never migrated, and the system becomes a second incomplete repository. Two years later the team shops for a new CLM. Indian mid-size companies often avoid CLM because of cost and setup time.",
+   "who": "Legal ops, GCs, procurement; mid-size Indian companies",
+   "region": "Global",
+   "scale_evidence": [
+    {
+     "claim": "Cimplifi quoting Gartner: nearly 50% of initial CLM implementations will fall short, due to poor data quality and integration, unfit technology, resistance to change and insufficient training.",
+     "source_url": "https://www.cimplifi.com/resources/why-many-first-time-clm-implementations-fail/"
+    },
+    {
+     "claim": "Legal Technology Insider repeats the Gartner prediction and lists causes: lack of preparedness, stakeholders not engaged, poor CRM/ERP integration, unrealistic expectations.",
+     "source_url": "https://legaltechnology.com/guest-post-the-five-reasons-clm-implementations-fail-and-how-to-avoid-them/"
+    },
+    {
+     "claim": "DocuSign blog with legal ops leads from Ciena, Meta and Uber cites Gartner predicting 50% of first-time CLM deployments would fail by 2023.",
+     "source_url": "https://www.docusign.com/blog/legal-ops-experts-weigh-successful-contract-management-implementation-and-adoption"
+    },
+    {
+     "claim": "CLOC 2025: contract management implemented at 62% and among top planned implementations (30%).",
+     "source_url": "https://abovethelaw.com/2025/05/interpreting-the-2025-cloc-in-house-survey-results/"
+    }
+   ],
+   "current_tools_gap": "Ironclad, Icertis, Agiloft and DocuSign CLM need workflow design, integrations and migration before value. No product offers a zero-setup layer working on contracts where they already sit (email, WhatsApp PDFs, Drive, scans) that builds the repository and obligation calendar automatically.",
+   "severity": "high",
+   "size": "big"
+  },
+  {
+   "title": "AI redlining is weak and inconsistent with the firm's playbook, so redline rounds and re-checking continue",
+   "description": "Negotiation runs many redline rounds by email, and different associates accept different positions on the same clause (liability cap, indemnity, governing law and seat, non-compete, payment terms). AI tools insert standard text instead of the nuanced change the playbook calls for and handle formatted tracked changes poorly, so lawyers redo the redline. Foreign governing law or unusual seats slip through under time pressure.",
+   "who": "Associates and partners doing commercial work at Indian and global firms; in-house counsel",
+   "region": "Global",
+   "scale_evidence": [
+    {
+     "claim": "Vals Legal AI Report (VLAIR): on redlining the lawyer baseline (79.7%) beat every AI tool (Harvey 65.0%/59.4%, Vincent AI 53.6%); tools struggled with formatted redlines and inserted standard text.",
+     "source_url": "https://www.vals.ai/vlair"
+    },
+    {
+     "claim": "LegalOn 2025: 79% cite time savings; many want pre-built playbooks or to turn their own into AI review.",
+     "source_url": "https://www.legalontech.com/resources/2025-state-of-contracting"
+    },
+    {
+     "claim": "Stanford RegLab/HAI: purpose-built legal AI research tools hallucinated on more than 17% (Lexis+ AI) and 34% (Westlaw) of queries, so output must be re-verified.",
+     "source_url": "https://hai.stanford.edu/news/ai-trial-legal-models-hallucinate-1-out-6-or-more-benchmarking-queries"
+    }
+   ],
+   "current_tools_gap": "Harvey and Vincent AI score below lawyers on redlining; CoCounsel wasn't tested. Spellbook and LegalOn apply US/UK-tuned playbooks without Indian fallbacks (s.27 non-competes, s.74 liquidated damages, stamp-duty-sensitive clauses, seat vs venue, PASL on foreign seats). None verifies each suggested change quotes the exact source clause or tracks which playbook positions each reviewer accepted.",
+   "severity": "high",
+   "size": "big"
+  },
+  {
+   "title": "India: unstamped or under-stamped contracts surface only at the dispute stage, costing penalties and delaying arbitration and suits",
+   "description": "Years after signing, a dispute arises and the agreement is unstamped or under-stamped. It is inadmissible until duty and penalty (up to ten times) are paid. The law changed twice in 2023: N.N. Global (April 2023) held insufficiently stamped arbitration agreements couldn't be acted on; In Re Interplay (Dec 2023, 7 judges) overruled it, making stamping a curable defect for the tribunal. Clients face cost, impounding and procedural fights, including foreign parties with an Indian seat.",
+   "who": "Litigation and arbitration practices at Indian firms, in-house counsel, foreign companies contracting with Indian parties",
+   "region": "India (and cross-border)",
+   "scale_evidence": [
+    {
+     "claim": "In Re Interplay (13 Dec 2023) overruled N.N. Global and SMS Tea Estates: unstamped agreements are not void but inadmissible until the curable defect is cured; objections go to the tribunal.",
+     "source_url": "https://www.livelaw.in/amp/top-stories/arbitration-clauses-in-unstamped-agreements-enforceable-supreme-court-7-judge-bench-overruled-nn-global-decision-244387"
+    },
+    {
+     "claim": "Under N.N. Global, insufficiently stamped arbitration agreements couldn't be acted on until impounded and duty paid, reaching international arbitrations seated in India.",
+     "source_url": "https://conflictoflaws.net/2023/to-stamp-or-not-to-stamp-critiquing-the-indian-supreme-courts-judgement-in-n-n-global/"
+    }
+   ],
+   "current_tools_gap": "No AI legal tool (Harvey, CoCounsel, Lexis+ AI, Manupatra, SCC Online) audits a client's existing contracts for stamping and registration exposure before a dispute (which documents, which state Act, cost to cure now). Research tools find Interplay but don't apply it to the client's documents.",
+   "severity": "high",
+   "size": "big"
+  },
+  {
+   "title": "Conflict checks are slow, manual and error-prone, and small firms run them from memory",
+   "description": "A new matter needs checking against every past client, adverse party and related entity. Small Indian firms rely on a register, memory and WhatsApp search, missing names spelled differently in Hindi and English or relatives in related suits, though BCI Rules bar acting for the opposing side in the same or related matter. Larger firms pass incomplete intake forms back and forth for weeks. Conflicts are among the most frequently alleged errors in malpractice claims, and complaints reach the SC.",
+   "who": "All firms, especially small and mid-size Indian firms with no client database, solo advocates sharing files, firms growing through laterals",
+   "region": "India and Global",
+   "scale_evidence": [
+    {
+     "claim": "Loeb & Loeb (vendor case study): manual onboarding could take weeks; after automation conflicts handled up to 800 requests a month, up from about 200.",
+     "source_url": "https://www.intapp.com/case-study/loeb-and-loeb/"
+    },
+    {
+     "claim": "Swiss Re on the ABA Profile of Legal Malpractice Claims 2020-2023: conflicts of interest are one of the most frequently alleged errors; administrative errors increased.",
+     "source_url": "https://corporatesolutions.swissre.com/newsletters/2024-11-aba-profile-legal-malpractice-claims.html"
+    },
+    {
+     "claim": "LiveLaw on BCI Rules: an advocate who advised or was briefed by one party should not act for the opposing party in the same or related matter.",
+     "source_url": "https://livelaw.in/law-firms/law-firm-articles-/bci-rules-conflict-of-interest-238398"
+    },
+    {
+     "claim": "SC (2025) set aside an unreasoned BCI order on a conflict-of-interest misconduct complaint and directed a fresh decision.",
+     "source_url": "https://www.scconline.com/blog/post/2025/03/06/supreme-court-strikes-down-unreasoned-bci-order-advocates-professional-misconduct/"
+    },
+    {
+     "claim": "Aon/Attorneys' Advantage (ABA data): firms of 1-5 attorneys make up 63% of malpractice claims; solos 32%; administrative errors 20%.",
+     "source_url": "https://www.attorneys-advantage.com/getmedia/5fabf74d-11c9-490d-9822-f0263f92e363/AA-Malpractice-Infographic-5-26-2022pdf.pdf"
+    }
+   ],
+   "current_tools_gap": "Intapp and Aderant are enterprise-priced and search structured party names. Clio and PracticePanther do exact-name search over their own contacts, missing transliterations, relatives and related entities, and have no data for firms that never used them. Harvey and CoCounsel do no conflicts. No tool builds a conflict index automatically from a firm's WhatsApp, Gmail, consultations and scanned files and runs it at intake before advice is given.",
+   "severity": "medium",
+   "size": "big"
+  },
+  {
+   "title": "No time to prepare for hearings because notice is short and admin eats the day",
+   "description": "Final hearings can be notified a day ahead, boards are long, and matters are called with little warning. Lawyers rebuild a matter's history (last order, pending IAs, the bench's directions) from scattered PDFs, eCourts order sheets and WhatsApp notes in an hour, because nearly half the working day goes to administration. Preparation suffers, causing adjournments, weak arguments and missed points.",
+   "who": "Litigation associates and juniors in India and globally, outstation counsel, solo advocates",
+   "region": "Global (sharpest in India)",
+   "scale_evidence": [
+    {
+     "claim": "Karnataka HC advocates get only a day's notice before final hearings since the advance list was discontinued after November 2021.",
+     "source_url": "https://dakshindia.org/advance-causelist-petition-high-court-of-karnataka"
+    },
+    {
+     "claim": "Clio 2017 (via Attorney at Work): 2.3 billable hours a day and 48% of the day on office administration.",
+     "source_url": "https://www.attorneyatwork.com/?p=99970375"
+    },
+    {
+     "claim": "ABA Journal on Clio: lawyers bill about 28% of available hours; solos closer to 22%.",
+     "source_url": "https://www.abajournal.com/news/article/lawyers_are_only_billing_a_fraction_of_their_time_how_can_they_be_more_effi"
+    },
+    {
+     "claim": "Thomson Reuters Future of Professionals 2025 (2,275 respondents): AI users predicted to save 5 hours weekly (a forecast).",
+     "source_url": "https://www.thomsonreuters.com/en/press-releases/2025/june/the-ai-adoption-reality-check-firms-with-ai-strategies-are-twice-as-likely-to-see-ai-driven-revenue-growth-those-without-risk-falling-behind"
+    }
+   ],
+   "current_tools_gap": "Harvey and CoCounsel summarise uploaded documents but don't pull Indian order sheets and cause-list entries to auto-build a one-page hearing brief (last order, compliance due, open IAs, bench directions, limitation points) when a matter is listed. Indian trackers show dates, not a hearing-ready summary.",
+   "severity": "medium",
+   "size": "small"
+  },
+  {
+   "title": "Clients let down by their lawyer have almost no practical remedy, which erodes trust in the profession",
+   "description": "When an advocate takes the fee and goes silent, the client's options are a slow Bar Council complaint or a civil suit; since May 2024 the SC has held advocates aren't liable for deficiency in service under consumer law. Clients start new engagements suspicious and demand proof of work, and good firms have no easy way to show transparently what they did and when.",
+   "who": "Clients of Indian advocates; reputable firms wanting to differentiate on transparency",
+   "region": "India (UK comparison)",
+   "scale_evidence": [
+    {
+     "claim": "Bar of Indian Lawyers v. D.K. Gandhi (May 2024): advocates can't be held liable for deficiency in service under the Consumer Protection Act.",
+     "source_url": "https://disputeresolution.cyrilamarchandblogs.com/2024/05/advocates-no-longer-liable-under-consumer-protection-laws-for-alleged-deficiency-in-services/"
+    },
+    {
+     "claim": "Complaints go to the State Bar Council under s.35 and move to BCI under s.36B only if undecided within a year; clients are advised to attach WhatsApp, emails and receipts.",
+     "source_url": "https://nriinformation.com/legal/complaint-against-your-lawyer-india"
+    },
+    {
+     "claim": "UK Legal Ombudsman 2025/26: 14,259 new complaints (up 37%), 72% of assessed complaints showed poor service.",
+     "source_url": "https://www.legalombudsman.org.uk/information-centre/data-centre/complaints-data/legal-ombudsman-202526-annual-complaints-data-and-insight/"
+    }
+   ],
+   "current_tools_gap": "No tool gives an Indian client a trustworthy log of what the firm actually did (notices, filings, hearings attended, next steps) without the lawyer writing it up. Clio's activity feed is internal and US-oriented; Harvey, CoCounsel and Lexis+ AI have no client layer; LawRato rates by reviews, not verified work. Missing: an audit-logged automatic client timeline linked to eCourts events and the firm's documents.",
+   "severity": "medium",
+   "size": "big"
+  }
+ ]
+}

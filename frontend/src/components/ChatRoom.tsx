@@ -231,6 +231,24 @@ export function ChatRoom({ token, email, onSignOut }: { token: string; email: st
           <Link href="/review" className="text-sm text-indigo-700 hover:underline dark:text-indigo-300">
             Bulk Review
           </Link>
+          <details className="relative text-sm">
+            <summary className="cursor-pointer list-none text-indigo-700 hover:underline dark:text-indigo-300">Court desk ▾</summary>
+            <div className="absolute right-0 z-20 mt-2 flex w-56 flex-col rounded-xl border border-slate-200 bg-white p-1 shadow-lg dark:border-slate-700 dark:bg-slate-900">
+              {[
+                ["/board", "Tonight's board", "cause lists and appearances"],
+                ["/hearings", "Hearings", "clashes and hearing briefs"],
+                ["/deadlines", "Deadlines", "firm docket, blind check"],
+                ["/limitation", "Limitation", "calculator and copy tracker"],
+                ["/custody", "Custody", "default bail and s.479 dates"],
+                ["/rules", "Rule sign-off", "check the rule tables"],
+              ].map(([href, label, hint]) => (
+                <Link key={href} href={href} className="rounded-lg px-3 py-2 hover:bg-slate-50 dark:hover:bg-slate-800">
+                  <span className="block font-medium text-slate-800 dark:text-slate-100">{label}</span>
+                  <span className="block text-xs text-slate-500">{hint}</span>
+                </Link>
+              ))}
+            </div>
+          </details>
           <Link href="/team" className="text-sm text-indigo-700 hover:underline dark:text-indigo-300">
             Team
           </Link>

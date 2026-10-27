@@ -14,3 +14,6 @@ node_modules/
 .env.*
 !.env.example
 .claude/settings.local.json
+
+# Delhi High Court cause-list fixtures: its terms forbid storing its pages without permission (kept locally only)
+tests/fixtures/causelists/dhc/

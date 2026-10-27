@@ -1,6 +1,6 @@
 """Court case tracker: the firm's cases in court, hearing dates, and the upcoming-hearings agenda."""
 
-from datetime import date, datetime, timezone
+from datetime import date
 from typing import Annotated
 from uuid import UUID
 
@@ -9,6 +9,7 @@ from fastapi.concurrency import run_in_threadpool
 from pydantic import BaseModel, Field, StringConstraints, field_validator
 
 from app.core.rate_limiter import limit
+from app.database import get_supabase_admin
 from app.dependencies.org import OrgContext, get_org_context
 from app.routers.safety import ReasonQuery, delete_response
 from app.services import audit_service, ecourts_service
@@ -83,13 +84,14 @@ async def add_case(payload: CaseCreate, request: Request, ctx: OrgContext = Depe
     except ValueError as exc:
         raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, str(exc)) from exc
     row = {**_row(payload), "cnr": cnr}
+    fetched = None
     if cnr and ecourts_service.is_configured():
         try:
             fetched = await ecourts_service.fetch_case(cnr)
         except ecourts_service.CaseDataError as exc:
             raise HTTPException(status.HTTP_502_BAD_GATEWAY, str(exc)) from exc
-        # What the lawyer typed wins over the provider's data.
-        row = {**fetched, **{k: v for k, v in row.items() if v not in (None, "")}, "last_synced_at": datetime.now(timezone.utc).isoformat()}
+        if not row.get("title"):
+            row["title"] = fetched["title"]
     if not row.get("title"):
         raise HTTPException(status.HTTP_422_UNPROCESSABLE_CONTENT, "Give the case a title (or a CNR, with case data configured)")
     try:
@@ -98,6 +100,10 @@ async def add_case(payload: CaseCreate, request: Request, ctx: OrgContext = Depe
         if cnr and "duplicate" in str(exc).lower():
             raise HTTPException(status.HTTP_409_CONFLICT, "This CNR is already tracked") from exc
         raise
+    if fetched is not None:
+        # Provider data is server-owned (migration 014); what the lawyer typed wins.
+        typed = {k: v for k, v in _row(payload).items() if k in fetched}
+        saved = await ecourts_service.store_fetched(get_supabase_admin(), saved, fetched, typed)
     try:
         await audit_service.alog_action(ctx.user.id, ctx.org_id, AuditAction.ADD_COURT_CASE, "court_case", saved["id"],
                                         ip_address=audit_service.client_ip(request), metadata={"cnr": cnr})
@@ -128,7 +134,8 @@ async def sync_case(case_id: UUID, ctx: OrgContext = Depends(get_org_context)):
         raise HTTPException(status.HTTP_400_BAD_REQUEST, "Add the case's CNR to sync it")
     if not ecourts_service.is_configured():
         raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, "Case data is not configured (ECOURTS_API_KEY)")
-    return await ecourts_service.sync(ctx.db(), case)
+    # The user may see this case (checked above through RLS); the provider's data is written by the server.
+    return await ecourts_service.sync(get_supabase_admin(), case)
 
 
 @router.delete("/{case_id}")
